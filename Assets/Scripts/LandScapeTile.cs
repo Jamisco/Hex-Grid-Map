@@ -1,16 +1,21 @@
 
+using Assets.Scripts;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static Assets.Scripts.SpriteManager;
+using static LandScapes;
 
 [CreateAssetMenu]
 public class LandScapeTile : Tile
 {
-    [SerializeField] LandScapeType _landScape;
-    [SerializeField] string _landScapeName;
+    [SerializeField] LandScape _landScape;
+    [SerializeField] Temperature _temperature;
     [SerializeField] Color _highlightColor;
+
     private float _noise = 0;
+
+    List<Sprite> _sprites;
 
     public void HighLight(bool mark)
     {
@@ -49,32 +54,41 @@ public class LandScapeTile : Tile
         tileData.sprite = sprite;
     }
 
-    //public Sprite TileSprite
-    //{
-    //    get
-    //    {
-    //        return sprite;
-    //    }
-    //    set 
-    //    {
-    //        sprite = value;
-    //    }
-    //}
-
     public override void RefreshTile(Vector3Int position, ITilemap tilemap)
     {
         // please dont call base.refresh method in this method,
         // your just creating a stack overflow
     }
 
+    public Temperature TileTemperature
+    {
+        get
+        {
+            return _temperature;
+        }
+        set
+        {
+            _temperature = value;
+        }
+    }
 
-    public LandScapeType LandScape
+    public LandScape TileLandScape
     {
         get
         {
             return _landScape;
         }
     }
+    public enum LandScape
+    {
+        /// <summary>
+        /// BEWARE CHANGING THE ORDER OF THESE ENUMS WILL ALSO 
+        /// CHANGE THE TILE OBJECTS IN UNITY EDITOR!!!!!!!!!!!!!!!!!!!!!!!!!!
+        /// </summary>
+        /// 
+        Ocean, Plains, WoodLands, Mountains, Highlands, Hills, Unknown
+    }
+
 
 
     [MenuItem("Assets/Create/2D/Custom Tiles/LandScapeTile")]
@@ -83,14 +97,5 @@ public class LandScapeTile : Tile
         string path = "Assets/Tiles/LandTile.asset";
         AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<LandScapeTile>(), path);
     }
-
-    /// <summary>
-    /// BEWARE CHANGING THE ORDER OF THESE ENUMS WILL ALSO CHANGE THE TILE OBJECTS IN UNITY EDITOR!!!!!!!!!!!!!!!!!!!!!!!!!!
-    /// </summary>
-    public enum LandScapeType
-    {
-        Water, Plains, Desert, Forest, Moutains, Jungle, Snow, Unknown
-    }
-
 
 }
