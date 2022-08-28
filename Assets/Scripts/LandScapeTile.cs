@@ -13,6 +13,8 @@ public class LandScapeTile : Tile
     [SerializeField] Temperature _temperature;
     [SerializeField] Color _highlightColor;
 
+    private float _elevation = -1;
+
     private float _noise = 0;
 
     List<Sprite> _sprites;
@@ -60,6 +62,106 @@ public class LandScapeTile : Tile
         // your just creating a stack overflow
     }
 
+    private Vector3Int GetNeighborHex(Vector3Int curPos, int neighborSide, Vector2Int mapSize)
+    {
+        Vector3Int neighborPosition = curPos;
+
+        switch (neighborSide)
+        {
+            case 1:
+                // increase both x and y by 1
+
+                if (neighborPosition.y % 2 == 1)
+                {
+                    neighborPosition.x += 1;
+                }
+
+                neighborPosition.y += 1;
+
+                break;
+            case 2:
+
+                neighborPosition.x += 1;
+
+                break;
+            case 3:
+
+                if (neighborPosition.y % 2 == 1)
+                {
+                    neighborPosition.x += 1;
+                }
+
+                neighborPosition.y -= 1;
+
+                break;
+            case 4:
+
+                if (neighborPosition.y % 2 == 0)
+                {
+                    neighborPosition.x -= 1;
+                }
+
+                neighborPosition.y -= 1;
+
+                break;
+            case 5:
+
+                neighborPosition.x -= 1;
+                break;
+
+            default:
+                // case 6
+
+                if (neighborPosition.y % 2 == 0)
+                {
+                    neighborPosition.x -= 1;
+                }
+
+                neighborPosition.y += 1;
+                break;
+        }
+
+        if(neighborPosition.x >= mapSize.x)
+        {
+            neighborPosition.x -= mapSize.x;
+        }
+
+        if (neighborPosition.x < 0)
+        {
+            neighborPosition.x += mapSize.x;
+        }
+
+        if (neighborPosition.y >= mapSize.y)
+        {
+            neighborPosition.y -= mapSize.y;
+        }
+
+        if (neighborPosition.y < 0)
+        {
+            neighborPosition.y += mapSize.y;
+        }
+
+        return neighborPosition;
+    }
+
+    /// <summary>
+    /// Gets the neighbor hexes in order, from position 0 - 5
+    /// </summary>
+    /// <returns></returns>
+
+    public Vector3Int[] GetNeighborHexes(Vector3Int curPos, Vector2Int mapSize)
+    {
+        Vector3Int[] neighbors = new Vector3Int[6];
+
+        // we start at index 1 because out getNeighborHex is also index from the number 1
+        for (int i = 1; i <= 6; i++)
+        {
+            neighbors[i - 1] = GetNeighborHex(curPos, i, mapSize);
+        }
+
+        return neighbors;
+    }
+
     public Temperature TileTemperature
     {
         get
@@ -69,6 +171,61 @@ public class LandScapeTile : Tile
         set
         {
             _temperature = value;
+        }
+    }
+
+    public bool[] GetCoasts(Tilemap tileMap, Vector3Int curPos, Vector2Int mapSize)
+    {
+        bool[] coastSides = new bool[6];
+        LandScapeTile curTile, nextTile;
+
+        for (int i = 0; i < coastSides.Length; i++)
+        {
+            coastSides[i] = false;
+        }
+
+      curTile = tileMap.GetTile(curPos) as LandScapeTile;
+
+        if (curTile._landScape == LandScape.WaterBody)
+        {
+            int i = 0;
+
+            foreach (Vector3Int pos2 in curTile.GetNeighborHexes(curPos, mapSize))
+            {
+                nextTile = tileMap.GetTile(pos2) as LandScapeTile;
+
+               if(nextTile == null)
+                {
+                    int sdsd = 0;
+                }
+
+                if(nextTile._landScape != LandScape.WaterBody)
+                {
+                    coastSides[i] = true;
+                }
+
+                i++;
+                
+            }
+
+            return coastSides;
+
+        }
+        else
+        {
+            return coastSides;
+        }
+    }
+
+    public float Elevation
+    {
+        get
+        {
+            return _elevation;
+        }
+        set
+        {
+            _elevation = value;
         }
     }
 
@@ -86,7 +243,7 @@ public class LandScapeTile : Tile
         /// CHANGE THE TILE OBJECTS IN UNITY EDITOR!!!!!!!!!!!!!!!!!!!!!!!!!!
         /// </summary>
         /// 
-        Ocean, Plains, WoodLands, Mountains, Highlands, Hills, Unknown
+        WaterBody, Plains, WoodLands, Mountains, Highlands, Hills, Unknown
     }
 
 

@@ -8,6 +8,7 @@ using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 using static LandScapes;
 using System.Collections.Generic;
+using static LandScapeTile;
 
 public class GridManager : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Grid baseGrid;
     [SerializeField] private Tilemap baseTileMap;
     [SerializeField] private Tilemap coastTileMap;
+
+    [SerializeField] private Tilemap[] coastTileMaps = new Tilemap[6];
 
     [SerializeField] private Camera mainCamera;
     [SerializeField] public float hexScale;
@@ -82,67 +85,67 @@ public class GridManager : MonoBehaviour
 
             NumOfMountains = mtnCount;
 
-            SetMountainHexes();
+            ///  SetMountainHexes();
         }
 
 
         private void SetMountainHexes()
         {
-            //int length;
-            //int width;
+            int length;
+            int width;
 
-            //int xPos;
-            //int yPos;
-            //int direction = 0;
+            int xPos;
+            int yPos;
+            int direction = 0;
 
-            //List<Vector2> aMountain;
-            //Vector2 newPosition, startVec;
+            List<Vector2> aMountain;
+            Vector2 newPosition, startVec;
 
-            //for (int i = 0; i < NumOfMountains; i++)
-            //{
-            //    aMountain = new List<Vector2>();
+            for (int i = 0; i < NumOfMountains; i++)
+            {
+                aMountain = new List<Vector2>();
 
-            //    xPos = Random.Range(0, HexCountX);
-            //    yPos = Random.Range(0, HexCountY);
+                xPos = Random.Range(0, HexCountX);
+                yPos = Random.Range(0, HexCountY);
 
-            //    newPosition = new Vector2(xPos, yPos);
-            //    mountains.Add(newPosition);
+                newPosition = new Vector2(xPos, yPos);
+                mountains.Add(newPosition);
 
-            //    length = Random.Range(1, MountainHexLength);
+                length = Random.Range(1, MountainHexLength);
 
-            //    for (int x = 0; x < length; x++)
-            //    {
-            //        // if use a while loop because the direction we roll, 
-            //        // might already have a mountain and so we want to start over
+                for (int x = 0; x < length; x++)
+                {
+                    // if use a while loop because the direction we roll, 
+                    // might already have a mountain and so we want to start over
 
-            //        while (true)
-            //        {
-            //            direction = Random.Range(1, 7);
+                    while (true)
+                    {
+                        direction = Random.Range(1, 7);
 
-            //            newPosition = GetNeighborHex(direction, newPosition);
+                        newPosition = GetNeighborHex(direction, newPosition);
 
-            //            if (!mountains.Contains(newPosition))
-            //            {
-            //                mountains.Add(newPosition);
-            //                break;
-            //            }
+                        if (!mountains.Contains(newPosition))
+                        {
+                            mountains.Add(newPosition);
+                            break;
+                        }
 
-            //            if (MtnHexIsEnclosed(newPosition))
-            //            {
-            //                break;
-            //            }
-            //        }
+                        if (MtnHexIsEnclosed(newPosition))
+                        {
+                            break;
+                        }
+                    }
 
 
-            //        //width = yPos + Random.Range(1, MountainHexWidth);
+                    //width = yPos + Random.Range(1, MountainHexWidth);
 
-            //        //for (int y = yPos; y < width; y++)
-            //        //{
-            //        //    mountains.Add(new Vector2(x, ));
+                    //for (int y = yPos; y < width; y++)
+                    //{
+                    //    mountains.Add(new Vector2(x, ));
 
-            //        //}
-            //    }
-            //}
+                    //}
+                }
+            }
         }
 
         private bool MtnHexIsEnclosed(Vector2 hexPos)
@@ -292,11 +295,14 @@ public class GridManager : MonoBehaviour
     }
 
     GridNoiseManager noiseManager;
-    SpriteManager gridSpriteManager;
+    SpriteManager baseTileSpriteManager;
+    CoastSpriteManager coastSpriteManager;
 
     private float hexWidth, hexHeight;
 
+
     private readonly Vector3Int botLeftPos = new(0, 0, 0);
+    private Vector2Int mapSize;
     private Vector3 mapCenterPos;
     private Vector3Int centerTile;
     private float mapWidth, mapHeight;
@@ -324,21 +330,20 @@ public class GridManager : MonoBehaviour
 
         foreach (Component map in baseGrid.GetComponentsInChildren<Tilemap>())
         {
-            if(map.name.Equals("BaseTileMap"))
+            if (map.name.Equals("BaseTileMap"))
             {
                 baseTileMap = map as Tilemap;
             }
 
             if (map.name.Equals("CoastTileMap"))
             {
-                coastTileMap = map as Tilemap ;
+                coastTileMap = map as Tilemap;
             }
         }
 
-        gridSpriteManager = gameObject.GetComponent<SpriteManager>();
+        baseTileSpriteManager = baseGrid.GetComponent<SpriteManager>();
+        coastSpriteManager = coastTileMap.GetComponent<CoastSpriteManager>();
 
-
-        //hexScale = Math.Clamp(hexScale, 1, 10);
 
         baseCellSize *= (int)hexScale;
 
@@ -354,6 +359,8 @@ public class GridManager : MonoBehaviour
 
         baseTileMap.transform.localScale = new Vector2(hexScale, hexScale);
 
+        coastTileMap.transform.localScale = new Vector2(hexScale, hexScale);
+
         noiseManager = baseGrid.GetComponent<GridNoiseManager>();
 
         GridNoiseManager.changeScale += GridNoiseManager_changeScale;
@@ -361,6 +368,8 @@ public class GridManager : MonoBehaviour
         SetMapValues();
 
         SetSprites();
+
+        InstantiateCoastMaps();
 
         GenerateGrid();
 
@@ -375,10 +384,21 @@ public class GridManager : MonoBehaviour
 
     Vector3Int curTilePos;
     Vector3 curMousePos;
+    Vector3 prevCamPosition = new Vector3();
     public void Update()
     {
         curTilePos = GetTilePosAtMousePos();
         curMousePos = GetmousePosition();
+
+        if(CameraPosition != prevCamPosition)
+        {
+            _cameraMoving = true;
+            prevCamPosition = CameraPosition;
+        }
+        else
+        {
+            _cameraMoving = false;
+        }
 
         bool hasTile = baseTileMap.HasTile(curTilePos);
 
@@ -396,11 +416,13 @@ public class GridManager : MonoBehaviour
 
             SideScroll();
         }
+
     }
 
     private void SetSprites()
     {
-        gridSpriteManager.Instantiate(hexScale);
+        baseTileSpriteManager.Instantiate(hexScale);
+        coastSpriteManager.Instantiate(hexScale);
 
         // each tile must have its own unique sprite, this is because each tile is its own
         // object. The tilemap has one instance of each tile(object)
@@ -408,21 +430,23 @@ public class GridManager : MonoBehaviour
         // they still refer to thesame instance. Thus, changing the sprite/data of one instance
         // also changes the data/sprites in all the other 100 instances
 
-        OceanTiles = gridSpriteManager.Oceans;
-        PlainTiles = gridSpriteManager.Plains;
-        HillTiles = gridSpriteManager.Hills;
-        HighlandTiles = gridSpriteManager.Highlands;
-        MountainTile = gridSpriteManager.Mountains;
-        DesertTile = gridSpriteManager.Deserts;
+        OceanTiles = baseTileSpriteManager.Oceans;
+        PlainTiles = baseTileSpriteManager.Plains;
+        HillTiles = baseTileSpriteManager.Hills;
+        HighlandTiles = baseTileSpriteManager.Highlands;
+        MountainTile = baseTileSpriteManager.Mountains;
+        DesertTile = baseTileSpriteManager.Deserts;
 
-        DryLandsTile = gridSpriteManager.DryLands;
-        WetLandsTile = gridSpriteManager.WetLands;
-        ForestTile = gridSpriteManager.Forest;
+        DryLandsTile = baseTileSpriteManager.DryLands;
+        WetLandsTile = baseTileSpriteManager.WetLands;
+        ForestTile = baseTileSpriteManager.Forest;
     }
 
     // every time we change the map height, width etc, we wanna change respective values such as center etc
     private void SetMapValues()
     {
+        mapSize = new Vector2Int(mapXHexCount, mapYHexCount);
+
         centerTile = new Vector3Int(mapXHexCount / 2, mapYHexCount / 2);
 
         mapCenterPos = baseTileMap.CellToWorld(centerTile);
@@ -434,9 +458,34 @@ public class GridManager : MonoBehaviour
         MainPlanet = new Planet(mapXHexCount, mapYHexCount, mapWidth, mapHeight,
             GetFractal(), maxMountainLength, maxMountainWidth, maxMountainCount);
 
+        baseTileMap.size = new Vector3Int(mapXHexCount, mapYHexCount);
+
+    }
+
+    private void InstantiateCoastMaps()
+    {
+        for (int i = 0; i < coastTileMaps.Length; i++)
+        {
+            coastTileMaps[i] = Instantiate(coastTileMap, baseGrid.transform) as Tilemap;
+            coastTilePositions.Add(new List<Vector3Int>());
+        }
     }
     private void GridNoiseManager_changeScale(float scale)
     {
+        waterTilePositions.Clear();
+
+        foreach (List<Vector3Int> aList in coastTilePositions)
+        {
+            aList.Clear();
+        }
+
+        for (int i = 0; i < coastTileMaps.Length; i++)
+        {
+            coastTileMaps[i].ClearAllTiles();
+
+            coastTileMaps[i].RefreshAllTiles();
+        }
+
         SetMapValues();
         GenerateGrid();
     }
@@ -449,9 +498,7 @@ public class GridManager : MonoBehaviour
         noiseManager.ComputeNoise(MainPlanet);
 
         List<Vector3Int> tilePositions = new List<Vector3Int>();
-        List<Tile> tiles = new List<Tile>();
-
-        logger.StartTimer();
+        List<LandScapeTile> tiles = new List<LandScapeTile>();
 
         for (int x = 0; x < mapXHexCount; x++)
         {
@@ -463,7 +510,6 @@ public class GridManager : MonoBehaviour
                 tilePositions.Add(new Vector3Int(x, y));
 
                 tiles.Add(GetBiomeToPlace(x, y));
-
             }
 
             PlaceTiles(tilePositions.ToArray(), tiles.ToArray());
@@ -471,104 +517,9 @@ public class GridManager : MonoBehaviour
 
         baseTileMap.RefreshAllTiles();
 
+        PlaceCoastTiles();
         //logger.LogTime("Place Tiles: ");
     }
-
-    // Temperature, Precipitaion
-    //LandScapeType[,] biomeTable = new LandScapeType[3, 3]
-    //{
-    //    {LandScapeType.WoodLands, LandScapeType.Plains, LandScapeType.WoodLands,  },
-    //    {LandScapeType.Jungle, LandScapeType.WoodLands, LandScapeType.Ocean,  },
-    //};
-    public Tile GetBiomeToPlace(int x, int y)
-    {
-        // based of Koppen climate classification, look up on wikipedia
-        float tempNoise, preNoise, surlvlNoise, mtnLvlNoise;
-
-        tempNoise = noiseManager.GetTempNoiseValue(x, y);
-        preNoise = noiseManager.GetPrecipNoiseValue(x, y);
-        surlvlNoise = noiseManager.GetSurfaceLevelNoiseValue(x, y);
-        mtnLvlNoise = noiseManager.GetMountainLevelNoiseValue(x, y);
-
-        Temperature temp = GetTemperature(tempNoise);
-        Precipitation rain = GetPrecipitation(preNoise);
-        GroundLevel grndLvl = GetGroundLevel(surlvlNoise);
-        HeightLevel heightLvl = GetHeightLevel(mtnLvlNoise);
-
-        Biome aBiome = GetBiome(temp, rain);
-
-        // LandScapeType biomeType = biomeTable[(int)temp, (int)precip];
-        // first determine if land or water
-        // if water -- check for mountauns...maybe
-        // if land - check height map
-        // if hills --> mountains == display with proper temp
-        // if plains
-        // - check precipitation
-        // display woodlands with proper temp
-
-        switch (grndLvl)
-        {
-            case GroundLevel.BelowGround:
-
-                return OceanTiles.GetRandomTile(temp);
-
-            case GroundLevel.AboveGround:
-
-                switch (aBiome)
-                {
-                    case Biome.Desert:
-                        return DesertTile.GetRandomTile(temp, heightLvl);
-                    case Biome.Plains:
-                        return PlainTiles.GetRandomTile(temp, heightLvl);
-                    case Biome.Forest:
-                        return ForestTile.GetRandomTile(temp, heightLvl);
-                    case Biome.DryLands:
-                        return DryLandsTile.GetRandomTile(temp, heightLvl);
-                    case Biome.WetLands:
-                        return WetLandsTile.GetRandomTile(temp, heightLvl);
-                    default:
-                        return PlainTiles.GetRandomTile(temp, heightLvl);
-                }
-        }
-
-        // now we must match temperature with their respective landscapes
-        // so each landscape type has its own weather tiles.
-        // for example, plain will have its own snow and desert tiles
-        // thus snow and desert are not landscapes rather they are temperatures
-
-        //switch (biomeType)
-        //{
-        //    case LandScapeType.Mountains:
-        //        return mountainTile;
-        //    case LandScapeType.Water:
-        //        return waterTile;
-        //    case LandScapeType.Plains:
-        //        return plainTile;
-        //    case LandScapeType.Desert:
-        //        return desertTile;
-        //    case LandScapeType.Forest:
-        //        return forestTile;
-        //    case LandScapeType.Jungle:
-        //        return jungleTile;
-        //}
-
-        return null;
-    }
-
-    //public enum BiomeType
-    //{
-    //    Desert,
-    //    Savanna,
-    //    TropicalRainforest,
-    //    Grassland,
-    //    Woodland,
-    //    SeasonalForest,
-    //    TemperateRainforest,
-    //    BorealForest,
-    //    Tundra,
-    //    Ice
-    //};
-
     private Temperature GetTemperature(float tempNoise)
     {
         Temperature temp = Temperature.Warm;
@@ -623,6 +574,25 @@ public class GridManager : MonoBehaviour
         return precip;
     }
 
+    private ElevationLevel GetElevationLevel(float levelNoise)
+    {
+        ElevationLevel level;
+
+        //Debug.Log("Level: " + levelNoise);
+
+        switch (levelNoise)
+        {
+            case < .5f:
+                level = ElevationLevel.BelowGround;
+                break;
+            default:
+                level = ElevationLevel.AboveGround;
+                break;
+        }
+
+        return level;
+    }
+
     private GroundLevel GetGroundLevel(float levelNoise)
     {
         GroundLevel level;
@@ -631,50 +601,30 @@ public class GridManager : MonoBehaviour
 
         switch (levelNoise)
         {
-            case < .5f:
-                level = GroundLevel.BelowGround;
-                break;
-            default:
-                level = GroundLevel.AboveGround;
-                break;
-        }
-
-        return level;
-    }
-
-    private HeightLevel GetHeightLevel(float levelNoise)
-    {
-        HeightLevel level;
-
-        //Debug.Log("Level: " + levelNoise);
-
-        switch (levelNoise)
-        {
             case < .75f:
-                level = HeightLevel.Flat;
+                level = GroundLevel.Flat;
                 break;
             case < .9f:
-                level = HeightLevel.Hill;
+                level = GroundLevel.Hill;
                 break;
             case < .95f:
-                level = HeightLevel.Highland;
+                level = GroundLevel.Highland;
                 break;
             default:
-                level = HeightLevel.Mountain;
+                level = GroundLevel.Mountain;
                 break;
         }
 
         return level;
     }
-
 
     public void PlaceTile(Vector3Int pos, Tile aTile)
     {
-        baseTileMap.SetTile(pos, aTile);
+        coastTileMaps[0].SetTile(pos, aTile);
         //tileMap.RefreshTile(pos);
 
     }
-    public void PlaceTiles(Vector3Int[] pos, Tile[] tiles, bool refreshTiles = false)
+    public void PlaceTiles(Vector3Int[] pos, LandScapeTile[] tiles, bool refreshTiles = false)
     {
         baseTileMap.SetTiles(pos, tiles);
 
@@ -682,6 +632,145 @@ public class GridManager : MonoBehaviour
         {
             baseTileMap.RefreshAllTiles();
         }
+    }
+
+    List<List<Vector3Int>> coastTilePositions = new List<List<Vector3Int>>();
+    List<Vector3Int> waterTilePositions = new List<Vector3Int>();
+
+    private void PlaceCoastTiles(List<Vector3Int> vectors, List<List<LandScapeTile>> tiles)
+    {
+        // The vectors list is sometimes(most of the time) greater than the Tiles lists
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            int P = 0;
+
+            if(tiles[i].Count > 0)
+            {
+                foreach (LandScapeTile aTile in tiles[i])
+                {
+                    if (aTile != null)
+                    {
+                        coastTileMaps[P].SetTile(vectors[i], aTile);
+                    }
+
+                    P++;
+                }
+
+              
+            }         
+        }
+
+        RefreshCoastTiles();
+    }
+
+    private void RefreshCoastTiles()
+    {
+        foreach (Tilemap tilemap in coastTileMaps)
+        {
+            tilemap.RefreshAllTiles();
+        }
+    }
+
+    private void PlaceCoastTiles()
+    {
+        LandScapeTile waterTile;
+
+        foreach (Vector3Int pos in waterTilePositions)
+        {
+            waterTile = baseTileMap.GetTile(pos) as LandScapeTile;
+
+            int i = 0;
+
+            foreach (bool hasCoast in waterTile.GetCoasts(baseTileMap, pos, mapSize))
+            {
+                if (hasCoast)
+                {
+                    coastTilePositions[i].Add(pos);
+                }
+
+                i++;
+            }
+        }
+
+        for (int i = 0; i < coastTileMaps.Length; i++)
+        {
+            foreach (Vector3Int pos in coastTilePositions[i])
+            {
+                coastTileMaps[i].SetTile(pos, coastSpriteManager.Coasts.GetTile(i));
+            }
+
+            coastTileMaps[i].RefreshAllTiles();
+        }
+    }
+    public LandScapeTile GetBiomeToPlace(int x, int y)
+    {
+        // based of Koppen climate classification, look up on wikipedia
+        float tempNoise, preNoise, surlvlNoise, mtnLvlNoise;
+
+        tempNoise = noiseManager.GetTempNoiseValue(x, y);
+        preNoise = noiseManager.GetPrecipNoiseValue(x, y);
+        surlvlNoise = noiseManager.GetSurfaceLevelNoiseValue(x, y);
+        mtnLvlNoise = noiseManager.GetMountainLevelNoiseValue(x, y);
+
+        Temperature temp = GetTemperature(tempNoise);
+        Precipitation rain = GetPrecipitation(preNoise);
+        ElevationLevel elvationLvl = GetElevationLevel(surlvlNoise);
+        GroundLevel heightLvl = GetGroundLevel(mtnLvlNoise);
+
+        Biome aBiome = GetBiome(temp, rain);
+
+        // LandScapeType biomeType = biomeTable[(int)temp, (int)precip];
+        // first determine if land or water
+        // if water -- check for mountauns...maybe
+        // if land - check height map
+        // if hills --> mountains == display with proper temp
+        // if plains
+        // - check precipitation
+        // display woodlands with proper temp
+
+        LandScapeTile returnTile = null;
+
+        switch (elvationLvl)
+        {
+            case ElevationLevel.BelowGround:
+
+                waterTilePositions.Add(new Vector3Int(x, y, 0));
+
+                returnTile = OceanTiles.GetRandomTile(temp);
+
+                break;
+
+            case ElevationLevel.AboveGround:
+
+                switch (aBiome)
+                {
+                    case Biome.Desert:
+                        returnTile = DesertTile.GetRandomTile(temp, heightLvl);
+                        break;
+                    case Biome.Plains:
+                        returnTile = PlainTiles.GetRandomTile(temp, heightLvl);
+                        break;
+                    case Biome.Forest:
+                        returnTile = ForestTile.GetRandomTile(temp, heightLvl);
+                        break;
+                    case Biome.DryLands:
+                        returnTile = DryLandsTile.GetRandomTile(temp, heightLvl);
+                        break;
+                    case Biome.WetLands:
+                        returnTile = WetLandsTile.GetRandomTile(temp, heightLvl);
+                        break;
+                    default:
+                        returnTile = PlainTiles.GetRandomTile(temp, heightLvl);
+                        break;
+                }
+
+                break;
+        }
+
+        returnTile.Elevation = surlvlNoise;
+
+        return returnTile;
     }
 
     public void PlaceTilesBlock(BoundsInt bounds, Tile[] tiles)
@@ -945,6 +1034,26 @@ public class GridManager : MonoBehaviour
             mainCamera.orthographicSize = zoom;
         }
     }
+    private bool MouseIsInsideCamera()
+    {
+        Vector3 mousePos = GetmousePosition();
+
+        float camLeft = GetCamLeftEdgePosition;
+        float camRight = GetCamRightEdgePosition;
+
+        float camTop = GetCamTopEdgePosition;
+        float camBot = GetCamBotEdgePosition;
+
+        if (mousePos.y >= camBot && mousePos.y <= camTop)
+        {
+            if (mousePos.x >= camLeft && mousePos.x <= camRight)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     private Vector2 GetScrollMultiplier()
     {
         // we divide camera size because when zoomed in, the speed can be very fast/sensitive
@@ -1025,26 +1134,6 @@ public class GridManager : MonoBehaviour
         return multiplier;
     }
 
-    private bool MouseIsInsideCamera()
-    {
-        Vector3 mousePos = GetmousePosition();
-
-        float camLeft = GetCamLeftEdgePosition;
-        float camRight = GetCamRightEdgePosition;
-
-        float camTop = GetCamTopEdgePosition;
-        float camBot = GetCamBotEdgePosition;
-
-        if (mousePos.y >= camBot && mousePos.y <= camTop)
-        {
-            if (mousePos.x >= camLeft && mousePos.x <= camRight)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
     private void SideScroll()
     {
         Vector3 currCamPos = mainCamera.transform.position;
@@ -1068,7 +1157,7 @@ public class GridManager : MonoBehaviour
         {
             case MapEdgeX.LeftEdge:
 
-                if (MouseMoved())
+                if (MouseMoved() || CameraIsMoving)
                 {
                     SetLongitudeEdges(MapEdgeX.LeftEdge);
                 }
@@ -1081,7 +1170,7 @@ public class GridManager : MonoBehaviour
                 break;
             case MapEdgeX.RightEdge:
 
-                if (MouseMoved())
+                if (MouseMoved() || CameraIsMoving)
                 {
                     SetLongitudeEdges(MapEdgeX.RightEdge);
                 }
@@ -1100,7 +1189,7 @@ public class GridManager : MonoBehaviour
         {
             case MapEdgeY.BottomEdge:
 
-                if (MouseMoved())
+                if (MouseMoved() || CameraIsMoving)
                 {
                     SetLatitudeEdges(MapEdgeY.BottomEdge);
                 }
@@ -1113,7 +1202,7 @@ public class GridManager : MonoBehaviour
                 break;
             case MapEdgeY.TopEdge:
 
-                if (MouseMoved())
+                if (MouseMoved() || CameraIsMoving)
                 {
                     SetLatitudeEdges(MapEdgeY.TopEdge);
                 }
@@ -1130,77 +1219,7 @@ public class GridManager : MonoBehaviour
 
         mainCamera.transform.position = new Vector3(posX, posY, -1);
     }
-    private void SetLongitudeEdges(MapEdgeX mapEdge)
-    {
-        List<Vector3Int> tileVectors = new List<Vector3Int>();
-        List<Tile> tiles = GetOppositeLongitudeTiles(mapEdge);
 
-        int length = GetCamWidthHexCount;
-
-        if (mapEdge == MapEdgeX.RightEdge)
-        {
-            for (int j = mapXHexCount; j <= mapXHexCount + length; j++)
-            {
-                // we are drawing above the top of the map
-                for (int i = GetHexPositionAtCamBotEdgePos; i <= GetHexPositionAtCamTopEdgePos; i++)
-                {
-                    tileVectors.Add(new Vector3Int(j, i, 0));
-                }
-            }
-        }
-        else if (mapEdge == MapEdgeX.LeftEdge)
-        {
-            // loop from left to right, first, then from top to bottom
-            // row to row, column to column
-
-            for (int j = -1; j >= 0 - length; j--)
-            {   // we are drawing below the bottom of the map
-                for (int i = GetHexPositionAtCamBotEdgePos; i <= GetHexPositionAtCamTopEdgePos; i++)
-                {
-                    tileVectors.Add(new Vector3Int(j, i, 0));
-                }
-            }
-        }
-
-        PlaceTiles(tileVectors.ToArray(), tiles.ToArray(), true);
-    }
-    private void SetLatitudeEdges(MapEdgeY mapEdge)
-    {
-        List<Vector3Int> tileVectors = new List<Vector3Int>();
-        List<Tile> tiles = GetOppositeLatitudeTiles(mapEdge);
-
-        int height = GetCamHeightHexCount;
-
-        if (mapEdge == MapEdgeY.TopEdge)
-        {
-            // get position to draw outside tiles
-
-            for (int j = mapYHexCount; j <= mapYHexCount + height; j++)
-            {
-                // we are drawing above the top of the map
-                for (int i = GetHexPositionAtLeftCamPos; i <= GetHexPositionAtRightCamPos; i++)
-                {
-                    tileVectors.Add(new Vector3Int(i, j, 0));
-                }
-            }
-        }
-        else if (mapEdge == MapEdgeY.BottomEdge)
-        {
-            //position to draw tiles
-
-            // loop from left to right, first, then from top to bottom
-            // row to row, column to column
-            for (int j = -1; j >= 0 - height; j--)
-            {   // we are drawing below the bottom of the map
-                for (int i = GetHexPositionAtLeftCamPos; i <= GetHexPositionAtRightCamPos; i++)
-                {
-                    tileVectors.Add(new Vector3Int(i, j, 0));
-                }
-            }
-        }
-
-        PlaceTiles(tileVectors.ToArray(), tiles.ToArray(), true);
-    }
     private Color HighLightTile(Vector3Int curPos, Vector3Int prevPos, Color prevColor)
     {
         Color curColor = baseTileMap.GetColor(curPos);
@@ -1214,6 +1233,7 @@ public class GridManager : MonoBehaviour
             // if prevTile is null or some random value that isnt on the map
             // this is because it is not yet initialized with a proper map value
             // color white is the transparency color for all sprites
+
             baseTileMap.SetColor(prevPos, Color.white);
         }
         catch (Exception)
@@ -1256,7 +1276,23 @@ public class GridManager : MonoBehaviour
         }
 
     }
+    private bool TileIsLand(Vector3Int pos)
+    {
+        LandScapeTile atile = baseTileMap.GetTile(pos) as LandScapeTile;
 
+        if (atile == null)
+        {
+            int i = 0;
+            return false;
+        }
+
+        if (atile.TileLandScape != LandScape.WaterBody)
+        {
+            return true;
+        }
+
+        return false;
+    }
     private List<Vector3Int> GetTilesAtCameraPos()
     {
         List<Vector3Int> tileVectors = new List<Vector3Int>();
@@ -1291,10 +1327,9 @@ public class GridManager : MonoBehaviour
         return tileVectors;
 
     }
-
-    private List<Tile> GetTilesAtVector(List<Vector3Int> tileVectors)
+    private List<LandScapeTile> GetTilesAtVector(List<Vector3Int> tileVectors)
     {
-        List<Tile> tiles = new List<Tile>();
+        List<LandScapeTile> tiles = new List<LandScapeTile>();
 
         foreach (Vector3Int vector in tileVectors)
         {
@@ -1303,7 +1338,87 @@ public class GridManager : MonoBehaviour
 
         return tiles;
     }
-    private List<Tile> GetOppositeLatitudeTiles(MapEdgeY currentMapEdge)
+    private void SetLongitudeEdges(MapEdgeX mapEdge)
+    {
+        List<Vector3Int> tileVectors = new List<Vector3Int>();
+
+        List<Vector3Int> oppositeVectors = GetOppositeLongitudeVectors(mapEdge);
+        List<LandScapeTile> oppositeTiles = GetTilesAtVector(oppositeVectors);
+
+        List<List<LandScapeTile>> coastTiles = GetOppositeLongitudeCoastTiles(oppositeVectors);
+
+        int length = GetCamWidthHexCount;
+
+        if (mapEdge == MapEdgeX.RightEdge)
+        {
+            for (int j = mapXHexCount; j <= mapXHexCount + length; j++)
+            {
+                // we are drawing above the top of the map
+                for (int i = GetHexPositionAtCamBotEdgePos; i <= GetHexPositionAtCamTopEdgePos + 1; i++)
+                {
+                    tileVectors.Add(new Vector3Int(j, i, 0));
+                }
+            }
+        }
+        else if (mapEdge == MapEdgeX.LeftEdge)
+        {
+            // loop from left to right, first, then from top to bottom
+            // row to row, column to column
+
+            for (int j = -1; j >= 0 - length; j--)
+            {   // we are drawing below the bottom of the map
+                for (int i = GetHexPositionAtCamBotEdgePos; i <= GetHexPositionAtCamTopEdgePos + 1; i++)
+                {
+                    tileVectors.Add(new Vector3Int(j, i, 0));
+                }
+            }
+        }
+
+        PlaceTiles(tileVectors.ToArray(), oppositeTiles.ToArray(), true);
+        PlaceCoastTiles(tileVectors, coastTiles);
+    }
+    private void SetLatitudeEdges(MapEdgeY mapEdge)
+    {
+        List<Vector3Int> tileVectors = new List<Vector3Int>();
+        List<Vector3Int> oppositeVectors = GetOppositeLatitudeVectors(mapEdge);
+        List<LandScapeTile> oppositeTiles = GetTilesAtVector(oppositeVectors);
+
+        List<List<LandScapeTile>> coastTiles = GetOppositeLatitudeCoastTiles(oppositeVectors);
+
+        int height = GetCamHeightHexCount;
+
+        if (mapEdge == MapEdgeY.TopEdge)
+        {
+            // get position to draw outside tiles
+
+            for (int j = mapYHexCount; j <= mapYHexCount + height; j++)
+            {
+                // we are drawing above the top of the map
+                for (int i = GetHexPositionAtLeftCamPos; i <= GetHexPositionAtRightCamPos; i++)
+                {
+                    tileVectors.Add(new Vector3Int(i, j, 0));
+                }
+            }
+        }
+        else if (mapEdge == MapEdgeY.BottomEdge)
+        {
+            //position to draw tiles
+
+            // loop from left to right, first, then from top to bottom
+            // row to row, column to column
+            for (int j = -1; j >= 0 - height; j--)
+            {   // we are drawing below the bottom of the map
+                for (int i = GetHexPositionAtLeftCamPos; i <= GetHexPositionAtRightCamPos; i++)
+                {
+                    tileVectors.Add(new Vector3Int(i, j, 0));
+                }
+            }
+        }
+
+        PlaceTiles(tileVectors.ToArray(), oppositeTiles.ToArray(), true);
+        PlaceCoastTiles(tileVectors, coastTiles);
+    }
+    private List<Vector3Int> GetOppositeLatitudeVectors(MapEdgeY currentMapEdge)
     {
         List<Vector3Int> tileVectors = new List<Vector3Int>();
 
@@ -1336,9 +1451,11 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        return GetTilesAtVector(tileVectors);
+
+
+        return tileVectors;
     }
-    private List<Tile> GetOppositeLongitudeTiles(MapEdgeX currentMapEdge)
+    private List<Vector3Int> GetOppositeLongitudeVectors(MapEdgeX currentMapEdge)
     {
         List<Vector3Int> tileVectors = new List<Vector3Int>();
 
@@ -1356,7 +1473,7 @@ public class GridManager : MonoBehaviour
             // get the tiles at right edges, from bottom to top
             for (int j = mapXHexCount - 1; j >= mapXHexCount - length; j--)
             {
-                for (int i = botSide; i <= topSide; i++)
+                for (int i = botSide; i <= topSide + 1; i++)
                 {
                     tileVectors.Add(new Vector3Int(j, i, 0));
                 }
@@ -1369,14 +1486,79 @@ public class GridManager : MonoBehaviour
 
             for (int j = 1; j <= length; j++)
             {
-                for (int i = botSide; i <= topSide; i++)
+                for (int i = botSide; i <= topSide + 1; i++)
                 {
                     tileVectors.Add(new Vector3Int(j, i, 0));
                 }
             }
         }
 
-        return GetTilesAtVector(tileVectors);
+        return tileVectors;
+    }
+    private List<List<LandScapeTile>> GetOppositeLatitudeCoastTiles(List<Vector3Int> oppositeVectors)
+    {
+        List<List<LandScapeTile>> coastTiles = new List<List<LandScapeTile>>();
+
+        foreach (Vector3Int pos in oppositeVectors)
+        {
+            coastTiles.Add(GetCoastTiles(pos));
+        }
+
+        return coastTiles;
+    } 
+    private List<List<LandScapeTile>> GetOppositeLongitudeCoastTiles(List<Vector3Int> oppositeVectors)
+    {
+        List<List<LandScapeTile>> coastTiles = new List<List<LandScapeTile>>();
+
+        foreach (Vector3Int pos in oppositeVectors)
+        {
+            coastTiles.Add(GetCoastTiles(pos));
+        }
+
+        return coastTiles;
+    }
+    private List<LandScapeTile> GetCoastTiles(Vector3Int tilePos)
+    {
+        List<LandScapeTile> coasts 
+            = new List<LandScapeTile> { null, null, null, null, null, null};
+
+        coasts.Capacity = 6;
+
+        bool hasCoast;
+        bool listEmpty = true;
+
+        for (int i = 0; i < coastTileMaps.Length; i++)
+        {
+            hasCoast = coastTileMaps[i].HasTile(tilePos);
+
+            if (hasCoast)
+            {
+                coasts[i] = coastTileMaps[i].GetTile(tilePos) as LandScapeTile;
+                listEmpty = false;
+            }
+        }
+
+        if (listEmpty)
+        {
+            coasts.Clear();
+
+            return coasts;
+        }
+        else
+        {
+            return coasts;
+        }        
+    }
+    private List<bool> HasCoastTiles(Vector3Int tilePos)
+    {
+        List<bool> coasts = new List<bool>();
+
+        for (int i = 0; i < coastTileMaps.Length; i++)
+        {
+            coasts[i] = coastTileMaps[i].HasTile(tilePos); ;
+        }
+
+        return coasts;
     }
     private Vector3 GetmousePosition()
     {
@@ -1427,12 +1609,12 @@ public class GridManager : MonoBehaviour
     private enum MapEdgeY { TopEdge, BottomEdge, None }
     private MapEdgeY GetMapEdgeY(float camYPosition)
     {
-        if (GetHexPositionAtCamBotEdgePos <= 2)
+        if (GetHexPositionAtCamBotEdgePos <= 3)
         {
             return MapEdgeY.BottomEdge;
         }
 
-        if (mapYHexCount - GetHexPositionAtCamTopEdgePos <= 2)
+        if (mapYHexCount - GetHexPositionAtCamTopEdgePos <= 3)
         {
             return MapEdgeY.TopEdge;
         }
@@ -1441,6 +1623,14 @@ public class GridManager : MonoBehaviour
 
     }
 
+    private bool _cameraMoving = false;
+    private bool CameraIsMoving
+    {
+        get
+        {
+            return _cameraMoving;
+        }
+    }
     private float CameraSize
     {
         get
@@ -1462,32 +1652,26 @@ public class GridManager : MonoBehaviour
             return CameraHeight * mainCamera.aspect;
         }
     }
+
+    private Vector3 CameraPosition
+    {
+        get
+        {
+            return mainCamera.transform.position;
+        }
+    }
     private float GetCamLeftEdgePosition
     {
         get
         {
-            return mainCamera.transform.position.x - CameraWidth / 2;
+            return CameraPosition.x - CameraWidth / 2;
         }
     }
     private float GetCamRightEdgePosition
     {
         get
         {
-            return mainCamera.transform.position.x + CameraWidth / 2;
-        }
-    }
-    private int GetHexPositionAtLeftCamPos
-    {
-        get
-        {
-            return (int)(GetCamLeftEdgePosition / hexDistanceX);
-        }
-    }
-    private int GetHexPositionAtRightCamPos
-    {
-        get
-        {
-            return (int)(GetCamRightEdgePosition / hexDistanceX);
+            return CameraPosition.x + CameraWidth / 2;
         }
     }
     private float GetCamTopEdgePosition
@@ -1504,6 +1688,20 @@ public class GridManager : MonoBehaviour
             return mainCamera.transform.position.y - CameraHeight / 2;
         }
     }
+    private int GetHexPositionAtLeftCamPos
+    {
+        get
+        {
+            return (int)(GetCamLeftEdgePosition / hexDistanceX);
+        }
+    }
+    private int GetHexPositionAtRightCamPos
+    {
+        get
+        {
+            return (int)(GetCamRightEdgePosition / hexDistanceX);
+        }
+    }
     private int GetHexPositionAtCamTopEdgePos
     {
         get
@@ -1518,6 +1716,7 @@ public class GridManager : MonoBehaviour
             return (int)(GetCamBotEdgePosition / hexDistanceY);
         }
     }
+
     private int GetCamHeightHexCount
     {
         get

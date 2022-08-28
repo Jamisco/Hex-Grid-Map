@@ -22,9 +22,8 @@ namespace Assets.Scripts
         public void Instantiate(float hexScale)
         {
             // make sure all sprites have a PPU for 256
-            // this method loops through all the sprites in the lists and changes their ppu so the sprites could match the cell sizes given the current scale of the grid
-            // the reason we cannot do this in the OnafterDeserialize() method is because that method does not allow for us to get and set any texture, including sprite textures
-            // and no you cannot call this method in deserialize either
+            // this method loops through all the sprites in the lists and changes their ppu
+            // so the sprites could match the cell sizes given the current scale of the grid
 
             _oceans.Instantiate(hexScale);
             _plains.Instantiate(hexScale);
@@ -36,7 +35,6 @@ namespace Assets.Scripts
             _dryLands.Instantiate(hexScale);
             _wetLands.Instantiate(hexScale);
             _forest.Instantiate(hexScale);
-
         }
 
         public Ocean Oceans

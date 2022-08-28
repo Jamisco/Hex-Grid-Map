@@ -16,6 +16,8 @@ public abstract class LandScapes
     [SerializeField] protected TileContainer warmTiles;
     [SerializeField] protected TileContainer coldTiles;
 
+    [SerializeField] protected Type tiles;
+
     public virtual LandScapeTile GetRandomTile(Temperature temp)
     {
         switch (temp)
@@ -39,7 +41,7 @@ public abstract class LandScapes
     /// <param name="temp"></param>
     /// <param name="height"></param>
     /// <returns></returns>
-    public virtual LandScapeTile GetRandomTile(Temperature temp, HeightLevel height)
+    public virtual LandScapeTile GetRandomTile(Temperature temp, GroundLevel height)
     {
         return GetRandomTile(temp);
     }
@@ -57,9 +59,9 @@ public abstract class LandScapes
         VeryHot, Hot, Warm, Cold, VeryCold, Freezing
     }
 
-    public enum GroundLevel { BelowGround, AboveGround };
+    public enum ElevationLevel { BelowGround, Shore, AboveGround };
 
-    public enum HeightLevel { Flat, Hill, Highland, Mountain };
+    public enum GroundLevel { Flat, Hill, Highland, Mountain };
 
     /// <summary>
     /// DO NOT CHANGE THE ORDER OF THIS
@@ -83,7 +85,6 @@ public abstract class LandScapes
         warmTiles.Instantiate(hexScale, tileAsset, Temperature.Warm);
         coldTiles.Instantiate(hexScale, tileAsset, Temperature.Cold);
     }
-
 
     internal enum Biome
     {

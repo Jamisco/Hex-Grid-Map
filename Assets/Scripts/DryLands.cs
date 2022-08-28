@@ -45,11 +45,11 @@ namespace Assets.Scripts
             }
         }
 
-        public override LandScapeTile GetRandomTile(Temperature temp, HeightLevel height)
+        public override LandScapeTile GetRandomTile(Temperature temp, GroundLevel height)
         {
             switch (height)
             {
-                case HeightLevel.Flat:
+                case GroundLevel.Flat:
 
                     switch (temp)
                     {
@@ -65,11 +65,11 @@ namespace Assets.Scripts
 
                     break;
 
-                case HeightLevel.Hill:
+                case GroundLevel.Hill:
                     return dryHills.GetRandomTile();
-                case HeightLevel.Highland:
+                case GroundLevel.Highland:
                     return dryHighlands.GetRandomTile();
-                case HeightLevel.Mountain:
+                case GroundLevel.Mountain:
                     return dryMountains.GetRandomTile();
             }
 
