@@ -8,7 +8,7 @@ using static LandScapeTile;
 namespace Assets.Scripts
 {
     [Serializable]
-    internal class Mountains : LandScapes
+    public class Mountains : LandScapes
     {
 
     }

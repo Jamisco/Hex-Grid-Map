@@ -10,25 +10,16 @@ using static GridManager;
 namespace Assets.Scripts
 {
     [Serializable]
-    internal class Desert : LandScapes
+    internal class Desert : LandScapes, IPlateau
     {
         [SerializeField] protected TileContainer veryHotTiles;
 
-        [SerializeField] protected TileContainer desertHills;
-        [SerializeField] protected TileContainer desertHighLands;
-        [SerializeField] protected TileContainer desertMountains;
-
-
-        public override void Instantiate(float hexScale)
+        internal override void Instantiate(float hexScale)
         {
             veryHotTiles.Instantiate(hexScale, tileAsset, Temperature.VeryHot);
             hotTiles.Instantiate(hexScale, tileAsset, Temperature.Hot);
             warmTiles.Instantiate(hexScale, tileAsset, Temperature.Warm);
             coldTiles.Instantiate(hexScale, tileAsset, Temperature.Cold);
-
-            desertHills.Instantiate(hexScale, tileAsset, Temperature.Hot);
-            desertHighLands.Instantiate(hexScale, tileAsset, Temperature.Hot);
-            desertMountains.Instantiate(hexScale, tileAsset, Temperature.Hot);
         }
 
         public override LandScapeTile GetRandomTile(Temperature temp)
@@ -48,35 +39,39 @@ namespace Assets.Scripts
             }
         }
 
-        public override LandScapeTile GetRandomTile(Temperature temp, GroundLevel height)
+
+        private Mountains _mountains;
+        private Highlands _highlands;
+        private Hills _hills;
+
+        public virtual void SetPlateaus(Mountains mountains, Highlands highlands, Hills hills)
+        {
+            _mountains = mountains;
+            _highlands = highlands;
+            _hills = hills;
+
+        }
+        public LandScapeTile GetRandomTile(Temperature temp, HeightLevel height)
         {
             switch (height)
             {
-                case GroundLevel.Flat:
-
-                    switch (temp)
-                    {
-                        case Temperature.VeryHot:
-                            return veryHotTiles.GetRandomTile();
-                        case Temperature.Hot:
-                            return hotTiles.GetRandomTile();
-                        case Temperature.Warm:
-                            return warmTiles.GetRandomTile();
-                        case Temperature.Cold:
-                            return coldTiles.GetRandomTile();
-                    }
-
-                    break;
-
-                case GroundLevel.Hill:
-                    return desertHills.GetRandomTile();
-                case GroundLevel.Highland:
-                    return desertHighLands.GetRandomTile();
-                case GroundLevel.Mountain:
-                    return desertMountains.GetRandomTile();
+                case HeightLevel.Flat:
+                    return GetRandomTile(temp);
+                case HeightLevel.Hills:
+                    return HillTiles.GetRandomTile(temp);
+                case HeightLevel.Highlands:
+                    return HighlandTiles.GetRandomTile(temp);
+                case HeightLevel.Mountain:
+                    return MountainTiles.GetRandomTile(temp);
+                default:
+                    return GetRandomTile(temp);
             }
-
-            return hotTiles.GetRandomTile();
         }
+
+        public Mountains MountainTiles => _mountains;
+
+        public Highlands HighlandTiles => _highlands;
+
+        public Hills HillTiles => _hills;
     }
 }

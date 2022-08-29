@@ -8,7 +8,7 @@ using static LandScapes;
 namespace Assets.Scripts
 {
     [Serializable]
-    internal class Highlands : LandScapes
+    public class Highlands : LandScapes
     {
 
     }

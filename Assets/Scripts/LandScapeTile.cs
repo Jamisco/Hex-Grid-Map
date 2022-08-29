@@ -9,7 +9,7 @@ using static LandScapes;
 [CreateAssetMenu]
 public class LandScapeTile : Tile
 {
-    [SerializeField] LandScape _landScape;
+    [SerializeField] LandScape _landscape;
     [SerializeField] Temperature _temperature;
     [SerializeField] Color _highlightColor;
 
@@ -121,7 +121,7 @@ public class LandScapeTile : Tile
                 break;
         }
 
-        if(neighborPosition.x >= mapSize.x)
+        if (neighborPosition.x >= mapSize.x)
         {
             neighborPosition.x -= mapSize.x;
         }
@@ -184,28 +184,24 @@ public class LandScapeTile : Tile
             coastSides[i] = false;
         }
 
-      curTile = tileMap.GetTile(curPos) as LandScapeTile;
+        curTile = tileMap.GetTile(curPos) as LandScapeTile;
 
-        if (curTile._landScape == LandScape.WaterBody)
+        if (LandScapeIsSeaorOcean(curTile._landscape))
         {
             int i = 0;
 
             foreach (Vector3Int pos2 in curTile.GetNeighborHexes(curPos, mapSize))
             {
                 nextTile = tileMap.GetTile(pos2) as LandScapeTile;
-
-               if(nextTile == null)
-                {
-                    int sdsd = 0;
-                }
-
-                if(nextTile._landScape != LandScape.WaterBody)
+                // check if the neighbor tiles are land.
+                // if they are then we have a coast
+                if (LandScapeIsLand(nextTile._landscape))
                 {
                     coastSides[i] = true;
                 }
 
                 i++;
-                
+
             }
 
             return coastSides;
@@ -214,6 +210,31 @@ public class LandScapeTile : Tile
         else
         {
             return coastSides;
+        }
+    }
+
+    private bool LandScapeIsSeaorOcean(LandScape landscape)
+    {
+        switch (landscape)
+        {
+            case LandScape.Ocean:
+            case LandScape.Sea:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private bool LandScapeIsLand(LandScape landscape)
+    {
+        switch (landscape)
+        {
+            case LandScape.Ocean:
+            case LandScape.Sea:
+            case LandScape.Lake:
+                return false;
+            default:
+                return true;
         }
     }
 
@@ -229,23 +250,13 @@ public class LandScapeTile : Tile
         }
     }
 
-    public LandScape TileLandScape
+    internal LandScape TileLandScape
     {
         get
         {
-            return _landScape;
+            return _landscape;
         }
     }
-    public enum LandScape
-    {
-        /// <summary>
-        /// BEWARE CHANGING THE ORDER OF THESE ENUMS WILL ALSO 
-        /// CHANGE THE TILE OBJECTS IN UNITY EDITOR!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /// </summary>
-        /// 
-        WaterBody, Plains, WoodLands, Mountains, Highlands, Hills, Unknown
-    }
-
 
 
     [MenuItem("Assets/Create/2D/Custom Tiles/LandScapeTile")]

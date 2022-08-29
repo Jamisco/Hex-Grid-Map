@@ -8,20 +8,20 @@ using static LandScapes;
 namespace Assets.Scripts
 {
     [Serializable]
-    internal class Plains : LandScapes
+    internal class Plains : LandScapes, IPlateau
     {
         [SerializeField] protected TileContainer veryHotTiles;
         [SerializeField] protected TileContainer veryColdTiles;
         [SerializeField] protected TileContainer freezingTiles;
 
-        public override void Instantiate(float hexScale)
+        internal override void Instantiate(float hexScale)
         {
             veryHotTiles.Instantiate(hexScale, tileAsset, Temperature.VeryHot);
             hotTiles.Instantiate(hexScale, tileAsset, Temperature.Hot);
             warmTiles.Instantiate(hexScale, tileAsset, Temperature.Warm);
             coldTiles.Instantiate(hexScale, tileAsset, Temperature.Cold);
             veryColdTiles.Instantiate(hexScale, tileAsset, Temperature.VeryCold);
-            freezingTiles.Instantiate(hexScale, tileAsset, Temperature.Freezing);
+            freezingTiles.Instantiate(hexScale, tileAsset, Temperature.Freezing);     
         }
         public override LandScapeTile GetRandomTile(Temperature temp)
         {
@@ -43,5 +43,38 @@ namespace Assets.Scripts
                     return hotTiles.GetRandomTile();
             }
         }
+
+        private Mountains _mountains;
+        private Highlands _highlands;
+        private Hills _hills;
+
+        public void SetPlateaus(Mountains mountains, Highlands highlands, Hills hills)
+        {
+            _mountains = mountains;
+            _highlands = highlands;
+            _hills = hills;
+        }
+        public LandScapeTile GetRandomTile(Temperature temp, HeightLevel height)
+        {
+            switch (height)
+            {
+                case HeightLevel.Flat:
+                    return GetRandomTile(temp);
+                case HeightLevel.Hills:
+                    return HillTiles.GetRandomTile(temp);
+                case HeightLevel.Highlands:
+                    return HighlandTiles.GetRandomTile(temp);
+                case HeightLevel.Mountain:
+                    return MountainTiles.GetRandomTile(temp);
+                default:
+                    return GetRandomTile(temp);
+            }
+        }
+
+        public Mountains MountainTiles => _mountains;
+
+        public Highlands HighlandTiles => _highlands;
+
+        public Hills HillTiles => _hills;
     }
 }

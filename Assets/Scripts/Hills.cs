@@ -8,13 +8,13 @@ using static LandScapeTile;
 namespace Assets.Scripts
 {
     [Serializable]
-    internal class Hills : LandScapes
+    public class Hills : LandScapes
     {
         [SerializeField] protected TileContainer veryColdTiles;
         [SerializeField] protected TileContainer freezingTiles;
 
         
-        public override void Instantiate(float hexScale)
+        internal override void Instantiate(float hexScale)
         {
             hotTiles.Instantiate(hexScale, tileAsset, Temperature.Hot);
             warmTiles.Instantiate(hexScale, tileAsset, Temperature.Warm);

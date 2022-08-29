@@ -17,7 +17,7 @@ namespace Assets.Scripts
 
         [SerializeField] protected TileContainer coastTiles;
 
-        public override void Instantiate(float hexScale)
+        internal override void Instantiate(float hexScale)
         {
             hotTiles.Instantiate(hexScale, tileAsset, Temperature.Hot);
             warmTiles.Instantiate(hexScale, tileAsset, Temperature.Warm);

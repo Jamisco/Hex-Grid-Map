@@ -89,82 +89,81 @@ public class GridManager : MonoBehaviour
         }
 
 
-        private void SetMountainHexes()
-        {
-            int length;
-            int width;
+        //private void SetMountainHexes()
+        //{
+        //    int length;
 
-            int xPos;
-            int yPos;
-            int direction = 0;
+        //    int xPos;
+        //    int yPos;
+        //    int direction = 0;
 
-            List<Vector2> aMountain;
-            Vector2 newPosition, startVec;
+        //    List<Vector2> aMountain;
+        //    Vector2 newPosition;
 
-            for (int i = 0; i < NumOfMountains; i++)
-            {
-                aMountain = new List<Vector2>();
+        //    for (int i = 0; i < NumOfMountains; i++)
+        //    {
+        //        aMountain = new List<Vector2>();
 
-                xPos = Random.Range(0, HexCountX);
-                yPos = Random.Range(0, HexCountY);
+        //        xPos = Random.Range(0, HexCountX);
+        //        yPos = Random.Range(0, HexCountY);
 
-                newPosition = new Vector2(xPos, yPos);
-                mountains.Add(newPosition);
+        //        newPosition = new Vector2(xPos, yPos);
+        //        mountains.Add(newPosition);
 
-                length = Random.Range(1, MountainHexLength);
+        //        length = Random.Range(1, MountainHexLength);
 
-                for (int x = 0; x < length; x++)
-                {
-                    // if use a while loop because the direction we roll, 
-                    // might already have a mountain and so we want to start over
+        //        for (int x = 0; x < length; x++)
+        //        {
+        //            // if use a while loop because the direction we roll, 
+        //            // might already have a mountain and so we want to start over
 
-                    while (true)
-                    {
-                        direction = Random.Range(1, 7);
+        //            while (true)
+        //            {
+        //                direction = Random.Range(1, 7);
 
-                        newPosition = GetNeighborHex(direction, newPosition);
+        //                newPosition = GetNeighborHex(direction, newPosition);
 
-                        if (!mountains.Contains(newPosition))
-                        {
-                            mountains.Add(newPosition);
-                            break;
-                        }
+        //                if (!mountains.Contains(newPosition))
+        //                {
+        //                    mountains.Add(newPosition);
+        //                    break;
+        //                }
 
-                        if (MtnHexIsEnclosed(newPosition))
-                        {
-                            break;
-                        }
-                    }
+        //                if (MtnHexIsEnclosed(newPosition))
+        //                {
+        //                    break;
+        //                }
+        //            }
 
 
-                    //width = yPos + Random.Range(1, MountainHexWidth);
+        //            //width = yPos + Random.Range(1, MountainHexWidth);
 
-                    //for (int y = yPos; y < width; y++)
-                    //{
-                    //    mountains.Add(new Vector2(x, ));
+        //            //for (int y = yPos; y < width; y++)
+        //            //{
+        //            //    mountains.Add(new Vector2(x, ));
 
-                    //}
-                }
-            }
-        }
+        //            //}
+        //        }
+        //    }
+        //}
 
-        private bool MtnHexIsEnclosed(Vector2 hexPos)
-        {
-            Vector2 temp = new Vector2();
+        //private bool MtnHexIsEnclosed(Vector2 hexPos)
+        //{
+        //    Vector2 temp = new Vector2();
 
-            for (int i = 1; i <= 6; i++)
-            {
-                temp = GetNeighborHex(i, hexPos);
+        //    for (int i = 1; i <= 6; i++)
+        //    {
+        //        temp = GetNeighborHex(i, hexPos);
 
-                if (mountains.Contains(temp))
-                {
-                    return false;
-                }
+        //        if (mountains.Contains(temp))
+        //        {
+        //            return false;
+        //        }
 
-            }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private Vector2 GetNeighborHex(int neighborSide, Vector2 pos)
         {
@@ -573,7 +572,6 @@ public class GridManager : MonoBehaviour
 
         return precip;
     }
-
     private ElevationLevel GetElevationLevel(float levelNoise)
     {
         ElevationLevel level;
@@ -582,36 +580,41 @@ public class GridManager : MonoBehaviour
 
         switch (levelNoise)
         {
-            case < .5f:
-                level = ElevationLevel.BelowGround;
+            case < .3f:
+                level = ElevationLevel.Ocean;
                 break;
+            case < .4f:
+                level = ElevationLevel.Sea;
+                break;        
             default:
-                level = ElevationLevel.AboveGround;
+                level = ElevationLevel.Ground;
                 break;
         }
 
         return level;
     }
-
-    private GroundLevel GetGroundLevel(float levelNoise)
+    private HeightLevel GetGroundLevel(float levelNoise)
     {
-        GroundLevel level;
+        HeightLevel level;
 
         //Debug.Log("Level: " + levelNoise);
 
         switch (levelNoise)
         {
-            case < .75f:
-                level = GroundLevel.Flat;
+            case < .4f:
+                level = HeightLevel.BelowGround;
                 break;
-            case < .9f:
-                level = GroundLevel.Hill;
+            case < .7f:
+                level = HeightLevel.Flat;
+                break;
+            case < .85f:
+                level = HeightLevel.Hills;
                 break;
             case < .95f:
-                level = GroundLevel.Highland;
+                level = HeightLevel.Highlands;
                 break;
             default:
-                level = GroundLevel.Mountain;
+                level = HeightLevel.Mountain;
                 break;
         }
 
@@ -716,7 +719,7 @@ public class GridManager : MonoBehaviour
         Temperature temp = GetTemperature(tempNoise);
         Precipitation rain = GetPrecipitation(preNoise);
         ElevationLevel elvationLvl = GetElevationLevel(surlvlNoise);
-        GroundLevel heightLvl = GetGroundLevel(mtnLvlNoise);
+        HeightLevel grndLevel = GetGroundLevel(mtnLvlNoise);
 
         Biome aBiome = GetBiome(temp, rain);
 
@@ -733,38 +736,36 @@ public class GridManager : MonoBehaviour
 
         switch (elvationLvl)
         {
-            case ElevationLevel.BelowGround:
-
+            case ElevationLevel.Ocean:
+            case ElevationLevel.Sea:
                 waterTilePositions.Add(new Vector3Int(x, y, 0));
 
                 returnTile = OceanTiles.GetRandomTile(temp);
-
                 break;
 
-            case ElevationLevel.AboveGround:
+            case ElevationLevel.Ground:
 
                 switch (aBiome)
                 {
                     case Biome.Desert:
-                        returnTile = DesertTile.GetRandomTile(temp, heightLvl);
+                        returnTile = DesertTile.GetRandomTile(temp, grndLevel);
                         break;
                     case Biome.Plains:
-                        returnTile = PlainTiles.GetRandomTile(temp, heightLvl);
+                        returnTile = PlainTiles.GetRandomTile(temp, grndLevel);
                         break;
                     case Biome.Forest:
-                        returnTile = ForestTile.GetRandomTile(temp, heightLvl);
+                        returnTile = ForestTile.GetRandomTile(temp, grndLevel);
                         break;
                     case Biome.DryLands:
-                        returnTile = DryLandsTile.GetRandomTile(temp, heightLvl);
+                        returnTile = DryLandsTile.GetRandomTile(temp, grndLevel);
                         break;
                     case Biome.WetLands:
-                        returnTile = WetLandsTile.GetRandomTile(temp, heightLvl);
+                        returnTile = WetLandsTile.GetRandomTile(temp, grndLevel);
                         break;
                     default:
-                        returnTile = PlainTiles.GetRandomTile(temp, heightLvl);
+                        returnTile = PlainTiles.GetRandomTile(temp, grndLevel);
                         break;
                 }
-
                 break;
         }
 
@@ -1282,16 +1283,18 @@ public class GridManager : MonoBehaviour
 
         if (atile == null)
         {
-            int i = 0;
             return false;
         }
 
-        if (atile.TileLandScape != LandScape.WaterBody)
+        switch (atile.TileLandScape)
         {
-            return true;
+            case LandScape.Ocean:
+            case LandScape.Sea:
+            case LandScape.Lake:
+                return false;
+            default:
+                return true;
         }
-
-        return false;
     }
     private List<Vector3Int> GetTilesAtCameraPos()
     {

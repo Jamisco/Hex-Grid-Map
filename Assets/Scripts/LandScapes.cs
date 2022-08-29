@@ -16,8 +16,6 @@ public abstract class LandScapes
     [SerializeField] protected TileContainer warmTiles;
     [SerializeField] protected TileContainer coldTiles;
 
-    [SerializeField] protected Type tiles;
-
     public virtual LandScapeTile GetRandomTile(Temperature temp)
     {
         switch (temp)
@@ -33,19 +31,6 @@ public abstract class LandScapes
                 return warmTiles.GetRandomTile();
         }
     }
-
-    /// <summary>
-    /// If you are gonna use this method, implement it, the current implementaion is simply
-    /// the getRandomTile
-    /// </summary>
-    /// <param name="temp"></param>
-    /// <param name="height"></param>
-    /// <returns></returns>
-    public virtual LandScapeTile GetRandomTile(Temperature temp, GroundLevel height)
-    {
-        return GetRandomTile(temp);
-    }
-
     internal static Biome GetBiome(Temperature temp, Precipitation rain)
     {
         return BiomeTable[(int)temp, (int)rain];
@@ -59,9 +44,9 @@ public abstract class LandScapes
         VeryHot, Hot, Warm, Cold, VeryCold, Freezing
     }
 
-    public enum ElevationLevel { BelowGround, Shore, AboveGround };
+    public enum ElevationLevel { Ocean, Sea, Ground };
 
-    public enum GroundLevel { Flat, Hill, Highland, Mountain };
+    public enum HeightLevel { BelowGround, Flat, Hills, Highlands, Mountain };
 
     /// <summary>
     /// DO NOT CHANGE THE ORDER OF THIS
@@ -79,7 +64,7 @@ public abstract class LandScapes
         { Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
 
     };
-    public virtual void Instantiate(float hexScale)
+    internal virtual void Instantiate(float hexScale)
     {
         hotTiles.Instantiate(hexScale, tileAsset, Temperature.Hot);
         warmTiles.Instantiate(hexScale, tileAsset, Temperature.Warm);
@@ -94,5 +79,20 @@ public abstract class LandScapes
         DryLands,
         WetLands,
     };
+
+    internal enum LandScape
+    {
+        Ocean,
+        Sea,
+        Lake,
+
+        Plains,
+        Forests,
+
+        Hills,
+        Highlands,
+        Mountains
+    }
+
 
 }

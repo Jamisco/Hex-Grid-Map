@@ -108,6 +108,10 @@ namespace Assets.Scripts
             surLvlOffsetX = Random.Range(-1000f, 1000f);
             surLvlOffsetY = Random.Range(-1000f, 1000f);
 
+            _mountainLevelScale = Random.Range(5f, 10f);
+            mtnLvlOffsetX = Random.Range(-1000f, 1000f);
+            mtnLvlOffsetY = Random.Range(-1000f, 1000f);
+
         }
 
         private void RefreshMap()
@@ -147,6 +151,11 @@ namespace Assets.Scripts
 
                 surLvlOffsetX = Random.Range(-10000f, 10000f);
                 surLvlOffsetY = Random.Range(-10000f, 10000f);
+
+                mtnLvlOffsetX = Random.Range(-1000f, 1000f);
+                mtnLvlOffsetY = Random.Range(-1000f, 1000f);
+
+
             }
 
            // changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more

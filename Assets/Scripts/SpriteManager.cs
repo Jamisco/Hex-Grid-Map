@@ -11,30 +11,48 @@ namespace Assets.Scripts
     {
         [SerializeField] private Ocean _oceans;
         [SerializeField] private Plains _plains;
-        [SerializeField] private Hills _hills;
-        [SerializeField] private Highlands _highlands;
-        [SerializeField] private Mountains _mountains;
         [SerializeField] private Desert _deserts;
         [SerializeField] private DryLands _dryLands;
         [SerializeField] private WetLands _wetLands;
         [SerializeField] private Forest _forest;
+
+        [SerializeField] private Hills _hills;
+        [SerializeField] private Highlands _highlands;
+        [SerializeField] private Mountains _mountains;
+
+        [SerializeField] private Hills _desertHills;
+        [SerializeField] private Highlands _desertHighlands;
+        [SerializeField] private Mountains _desertMountains;
 
         public void Instantiate(float hexScale)
         {
             // make sure all sprites have a PPU for 256
             // this method loops through all the sprites in the lists and changes their ppu
             // so the sprites could match the cell sizes given the current scale of the grid
-
-            _oceans.Instantiate(hexScale);
-            _plains.Instantiate(hexScale);
             _hills.Instantiate(hexScale);
             _highlands.Instantiate(hexScale);
             _mountains.Instantiate(hexScale);
+
+            _desertHills.Instantiate(hexScale);
+            _desertHighlands.Instantiate(hexScale);
+            _desertMountains.Instantiate(hexScale);
+
+            _oceans.Instantiate(hexScale);
+
+            _plains.Instantiate(hexScale);
+            _plains.SetPlateaus(_mountains, _highlands, _hills);
+
             _deserts.Instantiate(hexScale);
+            _deserts.SetPlateaus(_desertMountains, _desertHighlands, _desertHills);
+
+            _forest.Instantiate(hexScale);
+            _forest.SetPlateaus(_mountains, _highlands, _hills);
 
             _dryLands.Instantiate(hexScale);
+            _dryLands.SetPlateaus(_desertMountains, _desertHighlands, _desertHills);
+
             _wetLands.Instantiate(hexScale);
-            _forest.Instantiate(hexScale);
+            _wetLands.SetPlateaus(_mountains, _highlands, _hills);
         }
 
         public Ocean Oceans
