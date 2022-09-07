@@ -13,11 +13,11 @@ public class LandScapeTile : Tile
     [SerializeField] Temperature _temperature;
     [SerializeField] Color _highlightColor;
 
+
+
     private float _elevation = -1;
 
     private float _noise = 0;
-
-    List<Sprite> _sprites;
 
     public void HighLight(bool mark)
     {
@@ -62,86 +62,101 @@ public class LandScapeTile : Tile
         // your just creating a stack overflow
     }
 
+    public static int GetOppositeNeighbor(int neighbor)
+    {
+        if (neighbor <= 3)
+        {
+            return neighbor + 3;
+        }
+        else
+        {
+            return neighbor - 3;
+        }
+    }
+
     private Vector3Int GetNeighborHex(Vector3Int curPos, int neighborSide, Vector2Int mapSize)
     {
-        Vector3Int neighborPosition = curPos;
+        /// PLEASE BE ADVICED, THE Y POSITION OF THE HEX MATTERS
+        /// WE HAVE TO ACCOUNT FOR CHANGES IF THE Y POSITION IS ODD OR EVEN
+        Vector3Int tempPos = curPos;
 
         switch (neighborSide)
         {
             case 1:
                 // increase both x and y by 1
 
-                if (neighborPosition.y % 2 == 1)
+                if (tempPos.y % 2 == 1)
                 {
-                    neighborPosition.x += 1;
+                    tempPos.x += 1;
                 }
 
-                neighborPosition.y += 1;
+                tempPos.y += 1;
 
                 break;
             case 2:
 
-                neighborPosition.x += 1;
+                tempPos.x += 1;
 
                 break;
             case 3:
 
-                if (neighborPosition.y % 2 == 1)
+                if (tempPos.y % 2 == 1)
                 {
-                    neighborPosition.x += 1;
+                    tempPos.x += 1;
                 }
 
-                neighborPosition.y -= 1;
+                tempPos.y -= 1;
 
                 break;
             case 4:
 
-                if (neighborPosition.y % 2 == 0)
+                if (tempPos.y % 2 == 0)
                 {
-                    neighborPosition.x -= 1;
+                    tempPos.x -= 1;
                 }
 
-                neighborPosition.y -= 1;
+                tempPos.y -= 1;
 
                 break;
             case 5:
 
-                neighborPosition.x -= 1;
+                tempPos.x -= 1;
                 break;
 
             default:
                 // case 6
 
-                if (neighborPosition.y % 2 == 0)
+                if (tempPos.y % 2 == 0)
                 {
-                    neighborPosition.x -= 1;
+                    tempPos.x -= 1;
                 }
 
-                neighborPosition.y += 1;
+                tempPos.y += 1;
                 break;
         }
 
-        if (neighborPosition.x >= mapSize.x)
+
+        if (tempPos.x >= mapSize.x)
         {
-            neighborPosition.x -= mapSize.x;
+            tempPos.x -= mapSize.x;
         }
 
-        if (neighborPosition.x < 0)
+        if (tempPos.x < 0)
         {
-            neighborPosition.x += mapSize.x;
+            tempPos.x += mapSize.x;
         }
 
-        if (neighborPosition.y >= mapSize.y)
+        if (tempPos.y >= mapSize.y)
         {
-            neighborPosition.y -= mapSize.y;
+            tempPos.y -= mapSize.y;
         }
 
-        if (neighborPosition.y < 0)
+        if (tempPos.y < 0)
         {
-            neighborPosition.y += mapSize.y;
+            tempPos.y += mapSize.y;
         }
 
-        return neighborPosition;
+        return tempPos;
     }
 
     /// <summary>
@@ -149,7 +164,7 @@ public class LandScapeTile : Tile
     /// </summary>
     /// <returns></returns>
 
-    public Vector3Int[] GetNeighborHexes(Vector3Int curPos, Vector2Int mapSize)
+    public Vector3Int[] GetNeighborPositions(Vector3Int curPos, Vector2Int mapSize)
     {
         Vector3Int[] neighbors = new Vector3Int[6];
 
@@ -157,6 +172,19 @@ public class LandScapeTile : Tile
         for (int i = 1; i <= 6; i++)
         {
             neighbors[i - 1] = GetNeighborHex(curPos, i, mapSize);
+        }
+
+        return neighbors;
+    }
+
+    public LandScapeTile[] GetNeighborTiles(Vector3Int curPos, Vector2Int mapSize, Tilemap tileMap)
+    {
+        LandScapeTile[] neighbors = new LandScapeTile[6];
+
+        // we start at index 1 because out getNeighborHex is also index from the number 1
+        for (int i = 1; i <= 6; i++)
+        {
+            neighbors[i - 1] = tileMap.GetTile(GetNeighborHex(curPos, i, mapSize)) as LandScapeTile;
         }
 
         return neighbors;
@@ -190,7 +218,7 @@ public class LandScapeTile : Tile
         {
             int i = 0;
 
-            foreach (Vector3Int pos2 in curTile.GetNeighborHexes(curPos, mapSize))
+            foreach (Vector3Int pos2 in curTile.GetNeighborPositions(curPos, mapSize))
             {
                 nextTile = tileMap.GetTile(pos2) as LandScapeTile;
                 // check if the neighbor tiles are land.
@@ -213,7 +241,19 @@ public class LandScapeTile : Tile
         }
     }
 
-    private bool LandScapeIsSeaorOcean(LandScape landscape)
+    public bool LandScapeIsSeaorOcean()
+    {
+        switch (_landscape)
+        {
+            case LandScape.Ocean:
+            case LandScape.Sea:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public static bool LandScapeIsSeaorOcean(LandScape landscape)
     {
         switch (landscape)
         {

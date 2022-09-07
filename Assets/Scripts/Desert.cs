@@ -51,17 +51,17 @@ namespace Assets.Scripts
             _hills = hills;
 
         }
-        public LandScapeTile GetRandomTile(Temperature temp, HeightLevel height)
+        public LandScapeTile GetRandomTile(Temperature temp, GroundLevel height)
         {
             switch (height)
             {
-                case HeightLevel.Flat:
+                case GroundLevel.Flat:
                     return GetRandomTile(temp);
-                case HeightLevel.Hills:
+                case GroundLevel.Hills:
                     return HillTiles.GetRandomTile(temp);
-                case HeightLevel.Highlands:
+                case GroundLevel.Highlands:
                     return HighlandTiles.GetRandomTile(temp);
-                case HeightLevel.Mountain:
+                case GroundLevel.Mountain:
                     return MountainTiles.GetRandomTile(temp);
                 default:
                     return GetRandomTile(temp);

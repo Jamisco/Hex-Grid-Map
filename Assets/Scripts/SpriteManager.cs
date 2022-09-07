@@ -9,7 +9,10 @@ namespace Assets.Scripts
     // x = -.5, y = -2/3
     internal class SpriteManager : MonoBehaviour
     {
+        // dont forget to instantiate the sprites if you declare new ones
+
         [SerializeField] private Ocean _oceans;
+        [SerializeField] private Lake _lakes;
         [SerializeField] private Plains _plains;
         [SerializeField] private Desert _deserts;
         [SerializeField] private DryLands _dryLands;
@@ -38,6 +41,7 @@ namespace Assets.Scripts
             _desertMountains.Instantiate(hexScale);
 
             _oceans.Instantiate(hexScale);
+            _lakes.Instantiate(hexScale);
 
             _plains.Instantiate(hexScale);
             _plains.SetPlateaus(_mountains, _highlands, _hills);
@@ -60,6 +64,14 @@ namespace Assets.Scripts
             get
             {
                 return _oceans;
+            }
+        }
+
+        public Lake Lakes
+        {
+            get
+            {
+                return _lakes;
             }
         }
         public Plains Plains

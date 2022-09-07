@@ -46,7 +46,7 @@ public abstract class LandScapes
 
     public enum ElevationLevel { Ocean, Sea, Ground };
 
-    public enum HeightLevel { BelowGround, Flat, Hills, Highlands, Mountain };
+    public enum GroundLevel { BelowGround, Flat, Hills, Highlands, Mountain };
 
     /// <summary>
     /// DO NOT CHANGE THE ORDER OF THIS
@@ -80,7 +80,7 @@ public abstract class LandScapes
         WetLands,
     };
 
-    internal enum LandScape
+    public enum LandScape
     {
         Ocean,
         Sea,

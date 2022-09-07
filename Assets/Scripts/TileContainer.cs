@@ -14,6 +14,14 @@ namespace Assets.Scripts
     public class TileContainer
     {
         [SerializeField] public List<Sprite> tileSprites = new List<Sprite>();
+        private float Hexscale;
+        private LandScapeTile tileAsset;
+        public TileContainer(float hexScale, LandScapeTile tileAsset, List<Sprite> tileSprites, 
+            Temperature temp = Temperature.Warm)
+        {
+            this.tileSprites = tileSprites;
+            Instantiate(hexScale, tileAsset, temp);
+        }
 
         private List<LandScapeTile> tiles;
 
@@ -33,6 +41,9 @@ namespace Assets.Scripts
             // the reason we cannot do this in the OnafterDeserialize() method is because that method does not allow for us to get and set any texture, including sprite textures
             // and no you cannot call this method in deserialize either
 
+            Hexscale = hexScale;
+            this.tileAsset = tileAsset;
+
             tileAsset.TileTemperature = temp;
 
             for (int i = 0; i < tileSprites.Count; i++)
@@ -40,21 +51,41 @@ namespace Assets.Scripts
                 tileSprites[i] = ChangePPU(tileSprites[i], hexScale);
             }
 
-            SetTiles(tileAsset);
+            SetTiles();
         }
-        private void SetTiles(LandScapeTile tileAsset)
+        private void SetTiles()
         {
             tiles = new List<LandScapeTile>();
 
             foreach (Sprite aSprite in tileSprites)
             {
                 tileAsset.sprite = aSprite;
+
+                // creates a new tile by cloning the tile asset with the current sprite
                 tiles.Add(UnityEngine.Object.Instantiate(tileAsset));
             }
         }
 
-        private Vector2 newPivot = new(0, 0); // this is = pivot.bottom in inspector
-        private Sprite ChangePPU(Sprite aSprite, float hexScale)
+        public void AddSprite(Sprite sprite)
+        {
+            Sprite newSprite = ChangePPU(sprite, Hexscale);
+
+            tileSprites.Add(newSprite);
+
+            tileAsset.sprite = newSprite;
+            tiles.Add(UnityEngine.Object.Instantiate(tileAsset));
+        }
+
+        public void AddSprites(List<Sprite> sprites)
+        {
+            foreach (Sprite sprite in sprites)
+            {
+                AddSprite(sprite);
+            }
+        }
+
+        private static Vector2 newPivot = new(0, 0); // this is = pivot.bottom in inspector
+        public static Sprite ChangePPU(Sprite aSprite, float hexScale)
         {
             // matches the sprite ppu to the hex grid cells, because when we change the scale of the cells, the ppu for the sprite must also change
             return Sprite.Create(aSprite.texture, aSprite.rect, newPivot, aSprite.pixelsPerUnit / hexScale, 1, SpriteMeshType.Tight, aSprite.border);

@@ -8,7 +8,7 @@ namespace Assets.Scripts
         public Highlands HighlandTiles { get; }
         public Hills HillTiles { get; }
 
-        public LandScapeTile GetRandomTile(Temperature temp, HeightLevel height);
+        public LandScapeTile GetRandomTile(Temperature temp, GroundLevel height);
         //{
         //    switch (height)
         //    {
