@@ -35,15 +35,6 @@ public abstract class LandScapes
     {
         return BiomeTable[(int)temp, (int)rain];
     }
-
-    /// <summary>
-    /// DO NOT CHANGE THE ORDER OF THIS
-    /// </summary>
-    public enum Temperature
-    {
-        VeryHot, Hot, Warm, Cold, VeryCold, Freezing
-    }
-
     public enum ElevationLevel { Ocean, Sea, Ground };
 
     public enum GroundLevel { BelowGround, Flat, Hills, Highlands, Mountain };
@@ -51,17 +42,43 @@ public abstract class LandScapes
     /// <summary>
     /// DO NOT CHANGE THE ORDER OF THIS
     /// </summary>
+    public enum Temperature
+    {
+        // DO NOT CHANGE THE ORDER OF THIS
+        // IF YOU ARE GOING TO, CHANGE ORDER OF BIOME TABLE TOO
+
+        // VeryHot ,Hot ,Warm ,Cold ,VeryCold ,Freezing  
+
+        Freezing, VeryCold, Cold, Warm, Hot, VeryHot
+    }
+
+    /// <summary>
+    /// DO NOT CHANGE THE ORDER OF THIS
+    /// </summary>
     public enum Precipitation { NoRain, LightRain, ModerateRain, HeavyRain, VolientRain };
 
+    // goes by ordering of TEMPERATURE AND PRECIPITATION
+    /// the x axis -> top to down correspondes to preciptation <summary>
+    /// the y axis -> left to right correspondes to Temperature
+    /// </summary>
     private static readonly Biome[,] BiomeTable = new Biome[6, 5]
     {
-        { Biome.Desert, Biome.DryLands, Biome.Plains, Biome.Forest, Biome.Forest },
-        { Biome.Desert, Biome.DryLands, Biome.Plains, Biome.Forest, Biome.WetLands },
-        { Biome.DryLands, Biome.Plains, Biome.Plains, Biome.Plains, Biome.WetLands },
-
+        { Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
+        { Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
         { Biome.Plains, Biome.Plains, Biome.Plains, Biome.WetLands, Biome.WetLands },
-        { Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
-        { Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
+      
+        { Biome.DryLands, Biome.Plains, Biome.Plains, Biome.Plains, Biome.WetLands },
+        { Biome.Desert, Biome.DryLands, Biome.Plains, Biome.Forest, Biome.WetLands },
+        { Biome.Desert, Biome.DryLands, Biome.Plains, Biome.Forest, Biome.Forest },
+
+
+        //        { Biome.Desert, Biome.DryLands, Biome.Plains, Biome.Forest, Biome.Forest },
+        //{ Biome.Desert, Biome.DryLands, Biome.Plains, Biome.Forest, Biome.WetLands },
+        //{ Biome.DryLands, Biome.Plains, Biome.Plains, Biome.Plains, Biome.WetLands },
+
+        //{ Biome.Plains, Biome.Plains, Biome.Plains, Biome.WetLands, Biome.WetLands },
+        //{ Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
+        //{ Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains, Biome.Plains },
 
     };
     internal virtual void Instantiate(float hexScale)
@@ -91,7 +108,9 @@ public abstract class LandScapes
 
         Hills,
         Highlands,
-        Mountains
+        Mountains,
+
+        Miscellaneous
     }
 
 

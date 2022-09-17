@@ -1,6 +1,7 @@
 
 using Assets.Scripts;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -64,6 +65,8 @@ public class LandScapeTile : Tile
 
     public static int GetOppositeNeighbor(int neighbor)
     {
+        // will return numbers from 1 - 6
+
         if (neighbor <= 3)
         {
             return neighbor + 3;
@@ -201,16 +204,18 @@ public class LandScapeTile : Tile
             _temperature = value;
         }
     }
-
-    public bool[] GetCoasts(Tilemap tileMap, Vector3Int curPos, Vector2Int mapSize)
+    /// <summary>
+    /// Checks if the current water tile is connected to any land Tile.
+    /// Note: The current Tile Must be a WATER BODY such as ocean/sea, lake
+    /// </summary>
+    /// <param name="tileMap"></param>
+    /// <param name="curPos"></param>
+    /// <param name="mapSize"></param>
+    /// <returns></returns>
+    public Neighbor GetPossibleCoasts(ref Tilemap tileMap, Vector3Int curPos, Vector2Int mapSize)
     {
-        bool[] coastSides = new bool[6];
+        List<int> coastSides = Enumerable.Repeat(2, 6).ToList();
         LandScapeTile curTile, nextTile;
-
-        for (int i = 0; i < coastSides.Length; i++)
-        {
-            coastSides[i] = false;
-        }
 
         curTile = tileMap.GetTile(curPos) as LandScapeTile;
 
@@ -225,19 +230,18 @@ public class LandScapeTile : Tile
                 // if they are then we have a coast
                 if (LandScapeIsLand(nextTile._landscape))
                 {
-                    coastSides[i] = true;
+                    coastSides[i] = 1;
                 }
 
                 i++;
 
             }
 
-            return coastSides;
-
+            return new Neighbor(coastSides); 
         }
         else
         {
-            return coastSides;
+            return new Neighbor(coastSides); 
         }
     }
 
@@ -278,13 +282,14 @@ public class LandScapeTile : Tile
         }
     }
 
+
     public float Elevation
     {
         get
         {
             return _elevation;
         }
-        set
+        set 
         {
             _elevation = value;
         }

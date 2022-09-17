@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using static GridManager;
 
@@ -29,8 +30,8 @@ namespace Assets.Scripts
         private float tempBorderFractal;
 
         [SerializeField] private int minSurfaceFractal;
-        [SerializeField] private int minTemperatureFractal;
         [SerializeField] private int minPrecipFractal;
+        [SerializeField] private int minMtnFractal;
 
         [SerializeField] private float mountainScale;
 
@@ -59,7 +60,7 @@ namespace Assets.Scripts
         float[,] mtnLvlNoiseMap;
 
         List<float> noiseValues = new List<float>();
-        private float maxTempScale, maxPrecipScale, maxSurScale;
+        private float maxTempScale, maxPrecipScale, maxSurScale, maxMtnScale;
 
 
 
@@ -70,6 +71,7 @@ namespace Assets.Scripts
             maxTempScale = .5f;
             maxPrecipScale = 1f;
             maxSurScale = 2f;
+            maxMtnScale = 4.5f;
 
             // scale is frequency across the map
             // aka how many times does the value repeat across the map
@@ -77,6 +79,7 @@ namespace Assets.Scripts
             _precipitationScale = Random.Range(0f, maxPrecipScale);
             _temperatureScale = Random.Range(0f, maxTempScale);
             _surfaceLevelScale = Random.Range(1f, maxSurScale);
+            _mountainLevelScale = Random.Range(1f, maxMtnScale);
 
             preOffsetX = Random.Range(-1000f, 1000f);
             preOffsetY = Random.Range(-1000f, 1000f);
@@ -108,7 +111,6 @@ namespace Assets.Scripts
             surLvlOffsetX = Random.Range(-1000f, 1000f);
             surLvlOffsetY = Random.Range(-1000f, 1000f);
 
-            _mountainLevelScale = Random.Range(5f, 10f);
             mtnLvlOffsetX = Random.Range(-1000f, 1000f);
             mtnLvlOffsetY = Random.Range(-1000f, 1000f);
 
@@ -127,7 +129,7 @@ namespace Assets.Scripts
             surLvlOffsetX = Random.Range(-1000f, 1000f);
             surLvlOffsetY = Random.Range(-1000f, 1000f);
 
-            _mountainLevelScale = Random.Range(5f, 10f);
+            _mountainLevelScale = Random.Range(1f, maxMtnScale);
             mtnLvlOffsetX = Random.Range(-1000f, 1000f);
             mtnLvlOffsetY = Random.Range(-1000f, 1000f);
 
@@ -143,22 +145,22 @@ namespace Assets.Scripts
 
             if (Input.GetMouseButtonDown(1))
             {
-                preOffsetX = Random.Range(-1000f, 1000f);
-                preOffsetY = Random.Range(-1000f, 1000f);
+                //preOffsetX = Random.Range(-1000f, 1000f);
+                //preOffsetY = Random.Range(-1000f, 1000f);
 
-                tempOffsetX = Random.Range(-1000f, 1000f);
-                tempOffsetY = Random.Range(-1000f, 1000f);
+                //tempOffsetX = Random.Range(-1000f, 1000f);
+                //tempOffsetY = Random.Range(-1000f, 1000f);
 
-                surLvlOffsetX = Random.Range(-10000f, 10000f);
-                surLvlOffsetY = Random.Range(-10000f, 10000f);
+                //surLvlOffsetX = Random.Range(-10000f, 10000f);
+                //surLvlOffsetY = Random.Range(-10000f, 10000f);
 
-                mtnLvlOffsetX = Random.Range(-1000f, 1000f);
-                mtnLvlOffsetY = Random.Range(-1000f, 1000f);
+                //mtnLvlOffsetX = Random.Range(-1000f, 1000f);
+                //mtnLvlOffsetY = Random.Range(-1000f, 1000f);
 
-
+                changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
             }
 
-           // changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
+          //  changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
         }
         public float PrecipitationScale
         {
@@ -392,18 +394,39 @@ namespace Assets.Scripts
         }
         private void SetMountainNoise(int x, int y, float xOffset, float yOffset, Planet planet)
         {
+            float multiplier = 0;
+
             float tempNoise = 0;
 
-            float multiplier = 0;
+            float adder = 0;
 
             float fractal = planet.Fractal;
 
+            float divisor = 0;
+
+            fractal += minMtnFractal;
+
+            fractal = Mathf.Clamp(fractal, minMtnFractal, 25);
+
+            adder = fractal * 2;
+
             // we do this because we want bigger planets to have more water inbetween them
-            multiplier = _mountainLevelScale + planet.Fractal / 6; // 6 is just some random number
+            multiplier = _mountainLevelScale;
 
-            tempNoise = noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset) * mountainScale;
+            for (int i = 1; i <= fractal; i++)
+            {
+                multiplier *= 2;
 
-            //tempNoise -= (float) (1 - surLvlNoiseMap[x, y]) * tempNoise;
+                // so we can normalize the values later
+                adder /= 2;
+
+                tempNoise += adder * (noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset) * mountainScale);
+                divisor += adder;
+
+            }
+
+            // this is to normalize values between 0 and 1
+            tempNoise = tempNoise / divisor;
 
             mtnLvlNoiseMap[x, y] = tempNoise;
 
@@ -419,8 +442,6 @@ namespace Assets.Scripts
             // we do this so the array values in memory are not randomly deleted by other process
             if (!loaded)
             {
-
-
                 loaded = true;
             }
 

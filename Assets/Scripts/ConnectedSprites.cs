@@ -133,6 +133,8 @@ namespace Assets.Scripts
             };
 
             // This means we could not find a sprite that has those tile rules
+            Debug.Log("Sprite Not Found for Sides" +
+                ": " + Neighbor.GetString(neighbors));
             return null;
         }
 
@@ -146,6 +148,8 @@ namespace Assets.Scripts
             {
                 return tiles.GetRandomTile();
             };
+
+            Debug.Log("Sprite Not Found for Side: " + neighborSide);
 
             // This means we could not find a sprite that has those tile rules
             return null;
@@ -165,12 +169,16 @@ namespace Assets.Scripts
 
     public struct Neighbor : IEquatable<Neighbor>
     {
-        private List<bool> NeighborValues { get; }
+        private bool _isConnected;
 
-        private List<int> NeighborNumbers { get; }
+        public bool IsConnected { get { return _isConnected;  } }
+        private List<bool> NeighborValues { get; }
+        public List<int> NeighborNumbers { get; }
 
         public Neighbor(List<int> neighbors)
         {
+            _isConnected = false;
+
             NeighborNumbers = neighbors;
             NeighborValues = new List<bool>();
 
@@ -179,11 +187,13 @@ namespace Assets.Scripts
 
         public Neighbor(int neighborSide)
         {
+            _isConnected = false;
+
             NeighborNumbers = new List<int>();
 
             NeighborValues = new List<bool>();
 
-            NeighborNumbers = ConvertNeighborSide(neighborSide);
+            NeighborNumbers = CreateNeighborList(neighborSide);
 
             NeighborValues = Convert2Bool(NeighborNumbers);
         }
@@ -197,6 +207,7 @@ namespace Assets.Scripts
                 if(num == 1)
                 {
                     result.Add(true);
+                    _isConnected = true;
                 }
                 else
                 {
@@ -207,11 +218,43 @@ namespace Assets.Scripts
             return result;
         }
 
-        private List<int> ConvertNeighborSide(int neighborSide)
+        /// <summary>
+        /// If you have a list of sides already, then u can pass in that list
+        /// for example, if you have neighbors at position 2, 5
+        /// This will create a neigbor struct with a value of 1 at position 2 and 5
+        /// </summary>
+        /// <param name="neighbors"></param>
+        /// <returns></returns>
+        public static Neighbor ConvertSidesToNeighbor(List<int> neighbors)
         {
             List<int> result = Enumerable.Repeat(2, 6).ToList();
 
-            result[neighborSide - 1] = 1;
+            foreach (int aSide in neighbors)
+            {
+                // since a hex only has 6 sides
+                if(aSide > 0 && aSide <= 6)
+                {
+                    result[aSide - 1] = 1;
+                }           
+            }
+
+            return new Neighbor(result);
+        }
+        private List<int> CreateNeighborList(int neighborSide)
+        {
+            List<int> result = Enumerable.Repeat(2, 6).ToList();
+
+            try
+            {
+                result[neighborSide - 1] = 1;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+          
+            _isConnected = true;
 
             return result;
         }
@@ -223,13 +266,44 @@ namespace Assets.Scripts
             if (hasNeighbor == true)
             {
                 NeighborNumbers[index] = 1;
+                _isConnected = true;
             }
             else
             {
                 NeighborNumbers[index] = 2;
             }         
         }
+        /// <summary>
+        /// Returns a new Neighbor that is combined with the given neighbor
+        /// </summary>
+        /// <param name="newNeighbor"></param>
+        /// <returns></returns>
+        public Neighbor CombineNeighbor(Neighbor newNeighbor)
+        {
+            List<int> newNum = newNeighbor.NeighborNumbers;
+            List<int> combined = new List<int>();
 
+            for (int i = 0; i < NeighborNumbers.Count; i++)
+            {
+                if (NeighborNumbers[i] == 1)
+                {
+                    combined.Add(1);
+                }
+                else
+                {
+                    if (newNum[i] == 1)
+                    {
+                        combined.Add(1);
+                    }
+                    else
+                    {
+                        combined.Add(2);
+                    }
+                }
+            }
+
+            return new Neighbor(combined);
+        }
         public override int GetHashCode()
         {
             // a proper hashcode is needed since we will be using dictionary 
@@ -245,7 +319,6 @@ namespace Assets.Scripts
 
             return hashcode;
         }
-
         public override bool Equals(object obj)
         {
             if(obj is Neighbor)
@@ -257,7 +330,6 @@ namespace Assets.Scripts
                 return false;
             }      
         }
-
         public bool Equals(Neighbor other)
         {
             if (NeighborValues.SequenceEqual(other.NeighborValues))
@@ -269,15 +341,53 @@ namespace Assets.Scripts
                 return false;
             }
         }
-
         public static bool operator ==(Neighbor a, Neighbor b)
         {
             return a.Equals(b);
         }
-
         public static bool operator !=(Neighbor a, Neighbor b)
         {
             return a.Equals(b);
+        }
+
+        public override string ToString()
+        {
+            string str = "";
+
+            foreach (int  num in NeighborNumbers)
+            {
+                str += num + " ";
+            }
+
+            return str;
+        }
+
+        public static string GetString(List<int> neighbors)
+        {
+            string str = "";
+
+            foreach (int num in neighbors)
+            {
+                str += num + " ";
+            }
+
+            return str;
+        }
+
+        public static int Normalize(int neighbor)
+        {
+            if (neighbor > 6)
+            {
+                return 1;
+            }
+            if (neighbor <= 0)
+            {
+                return 1;
+            }
+
+            // the neighbor is accurate
+            return neighbor;
+
         }
 
     }
