@@ -363,23 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Temp
 
-# Files I want ignored
 
-/Library/
-/Assets/Scenes/
-/Assets/Editor
-/Assets/LandScapes
-/Assets/settings
-/Assets/Sprites\Palletes
-/Assets/Terrain Tile Hex Samples
-/Assets/Terrain Tile Hex Samples
-/UserSettings/
-/Assembly-CSharp.csproj/
-/ProjectSettings
-/Hex Grid Map.sln
-/Assembly-CSharp.csproj
-/Assembly-CSharp-Editor.csproj
-/.vsconfig
-/Assets/UniversalRenderPipelineGlobalSettings.asset
-*.txt
-/Assets/Sprites/Palletes

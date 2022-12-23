@@ -1,0 +1,74 @@
+﻿
+ [Done]
+ [Undone]
+
+5/27/22 - 9:28pm
+- scroll in and out of map [Done]
+- move left right up and down [Undone]
+- We should have a fully functional map that has all the base interactions we would need  [Undone]
+
+6/10/22
+- implement terrain sprites  [Done]
+
+6/10/22
+- implement highlight,  [Done]
+- fix previous tile name and type types  [Done]
+
+6/11/22
+- fix scale so camera can center and scroll properly  [Done]
+
+6/13/22
+- fix zoom, make sure you can scroll into particular hex  [Done]
+-begin mapping our proper map generation  [UnDone]
+	- so, proper ocean, forest, jungles etc
+	- make sure you get the proper tiles and everything for it
+
+6/14/22 - 4:59pm
+- get distrubution curve of perlin map  [Done]
+6/15/22 - 9:59pm
+- find a means to refresh map  [Done]
+- map generation is also kinda slow, when you change scale value  [Done]
+6/16/22
+- better procedural generation
+	- current map isnt random enough
+	- current perlin map is ass
+6/18/22
+- camera not centering,  [Done]
+	- figure out why, perhaps it has to do while tile anchors/size [Done]
+	- perhaps it has something to do with change sprite PPU [Done]
+6/19/22
+- adjust zoom for verticals[Done]
+	- so when you are zoom up, the max is not adjust[Done]
+	- when zoom down the minimim is adjusted for hexDistanceY/2 [Done]
+6/21/22
+- implement side scrolling [Done]
+- implement for natural looking ecosystem
+- looking into uniform distrubution of noice
+6/22/22
+- perhaps we could try sorting array
+- get percentage value inbetween a set range and use it to map
+7/1/22
+- make map lets curvy 
+	- using fractal noise 
+		11:45pm
+			- make fractal noise and other rng variables scale with map size
+- make map use proper climate
+	- use equator, to make heat, cold at poles
+		- proper climate zones
+- make map wraparound, left the right
+	- maybe up to down
+- Consider using a struct for the planet, that way we can easily pass/store around data about the planet
+
+7/3/22
+- consider making map generation faster
+
+7/6/22
+- make values for polar automatic based on planet size and initial temperature
+	- i recommend setting equator temp to 1.5x the value of initial temp
+	- same for polarfractal
+- make bigger maps more watery,
+	- you can do this by scaling the elevator ranges based on how big the map is, just as you did with fractal maps
+
+
+
+			FROM THIS POINT ON WE USE CLICK UP FOR ALL TASK RELATED ACTIVITIES
