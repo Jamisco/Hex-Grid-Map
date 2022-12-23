@@ -7,3 +7,6 @@ I am not sure if the terms of service allows for them to be used by others on th
 This project is here for educational purposes, just as I have learned alot from others to make this project
 I made this project so you can learn alot. And hopefully, when you all make your projects you too can help others learn
 That way, we all suffer less
+
+Here is a video of the project running
+https://www.youtube.com/watch?v=tKouIQnqqoI&lc=Ugzbg3De6FuI3EzIuI14AaABAg&ab_channel=Viktor
