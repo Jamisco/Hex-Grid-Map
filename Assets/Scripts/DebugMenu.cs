@@ -35,13 +35,13 @@ public class DebugMenu
     {
         timer.Stop();
 
-        elapsedTime.Clear();
-
         elapsedTime.AppendLine(String.Format(name + ": " + "{0:00}:{1:00}:{2:00}",
             timer.Elapsed.Minutes, timer.Elapsed.Seconds,
              timer.Elapsed.Milliseconds));
 
         UnityEngine.Debug.Log(elapsedTime);
+
+        elapsedTime.Clear();
     }
 
     public void LogTime(string name)

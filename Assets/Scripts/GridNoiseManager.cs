@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using static GridManager;
 
@@ -12,6 +13,7 @@ namespace Assets.Scripts
         [SerializeField] private float _precipitationScale;
         [SerializeField] private float _temperatureScale;
         [SerializeField] private float _surfaceLevelScale;
+        [SerializeField] private float _mountainLevelScale;
 
         private float preOffsetX;
         private float preOffsetY;
@@ -19,21 +21,25 @@ namespace Assets.Scripts
         private float tempOffsetX;
         private float tempOffsetY;
 
-        [SerializeField] private float surLvlOffsetX;
-        [SerializeField] private float surLvlOffsetY;
+        private float surLvlOffsetX;
+        private float surLvlOffsetY;
 
-        [SerializeField] private float elevationScale;
-        [SerializeField] private int minSurfaceFractal;
+        private float mtnLvlOffsetX;
+        private float mtnLvlOffsetY;
 
-        private float planetTemperature;
         private float tempBorderFractal;
+
+        [SerializeField] private int minSurfaceFractal;
+        [SerializeField] private int minPrecipFractal;
+        [SerializeField] private int minMtnFractal;
+
+        [SerializeField] private float mountainScale;
+
         [SerializeField] private float initialTemperature;
 
-        [SerializeField] private int equatorPercentSize;
-        [SerializeField] private int polePercentSize;
+        [SerializeField] private float elevationMultiplier;
+        [SerializeField] private float rainMultiplier;
 
-        [SerializeField] private float equatorTempMultiplier;
-        [SerializeField] private float poleTempMultiplier;
 
         [SerializeField] private int waterBarrierX;
         [SerializeField] private int waterBarrierY;
@@ -42,35 +48,47 @@ namespace Assets.Scripts
         [SerializeField] private int wb_YMultiplier;
 
 
-        [SerializeField] private int minTemperatureFractal;
+
 
         // using 1 event for all scales, Im lazy
         public delegate void ChangeScale(float scale); //I do declare!
         public static event ChangeScale changeScale;  // create an event variable 
 
-
-        float[,] preNoiseMap;
+        float[,] precipNoiseMap;
         float[,] tempNoiseMap;
         float[,] surLvlNoiseMap;
+        float[,] mtnLvlNoiseMap;
 
         List<float> noiseValues = new List<float>();
+        private float maxTempScale, maxPrecipScale, maxSurScale, maxMtnScale;
+
+
 
         private PerlinNoise noise;
         private void Awake()
         {
             noise = new PerlinNoise();
+            maxTempScale = .5f;
+            maxPrecipScale = 1f;
+            maxSurScale = 2f;
+            maxMtnScale = 4.5f;
 
             // scale is frequency across the map
             // aka how many times does the value repeat across the map
 
-            _precipitationScale = Random.Range(1f, 5f);
-            _temperatureScale = Random.Range(1.2f, 3f);
+            _precipitationScale = Random.Range(0f, maxPrecipScale);
+            _temperatureScale = Random.Range(0f, maxTempScale);
+            _surfaceLevelScale = Random.Range(1f, maxSurScale);
+            _mountainLevelScale = Random.Range(1f, maxMtnScale);
 
-            _surfaceLevelScale = Random.Range(1f, 2);
+            preOffsetX = Random.Range(-1000f, 1000f);
+            preOffsetY = Random.Range(-1000f, 1000f);
 
-            planetTemperature = initialTemperature * 1.25f;
-            equatorTempMultiplier = initialTemperature * 3;
-            tempBorderFractal = (equatorPercentSize + polePercentSize) / 2;
+            tempOffsetX = Random.Range(-1000f, 1000f);
+            tempOffsetY = Random.Range(-1000f, 1000f);
+
+            surLvlOffsetX = Random.Range(-1000f, 1000f);
+            surLvlOffsetY = Random.Range(-1000f, 1000f);
         }
 
         private void Start()
@@ -93,32 +111,56 @@ namespace Assets.Scripts
             surLvlOffsetX = Random.Range(-1000f, 1000f);
             surLvlOffsetY = Random.Range(-1000f, 1000f);
 
+            mtnLvlOffsetX = Random.Range(-1000f, 1000f);
+            mtnLvlOffsetY = Random.Range(-1000f, 1000f);
+
+        }
+
+        private void RefreshMap()
+        {
+            _precipitationScale = Random.Range(0f, maxPrecipScale);
+            preOffsetY = Random.Range(-1000f, 1000f);
+
+            _temperatureScale = Random.Range(0f, maxTempScale);
+            tempOffsetX = Random.Range(-1000f, 1000f);
+            tempOffsetY = Random.Range(-1000f, 1000f);
+
+            _surfaceLevelScale = Random.Range(1f, maxSurScale);
+            surLvlOffsetX = Random.Range(-1000f, 1000f);
+            surLvlOffsetY = Random.Range(-1000f, 1000f);
+
+            _mountainLevelScale = Random.Range(1f, maxMtnScale);
+            mtnLvlOffsetX = Random.Range(-1000f, 1000f);
+            mtnLvlOffsetY = Random.Range(-1000f, 1000f);
+
+            changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
         }
 
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _precipitationScale = Random.Range(1f, 5f);
-                _temperatureScale = Random.Range(1.2f, 3f);
-                _surfaceLevelScale = Random.Range(1f, 2);
-
-               // changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
+                RefreshMap();
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                preOffsetX = Random.Range(-1000f, 1000f);
-                preOffsetY = Random.Range(-1000f, 1000f);
+                //preOffsetX = Random.Range(-1000f, 1000f);
+                //preOffsetY = Random.Range(-1000f, 1000f);
 
-                tempOffsetX = Random.Range(-1000f, 1000f);
-                tempOffsetY = Random.Range(-1000f, 1000f);
+                //tempOffsetX = Random.Range(-1000f, 1000f);
+                //tempOffsetY = Random.Range(-1000f, 1000f);
 
-                surLvlOffsetX = Random.Range(-10000f, 10000f);
-                surLvlOffsetY = Random.Range(-10000f, 10000f);
+                //surLvlOffsetX = Random.Range(-10000f, 10000f);
+                //surLvlOffsetY = Random.Range(-10000f, 10000f);
+
+                //mtnLvlOffsetX = Random.Range(-1000f, 1000f);
+                //mtnLvlOffsetY = Random.Range(-1000f, 1000f);
+
+                changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
             }
 
-            //changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
+         //   changeScale(_surfaceLevelScale); // just wanna raise the event to generate grid, nothing more
         }
         public float PrecipitationScale
         {
@@ -179,7 +221,32 @@ namespace Assets.Scripts
                 }
             }
         }
+        public float MountainLevelScale
+        {
+            get
+            {
+                return _mountainLevelScale;
+            }
+            set
+            {
+                // unity inspector changes variable values directly, 
+                // you cant detect that change using if statements
+                _mountainLevelScale = value;
 
+                if (changeScale != null) // checking if anyone is on the other line.
+                {
+                    // triggers the event
+                    changeScale(_mountainLevelScale);
+                }
+            }
+        }
+
+        private float GetRandomFloat()
+        {
+            return (float) (new System.Random().Next(-1, 1) / 20f);
+        }
+
+        float maxTemp = -10;
         private void SetTemperatureNoise(int x, int y, float xOffset, float yOffset, Planet planet)
         {
             float correctTemperature = 0;
@@ -188,47 +255,38 @@ namespace Assets.Scripts
 
             float fractal = planet.Fractal;
 
-            int equDistance = (int)planet.HexCountY * equatorPercentSize / 100;
-            int poleDistance = (int)planet.HexCountY * polePercentSize / 100;
-
-            float divisor = 0;
-            float adder = 0;
-            float multiplier = 0;
-
             // gets distance from poles in fractions    
             // the closer the value to the poles, the closer to 0 the number is
             float position = Mathf.Sin(Mathf.PI * ((float)y / planet.HexCountY));
 
-            bool withinEquator = position > Mathf.Sin(Mathf.PI * ((float)(planet.Equator() + equDistance) / planet.HexCountY));
+            correctTemperature =
+                (position) * initialTemperature + GetRandomFloat();
+            // the random float is for artificial fractal
 
-            bool withinPoles = position < Mathf.Sin(Mathf.PI * ((float)(planet.SouthPole + poleDistance) / planet.HexCountY));
-
-            // we add .2f because the polar border sizes are simply too big, 
-            correctTemperature = (position + .2f) * planetTemperature;
-
-            if (withinEquator)
+            if (tempNoise > maxTemp)
             {
-                float distance = (float)(equDistance - planet.DistanceFromEquator(y)) / equDistance;
-
-                // the closer to equator, the more we beef up the value, the furthur from the equator, the less intense the value
-                correctTemperature += distance * equatorTempMultiplier;
+                maxTemp = tempNoise;
             }
 
-            if (withinPoles)
-            {
-                float distance = (float)planet.DistanceFromPole(y) / poleDistance;
+            tempNoiseMap[x, y] = correctTemperature;
+        }
+        float maxPrecip = -10;
+        private void SetPrecipitation(int x, int y, float xOffset, float yOffset, Planet planet)
+        {
+            float tempNoise = 0;
+            float divisor = 0;
+            float adder = 0;
+            float multiplier = 0;
 
-                // the closer to pole, the more cold it is, 
-                correctTemperature *= distance;
-            }
+            float fractal = 0;
 
-            fractal += minTemperatureFractal;
+            fractal += minPrecipFractal;
 
-            fractal = Mathf.Clamp(fractal, minTemperatureFractal, 25);
+            fractal = Mathf.Clamp(fractal, minPrecipFractal, 25);
 
             adder = fractal * 2;
 
-            multiplier = _temperatureScale * tempBorderFractal; // multiply by something to increase border fractality
+            multiplier = _precipitationScale;
 
             for (int i = 1; i <= fractal; i++)
             {
@@ -239,19 +297,23 @@ namespace Assets.Scripts
                 // so we can normalize the values later
                 divisor += adder;
 
-                tempNoise += adder * noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset);
-
+                tempNoise += adder * noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset) * rainMultiplier;
             }
 
             // this is to normalize values between 0 and 1
             tempNoise = tempNoise / divisor;
 
-            tempNoise = Mathf.Pow(tempNoise, initialTemperature);
 
-            tempNoise = correctTemperature * tempNoise;
+            if (tempNoise > maxPrecip)
+            {
+                maxPrecip = tempNoise;
+            }
 
-            tempNoiseMap[x, y] = tempNoise;
+            precipNoiseMap[x, y] = tempNoise;
         }
+
+        float maxSur = -10;
+        float minSur = 10;
         private void SetSurfaceNoise(int x, int y, float xOffset, float yOffset, Planet planet)
         {
             float tempNoise = 0;
@@ -263,7 +325,7 @@ namespace Assets.Scripts
 
             float fractal = planet.Fractal;
 
-            float position = Mathf.Sin(Mathf.PI * ((float) x / planet.HexCountX));
+            float position = Mathf.Sin(Mathf.PI * ((float)x / planet.HexCountX));
 
             bool withinEdgeX = position <= Mathf.Sin(Mathf.PI * ((float)waterBarrierX / planet.HexCountX));
 
@@ -283,27 +345,29 @@ namespace Assets.Scripts
             {
                 multiplier *= 2;
 
-                adder /= 2;
-
                 // so we can normalize the values later
+
+                tempNoise += adder * (noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset) * elevationMultiplier);
+
                 divisor += adder;
 
-                tempNoise += adder * noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset);
+                adder /= 2;
             }
 
             // this is to normalize values between 0 and 1
-            tempNoise = tempNoise / divisor;
+            // These values are not well normalized,
+            // depending on the noise, the max value can be .8 or .7 or .88 etc
 
-            // affects water
-            // higher values = more elevation = less water
-            // lower values = less elevation = more water
+            //tempNoise = tempNoise * elevationScale;
 
-            // high elevation = more land, less water
-            // low elevation = less land, more water
-            // the numbers are just random numbers I tested - PLEASE DO NOT CHANGE WITHOUT CAREFUL CONSIDERATION
+            tempNoise = tempNoise / (divisor);
 
-            tempNoise = Mathf.Pow(tempNoise * (elevationScale / 100 * 10), 15);
+            // if elevation scale less then 1 = more water
+            // if elecation scale more than 1 = more land
 
+
+
+            // this is so the horizontal edges of the map have water barriers
             if (withinEdgeX && waterBarrierX > 0)
             {
                 float distance = 1 - (float)(planet.DistanceFromEdge(x)) / waterBarrierX;
@@ -315,38 +379,83 @@ namespace Assets.Scripts
                 // tempnoise is reduced as a percent of correctHeight,
                 tempNoise -= correctHeight * tempNoise;
             }
-         
+
+            if (tempNoise < minSur)
+            {
+                minSur = tempNoise;
+            }
+
+            if (tempNoise > maxSur)
+            {
+                maxSur = tempNoise;
+            }
+
             surLvlNoiseMap[x, y] = tempNoise;
         }
+        private void SetMountainNoise(int x, int y, float xOffset, float yOffset, Planet planet)
+        {
+            float multiplier = 0;
+
+            float tempNoise = 0;
+
+            float adder = 0;
+
+            float fractal = planet.Fractal;
+
+            float divisor = 0;
+
+            fractal += minMtnFractal;
+
+            fractal = Mathf.Clamp(fractal, minMtnFractal, 25);
+
+            adder = fractal * 2;
+
+            // we do this because we want bigger planets to have more water inbetween them
+            multiplier = _mountainLevelScale;
+
+            for (int i = 1; i <= fractal; i++)
+            {
+                multiplier *= 2;
+
+                // so we can normalize the values later
+                adder /= 2;
+
+                tempNoise += adder * (noise.GetNoise(multiplier * x / planet.HexCountX + xOffset, multiplier * y / planet.HexCountY + yOffset) * mountainScale);
+                divisor += adder;
+
+            }
+
+            // this is to normalize values between 0 and 1
+            tempNoise = tempNoise / divisor;
+
+            mtnLvlNoiseMap[x, y] = tempNoise;
+
+        }
+
 
         DebugMenu logger = new DebugMenu();
 
-        const float TAU = 2 * Mathf.PI;
-
-        public void ComputeNoise3d(float x, float y, float z)
-        {
-            //float angle_x = TAU * x;
-            ///* In "noise parameter space", we need nx and ny to travel the
-            //   same distance. The circle created from nx needs to have
-            //   circumference=1 to match the length=1 line created from ny,
-            //   which means the circle's radius is 1/2π, or 1/tau */
-
-            //return noise.PerlinNoise3D(Mathf.Cos(angle_x) / TAU, Mathf.Sin(angle_x) / TAU, y);
-        }
-
-
+        bool loaded = false;
         public void ComputeNoise(Planet aPlanet)
         {
-            preNoiseMap = new float[aPlanet.HexCountX, aPlanet.HexCountY];
+            // since arrays memory can be edited and change by any process
+            // we do this so the array values in memory are not randomly deleted by other process
+            if (!loaded)
+            {
+                loaded = true;
+            }
+
+            precipNoiseMap = new float[aPlanet.HexCountX, aPlanet.HexCountY];
             tempNoiseMap = new float[aPlanet.HexCountX, aPlanet.HexCountY];
             surLvlNoiseMap = new float[aPlanet.HexCountX, aPlanet.HexCountY];
+            mtnLvlNoiseMap = new float[aPlanet.HexCountX, aPlanet.HexCountY];
 
             Parallel.For(0, aPlanet.HexCountX, x =>
             {
                 for (int y = 0; y < aPlanet.HexCountY; y++)
                 {
                     // loop through x and y in the 
-                    
+
                     SetTemperatureNoise(x, y, tempOffsetX, tempOffsetY, aPlanet);
 
                     //tempNoiseMap[x, y] = noiseValue;
@@ -361,9 +470,13 @@ namespace Assets.Scripts
 
                     SetSurfaceNoise(x, y, surLvlOffsetX, surLvlOffsetY, aPlanet);
 
-                    //surLvlNoiseMap[x, y] = noiseValue;
+                    SetPrecipitation(x, y, preOffsetX, preOffsetY, aPlanet);
+
+                    SetMountainNoise(x, y, mtnLvlOffsetX, mtnLvlOffsetY, aPlanet);
                 }
             });
+
+            // NormalizeScales();
         }
 
         public float GetTempNoiseValue(int x, int y)
@@ -373,12 +486,38 @@ namespace Assets.Scripts
 
         public float GetPrecipNoiseValue(int x, int y)
         {
-            return preNoiseMap[x, y];
+            return precipNoiseMap[x, y];
         }
 
         public float GetSurfaceLevelNoiseValue(int x, int y)
         {
             return surLvlNoiseMap[x, y];
+        }
+
+        public float GetMountainLevelNoiseValue(int x, int y)
+        {
+            return mtnLvlNoiseMap[x, y];
+        }
+
+        private void NormalizeScales()
+        {
+            float preRatio = 1 / maxPrecip;
+            float surRatio = 1 / maxSur;
+            float tempRatio = 1 / maxTemp;
+
+            // do not normalize temperate Noise map, some values are meant to be above 1
+
+            for (int x = 0; x < precipNoiseMap.GetLength(0); x++)
+            {
+                for (int y = 0; y < precipNoiseMap.GetLength(1); y++)
+                {
+                    precipNoiseMap[x, y] = precipNoiseMap[x, y] * preRatio;
+
+                    surLvlNoiseMap[x, y] = surLvlNoiseMap[x, y] * surRatio;
+                }
+            }
+
+            Debug.Log(surLvlNoiseMap[50, 50]);
         }
     }
 }
