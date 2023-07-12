@@ -189,7 +189,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &490729951
@@ -246,27 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -294,7 +273,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -318,7 +297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 50, y: 40, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,73 +333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
-  m_LightType: 4
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
-  m_Intensity: 1
-  m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
-  m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
-  m_ShadowIntensity: 0.75
-  m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
-  m_Vertices:
-  - position: {x: 0.9985302, y: 0.9985302, z: 0}
-    color: {r: 0.70710677, g: 0.70710677, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: 0.9985302, y: 0.9985302, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.9985302, y: 0.9985302, z: 0}
-    color: {r: -0.70710677, g: 0.70710677, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.9985302, y: 0.9985302, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.99853003, y: -0.9985304, z: 0}
-    color: {r: -0.70710665, g: -0.7071069, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.99853003, y: -0.9985304, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: 0.99853003, y: -0.9985304, z: 0}
-    color: {r: 0.70710665, g: -0.7071069, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: 0.99853003, y: -0.9985304, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: 0, y: 0, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  m_Triangles: 030001000800020000000100030002000100050003000800040002000300050004000300070005000800060004000500070006000500010007000800000006000700010000000700
-  m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
 --- !u!4 &619394802
 Transform:
   m_ObjectHideFlags: 0
@@ -466,7 +378,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 950372662}
+  m_Father: {fileID: 950372666}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &755074246
@@ -489,7 +401,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -598,11 +510,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 950372662}
+  - component: {fileID: 950372666}
   - component: {fileID: 950372656}
-  - component: {fileID: 950372658}
-  - component: {fileID: 950372659}
-  - component: {fileID: 950372660}
+  - component: {fileID: 950372664}
+  - component: {fileID: 950372663}
+  - component: {fileID: 950372665}
   m_Layer: 0
   m_Name: BaseGrid
   m_TagString: Untagged
@@ -622,7 +534,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 1
   m_CellSwizzle: 0
---- !u!114 &950372658
+--- !u!114 &950372663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -631,18 +543,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 950372655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c821e424b7ca9404fa26cd064e736d33, type: 3}
+  m_Script: {fileID: 11500000, guid: d055cf6ae1248184491b4ee6aef4f48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _precipitationScale: 1.55
+  _temperatureScale: 0.34
+  _surfaceLevelScale: 1.82
+  _mountainLevelScale: 1.37
+  minSurfaceFractal: 3
+  minPrecipFractal: 3
+  minMtnFractal: 3
+  mountainScale: 1.36
+  initialTemperature: 1
+  elevationMultiplier: 0.85
+  rainMultiplier: 1.15
+  waterBarrierX: 10
+  waterBarrierY: 0
+  wb_XMultiplier: 0.25
+  wb_YMultiplier: 0
+--- !u!114 &950372664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950372655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5572d84f268405649a11becfa9aadbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseGrid: {fileID: 950372656}
-  baseTileMap: {fileID: 0}
-  coastTileMap: {fileID: 0}
-  riverTileMap: {fileID: 0}
+  baseTileMap: {fileID: 755074247}
+  coastTileMap: {fileID: 1547094929}
+  riverTileMap: {fileID: 1508648865}
   mainCamera: {fileID: 519420031}
-  hexScale: 3
+  hexScale: 1
   baseCellSize: 1
-  mapXHexCount: 500
-  mapYHexCount: 500
+  mapXHexCount: 100
+  mapYHexCount: 100
   MountainLevel:
   - 0.4
   - 0.75
@@ -657,7 +596,7 @@ MonoBehaviour:
   - 0.1
   - 0.15
   - 0.5
---- !u!114 &950372659
+--- !u!114 &950372665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -666,400 +605,428 @@ MonoBehaviour:
   m_GameObject: {fileID: 950372655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4206959ad9ed6d48b982840329fef3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _precipitationScale: 0
-  _temperatureScale: 0
-  _surfaceLevelScale: 0
-  _mountainLevelScale: 0
-  minSurfaceFractal: 3
-  minPrecipFractal: 3
-  minMtnFractal: 3
-  mountainScale: 1.36
-  initialTemperature: 1
-  elevationMultiplier: 0.85
-  rainMultiplier: 1.15
-  waterBarrierX: 10
-  waterBarrierY: 0
-  wb_XMultiplier: 0.25
-  wb_YMultiplier: 0
---- !u!114 &950372660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950372655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffa75eefa789c0b4696464bfd946045a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c5fb13624cf1284082440725cb0eff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _oceans:
-    tileAsset: {fileID: 11400000, guid: 5b7fd0e944787264c93f98b098d88a30, type: 2}
+    tileAsset: {fileID: 11400000, guid: 815da816fb5aef84f9d80518045e1ccb, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: e841501b034361c479ae7761d204c235, type: 3}
-      - {fileID: 21300000, guid: 0cc6c57b7612c464a96cf1d796b3cb1f, type: 3}
-      - {fileID: 21300000, guid: fc2c5d18df5921045b7170cefde53836, type: 3}
-      - {fileID: 21300000, guid: bf9b64ad058476e4d88347d3d3108c56, type: 3}
+      - {fileID: 21300000, guid: 7b9feb9e6eb98da46bff54963ff2767f, type: 3}
+      - {fileID: 21300000, guid: dd0e86ad3b75c104fb394fb1be92d861, type: 3}
+      - {fileID: 21300000, guid: 91033633ea2580f41a027aa667ce925f, type: 3}
+      - {fileID: 21300000, guid: b0d91d52b37ec77438a361163c857065, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: e841501b034361c479ae7761d204c235, type: 3}
-      - {fileID: 21300000, guid: 0cc6c57b7612c464a96cf1d796b3cb1f, type: 3}
-      - {fileID: 21300000, guid: fc2c5d18df5921045b7170cefde53836, type: 3}
-      - {fileID: 21300000, guid: bf9b64ad058476e4d88347d3d3108c56, type: 3}
+      - {fileID: 21300000, guid: 7b9feb9e6eb98da46bff54963ff2767f, type: 3}
+      - {fileID: 21300000, guid: dd0e86ad3b75c104fb394fb1be92d861, type: 3}
+      - {fileID: 21300000, guid: 91033633ea2580f41a027aa667ce925f, type: 3}
+      - {fileID: 21300000, guid: b0d91d52b37ec77438a361163c857065, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 85980b2265ff45344b1513252dd5d6ef, type: 3}
-      - {fileID: 21300000, guid: 4e30581d44e8de74b8cef8615a827296, type: 3}
-      - {fileID: 21300000, guid: e51d401b0ad3bfa458c17e39fa1d0fe2, type: 3}
-      - {fileID: 21300000, guid: 7b67d17dfc98d5848af25c32dd1051cd, type: 3}
+      - {fileID: 21300000, guid: 7b9feb9e6eb98da46bff54963ff2767f, type: 3}
+      - {fileID: 21300000, guid: dd0e86ad3b75c104fb394fb1be92d861, type: 3}
+      - {fileID: 21300000, guid: 91033633ea2580f41a027aa667ce925f, type: 3}
+      - {fileID: 21300000, guid: b0d91d52b37ec77438a361163c857065, type: 3}
     veryColdTiles:
       tileSprites:
-      - {fileID: 21300000, guid: c03d7b7abe5f59f4291f0920a780f088, type: 3}
-      - {fileID: 21300000, guid: e687450362cef744684faaf8d4a7032d, type: 3}
-      - {fileID: 21300000, guid: 83733db5e78b0a8478114b45c4a54f31, type: 3}
-      - {fileID: 21300000, guid: 15b02911c45836a4b8a8c152ba4efb0a, type: 3}
+      - {fileID: 21300000, guid: 8357fa23940668444ba0819e594c75e6, type: 3}
+      - {fileID: 21300000, guid: 2fa599c593091f049a33d2feb739cfb5, type: 3}
+      - {fileID: 21300000, guid: c7129e0035151724eb5f53de2dfed008, type: 3}
+      - {fileID: 21300000, guid: cd2206f16e15f064d8ddc71bd0bf1506, type: 3}
     freezingTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 3ecb578a1427c814495c76f9f06aacaa, type: 3}
-      - {fileID: 21300000, guid: e792d3719cbd10b4e8b4f296beffd5c9, type: 3}
-      - {fileID: 21300000, guid: c71963927a62933459606789f53c0a98, type: 3}
-    coastTiles:
-      tileSprites: []
+      - {fileID: 21300000, guid: a83b260bb6f0fef499ab10c9a73afbd1, type: 3}
+      - {fileID: 21300000, guid: 1a0b6c647cf78ca498c17fee72e04437, type: 3}
+      - {fileID: 21300000, guid: 550072f77f167ce41bee3c070487ce91, type: 3}
+      - {fileID: 21300000, guid: b20f99e0bf9a299428e5d626cfdb27a8, type: 3}
+      - {fileID: 21300000, guid: 864144f073f046e448a4b9a0acb2a81a, type: 3}
   _lakes:
-    tileAsset: {fileID: 11400000, guid: 19081d2c13bd0304eb7bc2b62e1b02d4, type: 2}
+    tileAsset: {fileID: 11400000, guid: c45558090db4ec145984bd9e74c206ba, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 80605c0e0b6007b4d9c212cfc6d95379, type: 3}
-      - {fileID: 21300000, guid: 7a6b56c270658cc43803462ad4c80348, type: 3}
-      - {fileID: 21300000, guid: 7acdc8aeb47e6274284f23dff979e1f1, type: 3}
-      - {fileID: 21300000, guid: 8d525ba247a6f324ba389f5f40dc643b, type: 3}
+      - {fileID: 21300000, guid: 887d164985172594b9a98ef89f687b7a, type: 3}
+      - {fileID: 21300000, guid: a81ea603bcccba846a6f021a57bfb8ba, type: 3}
+      - {fileID: 21300000, guid: 3269f4e823833da42a0f97146bfec431, type: 3}
+      - {fileID: 21300000, guid: 86480285001e95f4e9ed140362075425, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 80605c0e0b6007b4d9c212cfc6d95379, type: 3}
-      - {fileID: 21300000, guid: 7a6b56c270658cc43803462ad4c80348, type: 3}
-      - {fileID: 21300000, guid: 7acdc8aeb47e6274284f23dff979e1f1, type: 3}
-      - {fileID: 21300000, guid: 8d525ba247a6f324ba389f5f40dc643b, type: 3}
+      - {fileID: 21300000, guid: 887d164985172594b9a98ef89f687b7a, type: 3}
+      - {fileID: 21300000, guid: a81ea603bcccba846a6f021a57bfb8ba, type: 3}
+      - {fileID: 21300000, guid: 3269f4e823833da42a0f97146bfec431, type: 3}
+      - {fileID: 21300000, guid: 86480285001e95f4e9ed140362075425, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 9b27c705a31d4e04a8544829c51f630c, type: 3}
-      - {fileID: 21300000, guid: ab63a74024fe77245b692a004d0bac67, type: 3}
-      - {fileID: 21300000, guid: 8d1b269e752d3fa4f8236a7fd7620727, type: 3}
-      - {fileID: 21300000, guid: bd73d62417e855947ab9ddb9071bda67, type: 3}
+      - {fileID: 21300000, guid: c2228698785194641897bb903a241117, type: 3}
+      - {fileID: 21300000, guid: 53a8edae622f0254bb3bf2589a9a6e29, type: 3}
+      - {fileID: 21300000, guid: 41b283bd2b9e3dc408de86c90b3978dc, type: 3}
+      - {fileID: 21300000, guid: a8b0bf4e4360144488ae7ecb25e46f55, type: 3}
     veryColdTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 7c603c4dcde48a249826938966e5b2f7, type: 3}
-      - {fileID: 21300000, guid: 84dcbfdabf422c046a1a9254a2726bc1, type: 3}
-      - {fileID: 21300000, guid: 559d1ba18b6f7554b91ab3d0523ee35b, type: 3}
-      - {fileID: 21300000, guid: fcf733452f4ec144ca69aea5a7882ef7, type: 3}
+      - {fileID: 21300000, guid: c2228698785194641897bb903a241117, type: 3}
+      - {fileID: 21300000, guid: 53a8edae622f0254bb3bf2589a9a6e29, type: 3}
+      - {fileID: 21300000, guid: 41b283bd2b9e3dc408de86c90b3978dc, type: 3}
+      - {fileID: 21300000, guid: a8b0bf4e4360144488ae7ecb25e46f55, type: 3}
     freezingTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 427c33bd4c21f3d419142c6acf2dc74e, type: 3}
-      - {fileID: 21300000, guid: 507cddba3b6244c42a01691f16437057, type: 3}
-      - {fileID: 21300000, guid: b6e872dbce137d842a2fdb5d58fc9b91, type: 3}
-      - {fileID: 21300000, guid: eef22687bc5f0fc4b8e4599f29affaad, type: 3}
-      - {fileID: 21300000, guid: 36e28e9a7cc78af43a888f18418460c8, type: 3}
+      - {fileID: 21300000, guid: 5996ac440a6e24442a878500a9194eea, type: 3}
+      - {fileID: 21300000, guid: fd207a9e74cc5e74ba8e5438a624dcba, type: 3}
+      - {fileID: 21300000, guid: 405c3e1acebfdd84cb26c92832947384, type: 3}
+      - {fileID: 21300000, guid: dfb00c7dae1fb554989f9321e2aab3d0, type: 3}
   _plains:
-    tileAsset: {fileID: 11400000, guid: 821ea3d3d044010448493ebecd0b5f53, type: 2}
+    tileAsset: {fileID: 11400000, guid: 7aea96c547fd361438ea2babb0b4bafe, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: a2c03e3a7b3dfc9468fbdfde21df687a, type: 3}
-      - {fileID: 21300000, guid: c71242024a4b4b645bd7e59342d877be, type: 3}
-      - {fileID: 21300000, guid: 07116b7a1874ec742ae3cd0b78477b43, type: 3}
-      - {fileID: 21300000, guid: 763b405ea3c4bd94c91294208f37f19d, type: 3}
+      - {fileID: 21300000, guid: 24133b0960b26d148954ef4fae76a337, type: 3}
+      - {fileID: 21300000, guid: 93b1d31241389ef479e621aa4f75166c, type: 3}
+      - {fileID: 21300000, guid: afba93929a328a840acedcf216eb26be, type: 3}
+      - {fileID: 21300000, guid: cc0b4b0ccd7664048bbcd35aacd1a52a, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 8a8dacd9ee5f6b848b27a5129f6f4238, type: 3}
-      - {fileID: 21300000, guid: a00eb4fdd0412a7479dd32a392bfab29, type: 3}
-      - {fileID: 21300000, guid: 8b1abd64669c6ac47a92c3bb04a026c2, type: 3}
-      - {fileID: 21300000, guid: 5a25225203fe60f419098ec25f4bd63e, type: 3}
+      - {fileID: 21300000, guid: 24133b0960b26d148954ef4fae76a337, type: 3}
+      - {fileID: 21300000, guid: 93b1d31241389ef479e621aa4f75166c, type: 3}
+      - {fileID: 21300000, guid: afba93929a328a840acedcf216eb26be, type: 3}
+      - {fileID: 21300000, guid: cc0b4b0ccd7664048bbcd35aacd1a52a, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 91aab815eba2a704e97aa7ff2be26ef8, type: 3}
-      - {fileID: 21300000, guid: d3e4776064cbc6146878357184615ad0, type: 3}
-      - {fileID: 21300000, guid: 6cec2c36e84a1e9439609728d3bf42da, type: 3}
-      - {fileID: 21300000, guid: 96001be02960c3f4d9c77b399fc5cd58, type: 3}
+      - {fileID: 21300000, guid: 7e6a2aef2bb591d4ea991a5d3dffb33d, type: 3}
+      - {fileID: 21300000, guid: 5f31e080f00758a42ad763c722c96387, type: 3}
+      - {fileID: 21300000, guid: e774789187c64f64184b347e8a905bd1, type: 3}
+      - {fileID: 21300000, guid: 7c78a1cef1e92d1488ec4d1919d8d009, type: 3}
     veryHotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 242f9e2d40993184b86a5f6612cdf9ff, type: 3}
-      - {fileID: 21300000, guid: 30a58a43a543d96499f8ddec24c3b68a, type: 3}
-      - {fileID: 21300000, guid: 9c01e0b6f0d489945aaed9fa35a602d8, type: 3}
-      - {fileID: 21300000, guid: 348aaecda7dc730409a47ee97507de4b, type: 3}
+      - {fileID: 21300000, guid: 24133b0960b26d148954ef4fae76a337, type: 3}
+      - {fileID: 21300000, guid: 93b1d31241389ef479e621aa4f75166c, type: 3}
+      - {fileID: 21300000, guid: afba93929a328a840acedcf216eb26be, type: 3}
+      - {fileID: 21300000, guid: cc0b4b0ccd7664048bbcd35aacd1a52a, type: 3}
     veryColdTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 427c33bd4c21f3d419142c6acf2dc74e, type: 3}
-      - {fileID: 21300000, guid: 507cddba3b6244c42a01691f16437057, type: 3}
-      - {fileID: 21300000, guid: b6e872dbce137d842a2fdb5d58fc9b91, type: 3}
-      - {fileID: 21300000, guid: eef22687bc5f0fc4b8e4599f29affaad, type: 3}
+      - {fileID: 21300000, guid: 04713fd83cfc8f94da79569812b7a438, type: 3}
+      - {fileID: 21300000, guid: 49d6dc5cfb3408744b017dc98058a075, type: 3}
+      - {fileID: 21300000, guid: dd7a3afba6646de449cb25f3c460ed4e, type: 3}
+      - {fileID: 21300000, guid: c6d408b6617daca4a88653e9c7c4ae51, type: 3}
+      - {fileID: 21300000, guid: be6e62fcf99fd9944befa2a8c08a700e, type: 3}
     freezingTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 3ecb578a1427c814495c76f9f06aacaa, type: 3}
-      - {fileID: 21300000, guid: e792d3719cbd10b4e8b4f296beffd5c9, type: 3}
-      - {fileID: 21300000, guid: c71963927a62933459606789f53c0a98, type: 3}
+      - {fileID: 21300000, guid: a83b260bb6f0fef499ab10c9a73afbd1, type: 3}
+      - {fileID: 21300000, guid: 1a0b6c647cf78ca498c17fee72e04437, type: 3}
+      - {fileID: 21300000, guid: 550072f77f167ce41bee3c070487ce91, type: 3}
+      - {fileID: 21300000, guid: b20f99e0bf9a299428e5d626cfdb27a8, type: 3}
+      - {fileID: 21300000, guid: 864144f073f046e448a4b9a0acb2a81a, type: 3}
   _deserts:
-    tileAsset: {fileID: 11400000, guid: a0f7a33a87f393048bda68b67cae1f36, type: 2}
+    tileAsset: {fileID: 11400000, guid: e19db94bf09b01e4885d87ba939d43c8, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 460469106e91b9e4db7d6c3fb12aadd4, type: 3}
-      - {fileID: 21300000, guid: 8ac968e190a98ab458ff3b5dc0821da3, type: 3}
-      - {fileID: 21300000, guid: dd48494b89c19ad449416d8c072827bd, type: 3}
-      - {fileID: 21300000, guid: 5160de42a80a9c4459b89c190d0b1c88, type: 3}
+      - {fileID: 21300000, guid: 56cfa9fc399205e4e99f01edcb07e802, type: 3}
+      - {fileID: 21300000, guid: 3f1838282598131498bae3309469535f, type: 3}
+      - {fileID: 21300000, guid: 5220f5490c4f0484cb77eef24cd15c93, type: 3}
+      - {fileID: 21300000, guid: b3ab05b62c5ad854a9e552157ca895dd, type: 3}
+      - {fileID: 21300000, guid: c6d6d7df3ab3c074495c5dd7ad14819e, type: 3}
+      - {fileID: 21300000, guid: 73c843f505728d544946aa499083f8a4, type: 3}
+      - {fileID: 21300000, guid: e1826acec03ddb642a02679c0691af3e, type: 3}
+      - {fileID: 21300000, guid: a1836efea6a170043ace985e20c0b397, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: c681791271c5b4341b491085d774bb81, type: 3}
-      - {fileID: 21300000, guid: 5027bbbf920a966478137532a4ec87f8, type: 3}
-      - {fileID: 21300000, guid: 204fb35861f682b46b10f48742a9cf4e, type: 3}
-      - {fileID: 21300000, guid: c6327902445c0ff4ebb3affa5b70fbc3, type: 3}
+      - {fileID: 21300000, guid: 5ce47885de52c8849882e3751e97c4a0, type: 3}
+      - {fileID: 21300000, guid: a2fb75ef74c32554183b9d2179ec9a92, type: 3}
+      - {fileID: 21300000, guid: 6482c0880adb76942ae65de77fce2ad8, type: 3}
+      - {fileID: 21300000, guid: bb24ce38f6d937943b7e2dfaa307dbd9, type: 3}
+      - {fileID: 21300000, guid: 0b7a50b77ae413748874826de6a4bd40, type: 3}
+      - {fileID: 21300000, guid: 3ca56fdcd2d1ccc4386f1befb073bf09, type: 3}
+      - {fileID: 21300000, guid: 99bac28bc92782447b2b957a90d68fc6, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 91e6d246dedfc1a418ac5693ddcf7198, type: 3}
-      - {fileID: 21300000, guid: 56711a3f7b2e2e64cb9851c4eaa4f260, type: 3}
-      - {fileID: 21300000, guid: d9ccfc8479a12114686a3e374e0dbc97, type: 3}
-      - {fileID: 21300000, guid: 1c7ce7cf98d348c479f6282e25b264d9, type: 3}
+      - {fileID: 21300000, guid: 9eda6c336b27c0e418ad82d73331637e, type: 3}
+      - {fileID: 21300000, guid: 101cedf5640ce1c479b6ee724763c26c, type: 3}
+      - {fileID: 21300000, guid: 596db1c5a7559a94bbb6084898f3e970, type: 3}
+      - {fileID: 21300000, guid: 2ecfaa8e0ccf6824c8b6350448efb91c, type: 3}
     veryHotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 79328abf6259df549b505e2febfed070, type: 3}
-      - {fileID: 21300000, guid: 978103513bb1fa440bbfbbc2263ec84e, type: 3}
-      - {fileID: 21300000, guid: 74c27463e46f2424a8100837c9619aad, type: 3}
-      - {fileID: 21300000, guid: f9c24b3bd04d87b4b924b826857027d7, type: 3}
+      - {fileID: 21300000, guid: 56cfa9fc399205e4e99f01edcb07e802, type: 3}
+      - {fileID: 21300000, guid: 3f1838282598131498bae3309469535f, type: 3}
+      - {fileID: 21300000, guid: 5220f5490c4f0484cb77eef24cd15c93, type: 3}
+      - {fileID: 21300000, guid: b3ab05b62c5ad854a9e552157ca895dd, type: 3}
+      - {fileID: 21300000, guid: c6d6d7df3ab3c074495c5dd7ad14819e, type: 3}
+      - {fileID: 21300000, guid: 73c843f505728d544946aa499083f8a4, type: 3}
+      - {fileID: 21300000, guid: e1826acec03ddb642a02679c0691af3e, type: 3}
+      - {fileID: 21300000, guid: a1836efea6a170043ace985e20c0b397, type: 3}
   _dryLands:
-    tileAsset: {fileID: 11400000, guid: 5065f58c8a085084d8cd788653a2c545, type: 2}
+    tileAsset: {fileID: 11400000, guid: e98e8d35afba20649bcd695e1061956e, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 5417d3f3af98ecf45a63d370f72adfc9, type: 3}
-      - {fileID: 21300000, guid: 688da5f007201bf499333840c6dc72b4, type: 3}
-      - {fileID: 21300000, guid: d18e0c18f16aa084f856ce6f2294f3e7, type: 3}
-      - {fileID: 21300000, guid: 03985563d9118a34ea9c84af0604b1ce, type: 3}
+      - {fileID: 21300000, guid: 8f3b56240a5d2154b85948cfcb3b50b5, type: 3}
+      - {fileID: 21300000, guid: 1ce55db7a19066249b7911285bf1cf67, type: 3}
+      - {fileID: 21300000, guid: b14ce61278930004bb5e80addc8590d2, type: 3}
+      - {fileID: 21300000, guid: 985d2c7972459f14aa42e3953742be48, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 3c09622509d98b8429ce8655a374a69e, type: 3}
-      - {fileID: 21300000, guid: ab70bf8144a18754abd362d192e839a6, type: 3}
-      - {fileID: 21300000, guid: b2a74a4a0a89bc04cb935bf78b9b6af4, type: 3}
-      - {fileID: 21300000, guid: 2ebd9aa864bd1b44b8d69a29e95a7042, type: 3}
+      - {fileID: 21300000, guid: 9a3cdc5ffa8371546b1c54732c82e0db, type: 3}
+      - {fileID: 21300000, guid: 82011f4756b575946b2f1f25c154005c, type: 3}
+      - {fileID: 21300000, guid: 8f516b9b68ac9d046b7011f4d23f8852, type: 3}
+      - {fileID: 21300000, guid: a29adc21bf77ea9409aef1a0b82d7e8f, type: 3}
+      - {fileID: 21300000, guid: 37549ed5cdc50ab45be82b8b7da9c519, type: 3}
+      - {fileID: 21300000, guid: 9be3d42238e86334aa1db4a57fd7273a, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 3f9b380392891a446bf0d2b761a1c709, type: 3}
-      - {fileID: 21300000, guid: 047e23efb2aa146418e6b04879e97d9d, type: 3}
-      - {fileID: 21300000, guid: ef8b788b038df804aa88086ac56806ce, type: 3}
-      - {fileID: 21300000, guid: 53a9dee1df7a93d439261f337b54524c, type: 3}
+      - {fileID: 21300000, guid: 9a3cdc5ffa8371546b1c54732c82e0db, type: 3}
+      - {fileID: 21300000, guid: 82011f4756b575946b2f1f25c154005c, type: 3}
+      - {fileID: 21300000, guid: 8f516b9b68ac9d046b7011f4d23f8852, type: 3}
+      - {fileID: 21300000, guid: a29adc21bf77ea9409aef1a0b82d7e8f, type: 3}
+      - {fileID: 21300000, guid: 37549ed5cdc50ab45be82b8b7da9c519, type: 3}
+      - {fileID: 21300000, guid: 9be3d42238e86334aa1db4a57fd7273a, type: 3}
     veryHotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 1417a4c1db100ac44a08c1a4bb543c25, type: 3}
-      - {fileID: 21300000, guid: 87f592f1ffa4eac4fa45603734424ea9, type: 3}
-      - {fileID: 21300000, guid: 80649d336e188874ba96bfe356ed9d32, type: 3}
-      - {fileID: 21300000, guid: 557bde3f94fe45b43bd2d98a471f7bc3, type: 3}
+      - {fileID: 21300000, guid: 99bac28bc92782447b2b957a90d68fc6, type: 3}
+      - {fileID: 21300000, guid: 97ef3277be258ee42bd1c22cba814dad, type: 3}
   _wetLands:
-    tileAsset: {fileID: 11400000, guid: 5e7377f2bc9fabc459ed1485415d3861, type: 2}
+    tileAsset: {fileID: 11400000, guid: f2e1d485ec2332b4bafdb09ffccf45b5, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 89183e48f41627544ba1b9f3fc8b407d, type: 3}
-      - {fileID: 21300000, guid: a998b7caa3f88d448b02e33d26da36eb, type: 3}
-      - {fileID: 21300000, guid: fd034198284430845a15c2c5d49dead9, type: 3}
-      - {fileID: 21300000, guid: afbb764930bb8a747bd2f554bdfe390a, type: 3}
+      - {fileID: 21300000, guid: 3dc9730900772a5498647dac39ddc0e1, type: 3}
+      - {fileID: 21300000, guid: 8a6ec02b7608b4e41b3b680b24282eac, type: 3}
+      - {fileID: 21300000, guid: 7ea3f283975a7014992e37d698cb658a, type: 3}
+      - {fileID: 21300000, guid: b9d28f845e7e5f34984f6ba4148dfdab, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: d09aa48433c41cf4b99a84d9820e9979, type: 3}
-      - {fileID: 21300000, guid: 994e2eeeb8c163c4aa41b134e73d0ea5, type: 3}
-      - {fileID: 21300000, guid: 3db91d7ceab395541a01cf284b246374, type: 3}
-      - {fileID: 21300000, guid: 5def67db41110a24fbb3e5cca9569377, type: 3}
+      - {fileID: 21300000, guid: 58404b1499fc74c43837f5c2f18324a2, type: 3}
+      - {fileID: 21300000, guid: eaf8cefd151abe94588eef383fd0211d, type: 3}
+      - {fileID: 21300000, guid: 1eb78866f12f79e40b948a50b9683cd9, type: 3}
+      - {fileID: 21300000, guid: 9d038fcc5e7fb1049bc0c8e76e77c6ab, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 3a3dadda648ff654a9f658b898e9eccd, type: 3}
-      - {fileID: 21300000, guid: 96ff5b8965b435f418669ddbbb055f96, type: 3}
-      - {fileID: 21300000, guid: bb5dc0acc9161544393bde05cb93278b, type: 3}
-      - {fileID: 21300000, guid: e163caf1c8a9f584da039c55c93cf8ad, type: 3}
+      - {fileID: 21300000, guid: 3dc9730900772a5498647dac39ddc0e1, type: 3}
+      - {fileID: 21300000, guid: 8a6ec02b7608b4e41b3b680b24282eac, type: 3}
+      - {fileID: 21300000, guid: 7ea3f283975a7014992e37d698cb658a, type: 3}
+      - {fileID: 21300000, guid: b9d28f845e7e5f34984f6ba4148dfdab, type: 3}
   _forest:
-    tileAsset: {fileID: 11400000, guid: 05fbf2c24bb4794458e0d0cd20d3b19b, type: 2}
+    tileAsset: {fileID: 11400000, guid: 00a04662bb791694899c86626643cb47, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 222aae9b94ca9b748a0dd182a2ec47f3, type: 3}
-      - {fileID: 21300000, guid: 93312d4222ad61446be900d97031204b, type: 3}
-      - {fileID: 21300000, guid: 5f80ab8898b7b0743850c4ee3cbe87ff, type: 3}
-      - {fileID: 21300000, guid: 5ad37662d488fc14a9c5c854022b9e06, type: 3}
+      - {fileID: 21300000, guid: a6d84309ec2239942807bc4a22e03b75, type: 3}
+      - {fileID: 21300000, guid: 52cd89f76c4a5da4495d728717ffbe41, type: 3}
+      - {fileID: 21300000, guid: a3717fd6633410748ba51baf3e19f80f, type: 3}
+      - {fileID: 21300000, guid: 3ad87abc36800d349a4787773d108d42, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 222aae9b94ca9b748a0dd182a2ec47f3, type: 3}
-      - {fileID: 21300000, guid: 93312d4222ad61446be900d97031204b, type: 3}
-      - {fileID: 21300000, guid: 5f80ab8898b7b0743850c4ee3cbe87ff, type: 3}
-      - {fileID: 21300000, guid: 5ad37662d488fc14a9c5c854022b9e06, type: 3}
+      - {fileID: 21300000, guid: a6d84309ec2239942807bc4a22e03b75, type: 3}
+      - {fileID: 21300000, guid: 52cd89f76c4a5da4495d728717ffbe41, type: 3}
+      - {fileID: 21300000, guid: a3717fd6633410748ba51baf3e19f80f, type: 3}
+      - {fileID: 21300000, guid: 3ad87abc36800d349a4787773d108d42, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 9abe58259b12c274385553b94ca3b706, type: 3}
-      - {fileID: 21300000, guid: fad09dbc7076adf4db4b4ae1aff1139c, type: 3}
-      - {fileID: 21300000, guid: 4cf49ef0171fa014c93cd8ee9fa5b070, type: 3}
-      - {fileID: 21300000, guid: beeeac2b04c45d141930d1ecbab37f33, type: 3}
+      - {fileID: 21300000, guid: 58404b1499fc74c43837f5c2f18324a2, type: 3}
+      - {fileID: 21300000, guid: eaf8cefd151abe94588eef383fd0211d, type: 3}
+      - {fileID: 21300000, guid: 1eb78866f12f79e40b948a50b9683cd9, type: 3}
+      - {fileID: 21300000, guid: 9d038fcc5e7fb1049bc0c8e76e77c6ab, type: 3}
     veryHotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 5f8f83cd756522046961fca2b537980a, type: 3}
-      - {fileID: 21300000, guid: 0b6552f2c6c8b1445bd468e78ba39b2d, type: 3}
-      - {fileID: 21300000, guid: 84ddc27df7486c146a67b9da2b93de1f, type: 3}
-      - {fileID: 21300000, guid: 8fd04f553bf0a30468d4aed3dc3a5c6c, type: 3}
+      - {fileID: 21300000, guid: 7a1150fd09a90684f9c09e3f47dba6e1, type: 3}
+      - {fileID: 21300000, guid: ace418be57b86534ebf2a6ea02980e23, type: 3}
+      - {fileID: 21300000, guid: bdf13edc24611a9449e21b46de63e6ca, type: 3}
+      - {fileID: 21300000, guid: 8b63f65378128014898c63c7fc87c97b, type: 3}
     veryColdTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 802241df539ac3a43b720ca0f9321915, type: 3}
-      - {fileID: 21300000, guid: 159f2c9c5e018fe4a8a1ffaaf708e9a1, type: 3}
-      - {fileID: 21300000, guid: 1b7999dd006d48646acd8dd7091281ab, type: 3}
-      - {fileID: 21300000, guid: 0c2b586abf4e73f44b7bfb1e12e1a17d, type: 3}
-      - {fileID: 21300000, guid: cd02e9c75e59137488f9c9a9de504361, type: 3}
-      - {fileID: 21300000, guid: f357159aafaf6b848b99f7b38daee79c, type: 3}
+      - {fileID: 21300000, guid: e0878cdf6fcc07e41a2ca4bc9db1c6d6, type: 3}
+      - {fileID: 21300000, guid: bacee57f91f6eae46a199dee8a798df1, type: 3}
+      - {fileID: 21300000, guid: f5d12c5cefd50c74098eda12db6c5c15, type: 3}
+      - {fileID: 21300000, guid: 053ea15e87f5fad4f91bf7ace1596e67, type: 3}
+      - {fileID: 21300000, guid: 6fd1724a8f1edec4fbf550c1f90745df, type: 3}
+      - {fileID: 21300000, guid: 01fb5fca853c2da45b3944119be4fa67, type: 3}
     freezingTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 9537a3e60336d914f889c96773ec204f, type: 3}
-      - {fileID: 21300000, guid: 54b244acd42c8014ba7d2bce2878813a, type: 3}
-      - {fileID: 21300000, guid: 394f3b43fd4840d43aefb9d89bcb7f99, type: 3}
-      - {fileID: 21300000, guid: 682be8ec61cc93647a66884775462e27, type: 3}
-      - {fileID: 21300000, guid: 6c614b019a2398643a16e651c5a05e75, type: 3}
-      - {fileID: 21300000, guid: 0bfd5ff8517bb8d418e09a6e177a1d48, type: 3}
+      - {fileID: 21300000, guid: 223727f49b7500e478b06b173f951c8a, type: 3}
+      - {fileID: 21300000, guid: cb37df1061dc33641aa548259cf89af3, type: 3}
+      - {fileID: 21300000, guid: e57715dbd241ad542a1b6362b8caffc5, type: 3}
+      - {fileID: 21300000, guid: dc3870a4613da7a4eb06075f27aca87e, type: 3}
+      - {fileID: 21300000, guid: e8b0d6d6e6bfb1e45a8939bcd1156d2b, type: 3}
+      - {fileID: 21300000, guid: 20dab6d6bff502e4787c2f0bf30e538c, type: 3}
   _hills:
-    tileAsset: {fileID: 11400000, guid: 45c48d9a154af1741a790d83d72dea9f, type: 2}
+    tileAsset: {fileID: 11400000, guid: 15aaf9722f8210c4cae4fb5c4a77bce3, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: ff82e10631e5ed542880eebb5bcfed3a, type: 3}
-      - {fileID: 21300000, guid: 99a934cad7542ed41819255942968a1d, type: 3}
-      - {fileID: 21300000, guid: 999118f269ad1a94bb8439efd6c11e8f, type: 3}
-      - {fileID: 21300000, guid: 926371c6928788a40a04edc29f911931, type: 3}
+      - {fileID: 21300000, guid: aabda9ea8fcb965418a9fc0d0cba10a2, type: 3}
+      - {fileID: 21300000, guid: 24cf010c1081ad542844213dc4629c40, type: 3}
+      - {fileID: 21300000, guid: 50dfed9e065aedd479d22e7af085b1d6, type: 3}
+      - {fileID: 21300000, guid: b9ea8d8abb1d41f4f8b63902b7eb5b15, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: ff82e10631e5ed542880eebb5bcfed3a, type: 3}
-      - {fileID: 21300000, guid: 99a934cad7542ed41819255942968a1d, type: 3}
-      - {fileID: 21300000, guid: 999118f269ad1a94bb8439efd6c11e8f, type: 3}
-      - {fileID: 21300000, guid: 926371c6928788a40a04edc29f911931, type: 3}
+      - {fileID: 21300000, guid: aabda9ea8fcb965418a9fc0d0cba10a2, type: 3}
+      - {fileID: 21300000, guid: 24cf010c1081ad542844213dc4629c40, type: 3}
+      - {fileID: 21300000, guid: 50dfed9e065aedd479d22e7af085b1d6, type: 3}
+      - {fileID: 21300000, guid: b9ea8d8abb1d41f4f8b63902b7eb5b15, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 6788042007d1a8e40868e02293a4d34a, type: 3}
-      - {fileID: 21300000, guid: 2dfdf104f9636a1438c05f8d56bebbfc, type: 3}
-      - {fileID: 21300000, guid: c5eddc2322a2329438f370a635f47223, type: 3}
-      - {fileID: 21300000, guid: 0ca718c5d9817db45b4eb366839d46f8, type: 3}
+      - {fileID: 21300000, guid: 3045fdebafc47ad499ea79d08ed7d286, type: 3}
+      - {fileID: 21300000, guid: 09390fc05927aab4f8969e03b68d7083, type: 3}
+      - {fileID: 21300000, guid: 71c954fe6adeef1409d6be2092ead930, type: 3}
+      - {fileID: 21300000, guid: 2e0482aa5ddabda449f7ba667f9de255, type: 3}
+      - {fileID: 21300000, guid: 5e9d7de7ac7a7a74394ade92d1b9e11b, type: 3}
     veryColdTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 25227b9be5940bb4f9ad3e364b75c03b, type: 3}
-      - {fileID: 21300000, guid: 7bc0e87bc47dd21468fb04e60af44207, type: 3}
-      - {fileID: 21300000, guid: b182e2c192e8ebe44a08ed807c66e42c, type: 3}
-      - {fileID: 21300000, guid: 478f81a4eaff7b94587117c799469761, type: 3}
+      - {fileID: 21300000, guid: 74194a231a19c4440801d900fcb3be08, type: 3}
+      - {fileID: 21300000, guid: 9268967e126a28e4e80708cacb89beac, type: 3}
+      - {fileID: 21300000, guid: d00a1bb7a89c05041ad801922a636cbd, type: 3}
+      - {fileID: 21300000, guid: d8c499c4c0f3abe43821200873dcb5e9, type: 3}
+      - {fileID: 21300000, guid: 3ba0be449c36dd342984a2178d50b6fc, type: 3}
     freezingTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 9f2e9e51d64083349847cc81d03e1d96, type: 3}
-      - {fileID: 21300000, guid: 9695be27a28e22b47af841545bf58f95, type: 3}
-      - {fileID: 21300000, guid: a1e0821356939824cbf62c3491463fe2, type: 3}
-      - {fileID: 21300000, guid: 2edb23c572ce88e46a7ce0761186bb2b, type: 3}
+      - {fileID: 21300000, guid: 3045fdebafc47ad499ea79d08ed7d286, type: 3}
+      - {fileID: 21300000, guid: 09390fc05927aab4f8969e03b68d7083, type: 3}
+      - {fileID: 21300000, guid: 71c954fe6adeef1409d6be2092ead930, type: 3}
+      - {fileID: 21300000, guid: 2e0482aa5ddabda449f7ba667f9de255, type: 3}
+      - {fileID: 21300000, guid: 5e9d7de7ac7a7a74394ade92d1b9e11b, type: 3}
   _highlands:
-    tileAsset: {fileID: 11400000, guid: fb8cbd07c3e0814448ba33c75404bcaf, type: 2}
+    tileAsset: {fileID: 11400000, guid: ff7edbac2a3e11a45bbf58593bcd9de9, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: a16ad5841ea01994e93e2dfe6eb81195, type: 3}
-      - {fileID: 21300000, guid: 622356113efaf3d44a80007e789c112f, type: 3}
-      - {fileID: 21300000, guid: 591eb1213048bea4fb4ec4680e280e07, type: 3}
-      - {fileID: 21300000, guid: e256d01c85a25b748b67c9343c5df076, type: 3}
+      - {fileID: 21300000, guid: 50a2c54d34957514492e640860aefdb9, type: 3}
+      - {fileID: 21300000, guid: 35797c653432a4d479a163eae97790f3, type: 3}
+      - {fileID: 21300000, guid: 2d85a99b88042a94aab93d54578c5ae5, type: 3}
+      - {fileID: 21300000, guid: b892f49a7ab51894da3368030ceb0250, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: a16ad5841ea01994e93e2dfe6eb81195, type: 3}
-      - {fileID: 21300000, guid: 622356113efaf3d44a80007e789c112f, type: 3}
-      - {fileID: 21300000, guid: 591eb1213048bea4fb4ec4680e280e07, type: 3}
-      - {fileID: 21300000, guid: e256d01c85a25b748b67c9343c5df076, type: 3}
+      - {fileID: 21300000, guid: 50a2c54d34957514492e640860aefdb9, type: 3}
+      - {fileID: 21300000, guid: 35797c653432a4d479a163eae97790f3, type: 3}
+      - {fileID: 21300000, guid: 2d85a99b88042a94aab93d54578c5ae5, type: 3}
+      - {fileID: 21300000, guid: b892f49a7ab51894da3368030ceb0250, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 2edb23c572ce88e46a7ce0761186bb2b, type: 3}
+      - {fileID: 21300000, guid: 22e70409ee30ed54aacc105f82c1e060, type: 3}
+      - {fileID: 21300000, guid: fcd7565ce1923994cbe62fe66845f859, type: 3}
+      - {fileID: 21300000, guid: 32940ba96071b0641850e85e9916e921, type: 3}
+      - {fileID: 21300000, guid: 2acf34ecd7268f0479908f1824059d08, type: 3}
   _mountains:
-    tileAsset: {fileID: 11400000, guid: 8418eaf1d656f5a4193e731d1e1b8b40, type: 2}
+    tileAsset: {fileID: 11400000, guid: 20b43cdf12471ec41b548810250bebfe, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: c0cc93cce6b27744e85f7ccc6b3db00a, type: 3}
-      - {fileID: 21300000, guid: 930869bc0c618d446a525c196a58129d, type: 3}
-      - {fileID: 21300000, guid: a574bb28797e67646805085db5d5c8b0, type: 3}
-      - {fileID: 21300000, guid: e811ff7d176db66489a5e51e09524082, type: 3}
-      - {fileID: 21300000, guid: 3af8b1b5d82bda4468400a00f9c8d469, type: 3}
+      - {fileID: 21300000, guid: 7845234e8b641ba41ba9cb61c7e88706, type: 3}
+      - {fileID: 21300000, guid: c12df4c98f99c3341855e663f263fb17, type: 3}
+      - {fileID: 21300000, guid: 8a43cc45c9332fe45ac9007e8dcbf210, type: 3}
+      - {fileID: 21300000, guid: bc39491858c269c46bc881bff8665a2d, type: 3}
+      - {fileID: 21300000, guid: dc2fc3c1859908f4eaa697c902853473, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: c0cc93cce6b27744e85f7ccc6b3db00a, type: 3}
-      - {fileID: 21300000, guid: 930869bc0c618d446a525c196a58129d, type: 3}
-      - {fileID: 21300000, guid: a574bb28797e67646805085db5d5c8b0, type: 3}
-      - {fileID: 21300000, guid: e811ff7d176db66489a5e51e09524082, type: 3}
-      - {fileID: 21300000, guid: 3af8b1b5d82bda4468400a00f9c8d469, type: 3}
+      - {fileID: 21300000, guid: 7845234e8b641ba41ba9cb61c7e88706, type: 3}
+      - {fileID: 21300000, guid: c12df4c98f99c3341855e663f263fb17, type: 3}
+      - {fileID: 21300000, guid: 8a43cc45c9332fe45ac9007e8dcbf210, type: 3}
+      - {fileID: 21300000, guid: bc39491858c269c46bc881bff8665a2d, type: 3}
+      - {fileID: 21300000, guid: dc2fc3c1859908f4eaa697c902853473, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 9f2e9e51d64083349847cc81d03e1d96, type: 3}
-      - {fileID: 21300000, guid: 9695be27a28e22b47af841545bf58f95, type: 3}
-      - {fileID: 21300000, guid: a1e0821356939824cbf62c3491463fe2, type: 3}
-      - {fileID: 21300000, guid: 2edb23c572ce88e46a7ce0761186bb2b, type: 3}
+      - {fileID: 21300000, guid: 47e4624016aea0649acddb5d3ab89e66, type: 3}
+      - {fileID: 21300000, guid: 26d1a355b5316624fa899edfe3ab1325, type: 3}
+      - {fileID: 21300000, guid: 633edb756ad5a7f459f1caa3d1d49cb4, type: 3}
+      - {fileID: 21300000, guid: 1545b6c68704fa94ba874915a73260b2, type: 3}
+      - {fileID: 21300000, guid: 22e70409ee30ed54aacc105f82c1e060, type: 3}
+      - {fileID: 21300000, guid: fcd7565ce1923994cbe62fe66845f859, type: 3}
+      - {fileID: 21300000, guid: 32940ba96071b0641850e85e9916e921, type: 3}
+      - {fileID: 21300000, guid: 2acf34ecd7268f0479908f1824059d08, type: 3}
   _desertHills:
-    tileAsset: {fileID: 11400000, guid: a0f7a33a87f393048bda68b67cae1f36, type: 2}
+    tileAsset: {fileID: 11400000, guid: 15aaf9722f8210c4cae4fb5c4a77bce3, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: d8e848e02386b8c418710b0dc398aaae, type: 3}
-      - {fileID: 21300000, guid: 92ad62a8c3f927549bec93a66fb95837, type: 3}
-      - {fileID: 21300000, guid: b1ea9381e7714584b935314519b4dcbf, type: 3}
-      - {fileID: 21300000, guid: 81af32bb3be32d540b8ff15a28993f10, type: 3}
-      - {fileID: 21300000, guid: 3876fa048a7ef70458b44cbf10b96304, type: 3}
-      - {fileID: 21300000, guid: 695dfb6d76dca0947b9c0e0e6c0f9f34, type: 3}
+      - {fileID: 21300000, guid: 9bdb085180716b94d976ce8c9c18fdc0, type: 3}
+      - {fileID: 21300000, guid: 5adc370b9638fcb40916e14b0bacf132, type: 3}
+      - {fileID: 21300000, guid: 7f1eddaec48b5354fbb5502b22b34120, type: 3}
+      - {fileID: 21300000, guid: 880360e991fb3d0448fe08fc3081b64a, type: 3}
+      - {fileID: 21300000, guid: d03f1ea555b70be4ca81f2d51f5fd6b6, type: 3}
+      - {fileID: 21300000, guid: 81c38f74fa3ff9d4eb81e7d81c9f8572, type: 3}
+      - {fileID: 21300000, guid: 3bfd7a97d84a4cb4a870e434010150c0, type: 3}
+      - {fileID: 21300000, guid: 087d77319045c1f4b9c6a7370a649993, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 6a634467f4a250a44ae4c803bcfe2661, type: 3}
-      - {fileID: 21300000, guid: 193352bbb60b74344a43a293ad517098, type: 3}
-      - {fileID: 21300000, guid: a32c4b0f92a4dcd42abb84a46a498d07, type: 3}
-      - {fileID: 21300000, guid: ccb06b421e5c96041875cb4ba0e2f1c6, type: 3}
+      - {fileID: 21300000, guid: 56cfa9fc399205e4e99f01edcb07e802, type: 3}
+      - {fileID: 21300000, guid: 3f1838282598131498bae3309469535f, type: 3}
+      - {fileID: 21300000, guid: 5220f5490c4f0484cb77eef24cd15c93, type: 3}
+      - {fileID: 21300000, guid: b3ab05b62c5ad854a9e552157ca895dd, type: 3}
+      - {fileID: 21300000, guid: c6d6d7df3ab3c074495c5dd7ad14819e, type: 3}
+      - {fileID: 21300000, guid: 73c843f505728d544946aa499083f8a4, type: 3}
+      - {fileID: 21300000, guid: e1826acec03ddb642a02679c0691af3e, type: 3}
+      - {fileID: 21300000, guid: a1836efea6a170043ace985e20c0b397, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 6a634467f4a250a44ae4c803bcfe2661, type: 3}
-      - {fileID: 21300000, guid: 193352bbb60b74344a43a293ad517098, type: 3}
-      - {fileID: 21300000, guid: a32c4b0f92a4dcd42abb84a46a498d07, type: 3}
-      - {fileID: 21300000, guid: ccb06b421e5c96041875cb4ba0e2f1c6, type: 3}
+      - {fileID: 21300000, guid: 9eda6c336b27c0e418ad82d73331637e, type: 3}
+      - {fileID: 21300000, guid: 101cedf5640ce1c479b6ee724763c26c, type: 3}
+      - {fileID: 21300000, guid: 596db1c5a7559a94bbb6084898f3e970, type: 3}
+      - {fileID: 21300000, guid: 2ecfaa8e0ccf6824c8b6350448efb91c, type: 3}
     veryColdTiles:
-      tileSprites: []
+      tileSprites:
+      - {fileID: 21300000, guid: 9eda6c336b27c0e418ad82d73331637e, type: 3}
+      - {fileID: 21300000, guid: 101cedf5640ce1c479b6ee724763c26c, type: 3}
+      - {fileID: 21300000, guid: 596db1c5a7559a94bbb6084898f3e970, type: 3}
+      - {fileID: 21300000, guid: 2ecfaa8e0ccf6824c8b6350448efb91c, type: 3}
     freezingTiles:
-      tileSprites: []
+      tileSprites:
+      - {fileID: 21300000, guid: 9eda6c336b27c0e418ad82d73331637e, type: 3}
+      - {fileID: 21300000, guid: 101cedf5640ce1c479b6ee724763c26c, type: 3}
+      - {fileID: 21300000, guid: 596db1c5a7559a94bbb6084898f3e970, type: 3}
+      - {fileID: 21300000, guid: 2ecfaa8e0ccf6824c8b6350448efb91c, type: 3}
   _desertHighlands:
-    tileAsset: {fileID: 11400000, guid: a0f7a33a87f393048bda68b67cae1f36, type: 2}
+    tileAsset: {fileID: 11400000, guid: e19db94bf09b01e4885d87ba939d43c8, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: e6b785fe4c300254d9d012341702afb7, type: 3}
-      - {fileID: 21300000, guid: d48865d2c05df1b40827cd6b8c50d98f, type: 3}
-      - {fileID: 21300000, guid: db4c0bc8c2659bf47be0b688b2590e94, type: 3}
-      - {fileID: 21300000, guid: b7ca8e850e8badb4ea8c550797d2cc99, type: 3}
-      - {fileID: 21300000, guid: 92c4a3e1b8aefaa4aac928c1f065f905, type: 3}
-      - {fileID: 21300000, guid: 5d1302d3d19b3ad4ca09c4823b6c6804, type: 3}
-      - {fileID: 21300000, guid: 8dc1156cc23cf64409b944ddc4e7a351, type: 3}
-      - {fileID: 21300000, guid: 8aecc1767aad66e49a3bb486a2e8be35, type: 3}
+      - {fileID: 21300000, guid: 421225f2eb9b18543aab6d5206f57688, type: 3}
+      - {fileID: 21300000, guid: ba544364412ade340a568083320f042f, type: 3}
+      - {fileID: 21300000, guid: 746e27cd9f2b8df4b870ee45733bc405, type: 3}
+      - {fileID: 21300000, guid: aa1b7a517d58d4049be7cff1dd149c0d, type: 3}
+      - {fileID: 21300000, guid: f1ca605186fe3834593cef57037cfb63, type: 3}
+      - {fileID: 21300000, guid: 7cd2f1622359fcb40b6b98a82adc4065, type: 3}
+      - {fileID: 21300000, guid: eb4128b3b50336f44bbccaf93420da86, type: 3}
+      - {fileID: 21300000, guid: 10f80b978b7c4864d9b876e7400d7f6b, type: 3}
+      - {fileID: 21300000, guid: 4531f35c5398e7942986f00232ab995c, type: 3}
+      - {fileID: 21300000, guid: ec649a7b5fbc464479d24e5add1332c2, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 0c833f2c7b4d74747a375388b84f366e, type: 3}
-      - {fileID: 21300000, guid: fb84238ea6bd332468ad85b0c45090e0, type: 3}
-      - {fileID: 21300000, guid: c1a367b2de4b0c34988c627d4e8c7298, type: 3}
-      - {fileID: 21300000, guid: 4f28b842d0cb03143880b5f7c9d530d4, type: 3}
-      - {fileID: 21300000, guid: 7ece08e54579b2242800c306b76c6c8a, type: 3}
-      - {fileID: 21300000, guid: 1ed0278e20fb86347818037a49d7f130, type: 3}
-      - {fileID: 21300000, guid: 6023a089085c3b949b4c7a0474cff6c4, type: 3}
-      - {fileID: 21300000, guid: e758cc6356838ee45a57b331023a5213, type: 3}
+      - {fileID: 21300000, guid: 421225f2eb9b18543aab6d5206f57688, type: 3}
+      - {fileID: 21300000, guid: ba544364412ade340a568083320f042f, type: 3}
+      - {fileID: 21300000, guid: 746e27cd9f2b8df4b870ee45733bc405, type: 3}
+      - {fileID: 21300000, guid: aa1b7a517d58d4049be7cff1dd149c0d, type: 3}
+      - {fileID: 21300000, guid: f1ca605186fe3834593cef57037cfb63, type: 3}
+      - {fileID: 21300000, guid: 7cd2f1622359fcb40b6b98a82adc4065, type: 3}
+      - {fileID: 21300000, guid: eb4128b3b50336f44bbccaf93420da86, type: 3}
+      - {fileID: 21300000, guid: 10f80b978b7c4864d9b876e7400d7f6b, type: 3}
+      - {fileID: 21300000, guid: 4531f35c5398e7942986f00232ab995c, type: 3}
+      - {fileID: 21300000, guid: ec649a7b5fbc464479d24e5add1332c2, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 0c833f2c7b4d74747a375388b84f366e, type: 3}
-      - {fileID: 21300000, guid: fb84238ea6bd332468ad85b0c45090e0, type: 3}
-      - {fileID: 21300000, guid: c1a367b2de4b0c34988c627d4e8c7298, type: 3}
-      - {fileID: 21300000, guid: 4f28b842d0cb03143880b5f7c9d530d4, type: 3}
-      - {fileID: 21300000, guid: 7ece08e54579b2242800c306b76c6c8a, type: 3}
-      - {fileID: 21300000, guid: 1ed0278e20fb86347818037a49d7f130, type: 3}
-      - {fileID: 21300000, guid: 6023a089085c3b949b4c7a0474cff6c4, type: 3}
-      - {fileID: 21300000, guid: e758cc6356838ee45a57b331023a5213, type: 3}
+      - {fileID: 21300000, guid: 421225f2eb9b18543aab6d5206f57688, type: 3}
+      - {fileID: 21300000, guid: ba544364412ade340a568083320f042f, type: 3}
+      - {fileID: 21300000, guid: 746e27cd9f2b8df4b870ee45733bc405, type: 3}
+      - {fileID: 21300000, guid: aa1b7a517d58d4049be7cff1dd149c0d, type: 3}
+      - {fileID: 21300000, guid: f1ca605186fe3834593cef57037cfb63, type: 3}
+      - {fileID: 21300000, guid: 7cd2f1622359fcb40b6b98a82adc4065, type: 3}
+      - {fileID: 21300000, guid: eb4128b3b50336f44bbccaf93420da86, type: 3}
+      - {fileID: 21300000, guid: 10f80b978b7c4864d9b876e7400d7f6b, type: 3}
+      - {fileID: 21300000, guid: 4531f35c5398e7942986f00232ab995c, type: 3}
+      - {fileID: 21300000, guid: ec649a7b5fbc464479d24e5add1332c2, type: 3}
   _desertMountains:
-    tileAsset: {fileID: 11400000, guid: a0f7a33a87f393048bda68b67cae1f36, type: 2}
+    tileAsset: {fileID: 11400000, guid: e19db94bf09b01e4885d87ba939d43c8, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 2845377459f51f8429d78f41dfe893af, type: 3}
-      - {fileID: 21300000, guid: cbe40b1611179bb42b0236308a5c78f9, type: 3}
+      - {fileID: 21300000, guid: 2a75ec48e6f34014a8d3601a108a48f2, type: 3}
+      - {fileID: 21300000, guid: f2c0375f2592b594e847950ded90ed11, type: 3}
+      - {fileID: 21300000, guid: 2876804d6dabcd94ba369c31367b713f, type: 3}
+      - {fileID: 21300000, guid: 0dae89031b060d84c839a92856459e88, type: 3}
+      - {fileID: 21300000, guid: 1d0b64d5b0af3ca43a8804d2109fe84b, type: 3}
+      - {fileID: 21300000, guid: 3b8cb7444da834b46939f769d039f0c5, type: 3}
+      - {fileID: 21300000, guid: 4a79f9d8f90cd514b978925ee733e46f, type: 3}
+      - {fileID: 21300000, guid: 8310dedf69629dc47bc50d0550d95363, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 07ba2654c54687c40b8bc9a180ece4f2, type: 3}
-      - {fileID: 21300000, guid: 64566b10d2af6d14cbe40c3b6e2378ce, type: 3}
-      - {fileID: 21300000, guid: ecea8979895b42842bb4c199b932d2f7, type: 3}
-      - {fileID: 21300000, guid: 12ecede2147e1ca4bbd3635ac25a1770, type: 3}
+      - {fileID: 21300000, guid: 0dae89031b060d84c839a92856459e88, type: 3}
+      - {fileID: 21300000, guid: 1d0b64d5b0af3ca43a8804d2109fe84b, type: 3}
+      - {fileID: 21300000, guid: 3b8cb7444da834b46939f769d039f0c5, type: 3}
+      - {fileID: 21300000, guid: 4a79f9d8f90cd514b978925ee733e46f, type: 3}
+      - {fileID: 21300000, guid: 8310dedf69629dc47bc50d0550d95363, type: 3}
     coldTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 82dacb489cbdcfc4398e0cbc95a29675, type: 3}
-      - {fileID: 21300000, guid: 0daa3afb2bbb44c408566a2c9a4507c4, type: 3}
---- !u!224 &950372662
-RectTransform:
+      - {fileID: 21300000, guid: 0dae89031b060d84c839a92856459e88, type: 3}
+      - {fileID: 21300000, guid: 1d0b64d5b0af3ca43a8804d2109fe84b, type: 3}
+      - {fileID: 21300000, guid: 3b8cb7444da834b46939f769d039f0c5, type: 3}
+      - {fileID: 21300000, guid: 4a79f9d8f90cd514b978925ee733e46f, type: 3}
+      - {fileID: 21300000, guid: 8310dedf69629dc47bc50d0550d95363, type: 3}
+--- !u!4 &950372666
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1076,11 +1043,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1508648861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1054,7 @@ GameObject:
   - component: {fileID: 1508648862}
   - component: {fileID: 1508648865}
   - component: {fileID: 1508648864}
-  - component: {fileID: 1508648863}
+  - component: {fileID: 1508648866}
   m_Layer: 0
   m_Name: RiverTileMap
   m_TagString: Untagged
@@ -1112,24 +1074,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 950372662}
+  m_Father: {fileID: 950372666}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1508648863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508648861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58a615cb2cff6a4fbd609403b11113f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  riverAsset: {fileID: 11400000, guid: 5b7fd0e944787264c93f98b098d88a30, type: 2}
-  riverSpriteRules: {fileID: 11400000, guid: 263e61e639c27ce4a992f504415ab8db, type: 2}
-  riverMouthRules: {fileID: 11400000, guid: a909189ae73c28b468af89b3c38a06bb, type: 2}
 --- !u!483693784 &1508648864
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -1150,7 +1097,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1217,6 +1164,21 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1508648866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508648861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d928eaf060673474899b92d43f89c97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riverAsset: {fileID: 11400000, guid: 1a3a61ece41af8443b87f443b4b81baf, type: 2}
+  riverSpriteRules: {fileID: 11400000, guid: e04f87961b9dc7b4e9f013eaa2fe145a, type: 2}
+  riverMouthRules: {fileID: 11400000, guid: b0312ecdbec5ebe4f869c6a677257ebb, type: 2}
 --- !u!1 &1547094925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1210,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 950372662}
+  m_Father: {fileID: 950372666}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1547094928
@@ -1271,7 +1233,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1381,8 +1343,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1547094925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 503d56a669fc48c45a0a101696172581, type: 3}
+  m_Script: {fileID: 11500000, guid: c7325225d9c687848a725099981f053c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coastAsset: {fileID: 11400000, guid: 0005ba39081f73d4cb186d51b5bf23a2, type: 2}
-  coastSpriteRules: {fileID: 11400000, guid: eb162cd1f7bf8b54da26327a4fc3cd1e, type: 2}
+  coastAsset: {fileID: 11400000, guid: 71298294c70fc614b974b05ca0ef7c0d, type: 2}
+  coastSpriteRules: {fileID: 11400000, guid: 4bf7a019115e41c42834c154af1ae20e, type: 2}

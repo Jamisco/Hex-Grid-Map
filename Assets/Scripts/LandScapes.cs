@@ -8,6 +8,7 @@ using UnityEngine;
 using static LandScapeTile;
 
 
+[Serializable]
 public abstract class LandScapes
 {
     [SerializeField] protected LandScapeTile tileAsset;
@@ -18,18 +19,27 @@ public abstract class LandScapes
 
     public virtual LandScapeTile GetRandomTile(Temperature temp)
     {
-        switch (temp)
+        try
         {
-            case Temperature.VeryHot:
-            case Temperature.Hot:
-                return hotTiles.GetRandomTile();
-            case Temperature.Warm:
-                return warmTiles.GetRandomTile();
-            case Temperature.Cold:
-                return coldTiles.GetRandomTile();
-            default:
-                return warmTiles.GetRandomTile();
+            switch (temp)
+            {
+                case Temperature.VeryHot:
+                case Temperature.Hot:
+                    return hotTiles.GetRandomTile();
+                case Temperature.Warm:
+                    return warmTiles.GetRandomTile();
+                case Temperature.Cold:
+                    return coldTiles.GetRandomTile();
+                default:
+                    return warmTiles.GetRandomTile();
+            }
         }
+        catch (Exception)
+        {
+            // most likely error is that you didnt fill in the sprites for this temperature in editor
+           return hotTiles.GetRandomTile();
+        }
+
     }
     internal static Biome GetBiome(Temperature temp, Precipitation rain)
     {

@@ -10,13 +10,6 @@ namespace Assets.Scripts
         [SerializeField] protected TileContainer veryColdTiles;
         [SerializeField] protected TileContainer freezingTiles;
 
-        /// <summary>
-        /// The coasts must be placed in order, Starting from position 0 - 5, 
-        /// Pos 0 is North-east (0 - 60 degrees)
-        /// </summary>
-
-        [SerializeField] protected TileContainer coastTiles;
-
         internal override void Instantiate(float hexScale)
         {
             hotTiles.Instantiate(hexScale, tileAsset, Temperature.Hot);
@@ -45,11 +38,5 @@ namespace Assets.Scripts
                     return hotTiles.GetRandomTile();
             }
         }
-
-        public LandScapeTile GetCoast(int index)
-        {
-            return coastTiles.GetTile(index);
-        }
-
     }
 }

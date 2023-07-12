@@ -26,22 +26,30 @@ namespace Assets.Scripts
 
         public override LandScapeTile GetRandomTile(Temperature temp)
         {
-            switch (temp)
+            try
             {
-                case Temperature.VeryHot:
-                case Temperature.Hot:
-                    return hotTiles.GetRandomTile();
-                case Temperature.Warm:
-                    return warmTiles.GetRandomTile();
-                case Temperature.Cold:
-                    return warmTiles.GetRandomTile();
-                case Temperature.VeryCold:
-                    return veryColdTiles.GetRandomTile();
-                case Temperature.Freezing:
-                    return freezingTiles.GetRandomTile();
-                default:
-                    return hotTiles.GetRandomTile();
+                switch (temp)
+                {
+                    case Temperature.VeryHot:
+                    case Temperature.Hot:
+                        return hotTiles.GetRandomTile();
+                    case Temperature.Warm:
+                        return warmTiles.GetRandomTile();
+                    case Temperature.Cold:
+                        return warmTiles.GetRandomTile();
+                    case Temperature.VeryCold:
+                        return veryColdTiles.GetRandomTile();
+                    case Temperature.Freezing:
+                        return freezingTiles.GetRandomTile();
+                    default:
+                        return hotTiles.GetRandomTile();
+                }
             }
+            catch (Exception)
+            {
+                return hotTiles.GetRandomTile(); ;
+            }
+
         }
     }
 }

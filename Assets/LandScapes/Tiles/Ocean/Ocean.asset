@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f3e58e45aee7ea4cb7ea2d7bb980b6e, type: 3}
+  m_Script: {fileID: 11500000, guid: a145fde8a0f54504bbd7316654962e02, type: 3}
   m_Name: Ocean
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
@@ -34,5 +34,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 0
   m_ColliderType: 1
-  _landScape: 0
-  _highlightColor: {r: 0.03921567, g: 0.38431373, b: 0.9607843, a: 0.8352941}
+  _landscape: 0
+  _temperature: 3
+  _highlightColor: {r: 0, g: 0.2473979, b: 1, a: 0}

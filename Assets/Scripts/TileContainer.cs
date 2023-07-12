@@ -11,6 +11,7 @@ namespace Assets.Scripts
     [Serializable]
     // This class creates tiles numbering the amount of sprites given to it
     // so if you give it, 4 sprites, it creates 4 unique tiles out of that sprite
+    //
     public class TileContainer
     {
         [SerializeField] public List<Sprite> tileSprites = new List<Sprite>();
@@ -46,11 +47,6 @@ namespace Assets.Scripts
 
             tileAsset.TileTemperature = temp;
 
-            for (int i = 0; i < tileSprites.Count; i++)
-            {
-                tileSprites[i] = ChangePPU(tileSprites[i], hexScale);
-            }
-
             SetTiles();
         }
         private void SetTiles()
@@ -68,11 +64,9 @@ namespace Assets.Scripts
 
         public void AddSprite(Sprite sprite)
         {
-            Sprite newSprite = ChangePPU(sprite, Hexscale);
+            tileSprites.Add(sprite);
 
-            tileSprites.Add(newSprite);
-
-            tileAsset.sprite = newSprite;
+            tileAsset.sprite = sprite;
             tiles.Add(UnityEngine.Object.Instantiate(tileAsset));
         }
 
