@@ -14,3 +14,7 @@ https://www.youtube.com/watch?v=tKouIQnqqoI&lc=Ugzbg3De6FuI3EzIuI14AaABAg&ab_cha
 
 ----------- UPDATE, please be aware that the serialzed fields have been lost entirely in this git. Thus when you download the program, you will have to manually fill in the sprites and hexes.
 Additionally, you should download the 2D Tilemap extra from the package manager. 
+
+---------------------------------------------------------
+
+This project is decapretated. I am working on a new and better one which will allow for faster generation and rendering speed while also allowing for more versitality.
