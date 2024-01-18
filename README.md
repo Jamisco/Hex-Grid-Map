@@ -18,3 +18,5 @@ Additionally, you should download the 2D Tilemap extra from the package manager.
 ---------------------------------------------------------
 
 This project is decapretated. I am working on a new and better one which will allow for faster generation and rendering speed while also allowing for more versitality.
+
+New version: https://github.com/Jamisco/GridMap
