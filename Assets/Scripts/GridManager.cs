@@ -1909,6 +1909,7 @@ public class GridManager : MonoBehaviour
         }
         public static void DisplayRivers()
         {
+            return;
             LandScapeTile tempTile;
 
             foreach (Vector3Int pos in RiverPoints.Keys)

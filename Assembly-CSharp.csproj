@@ -53,47 +53,47 @@
     <UnityVersion>2021.3.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DebugMenu.cs" />
-    <Compile Include="Assets\Scripts\ConnectedSprites.cs" />
-    <Compile Include="Assets\Scripts\Coast.cs" />
+    <Compile Include="Assets\Scripts\LandScapeTile.cs" />
+    <Compile Include="Assets\Scripts\MathFunctions.cs" />
+    <Compile Include="Assets\Scripts\Lake.cs" />
+    <Compile Include="Assets\Scripts\MountainSaver.cs" />
+    <Compile Include="Assets\Scripts\Highlands.cs" />
+    <Compile Include="Assets\Scripts\LandScapes.cs" />
+    <Compile Include="Assets\Scripts\PerlinNoise.cs" />
+    <Compile Include="Assets\Scripts\River.cs" />
+    <Compile Include="Assets\Scripts\GridManager.cs" />
+    <Compile Include="Assets\Scripts\IPlateau.cs" />
+    <Compile Include="Assets\Scripts\GridNoiseManager.cs" />
     <Compile Include="Assets\Scripts\Forest.cs" />
+    <Compile Include="Assets\Scripts\Desert.cs" />
+    <Compile Include="Assets\Scripts\BaseTerrain.cs" />
+    <Compile Include="Assets\Scripts\Hills.cs" />
     <Compile Include="Assets\Scripts\WaterBody.cs" />
     <Compile Include="Assets\Scripts\Plains.cs" />
-    <Compile Include="Assets\Scripts\GridManager.cs" />
-    <Compile Include="Assets\Scripts\Desert.cs" />
-    <Compile Include="Assets\Scripts\LandScapeTile.cs" />
-    <Compile Include="Assets\Scripts\LandScapes.cs" />
-    <Compile Include="Assets\Scripts\WetLands.cs" />
-    <Compile Include="Assets\Scripts\Hills.cs" />
-    <Compile Include="Assets\Scripts\Highlands.cs" />
-    <Compile Include="Assets\Scripts\IPlateau.cs" />
-    <Compile Include="Assets\Scripts\Ocean.cs" />
-    <Compile Include="Assets\Scripts\RiverSpriteManager.cs" />
-    <Compile Include="Assets\Scripts\River.cs" />
-    <Compile Include="Assets\Scripts\Lake.cs" />
-    <Compile Include="Assets\Scripts\BaseTerrain.cs" />
-    <Compile Include="Assets\Scripts\Mountains.cs" />
-    <Compile Include="Assets\Scripts\MountainSaver.cs" />
-    <Compile Include="Assets\Scripts\MathFunctions.cs" />
-    <Compile Include="Assets\Scripts\DryLands.cs" />
-    <Compile Include="Assets\Scripts\GridNoiseManager.cs" />
-    <Compile Include="Assets\Scripts\TileContainer.cs" />
-    <Compile Include="Assets\Scripts\HexNoise.cs" />
-    <Compile Include="Assets\Scripts\CoastSpriteManager.cs" />
-    <Compile Include="Assets\Scripts\PerlinNoise.cs" />
     <Compile Include="Assets\Scripts\SpriteManager.cs" />
+    <Compile Include="Assets\Scripts\DebugMenu.cs" />
+    <Compile Include="Assets\Scripts\CoastSpriteManager.cs" />
+    <Compile Include="Assets\Scripts\DryLands.cs" />
+    <Compile Include="Assets\Scripts\TileContainer.cs" />
+    <Compile Include="Assets\Scripts\WetLands.cs" />
+    <Compile Include="Assets\Scripts\HexNoise.cs" />
+    <Compile Include="Assets\Scripts\Mountains.cs" />
+    <Compile Include="Assets\Scripts\ConnectedSprites.cs" />
+    <Compile Include="Assets\Scripts\Ocean.cs" />
+    <Compile Include="Assets\Scripts\Coast.cs" />
+    <Compile Include="Assets\Scripts\RiverSpriteManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Sprites\Desert Terrain Hexes\readme_desert.txt" />
+    <None Include="Assets\Sprites\Basic Tile Set\Tiles\readme v1.3.txt" />
     <None Include="Assets\Sprites\Cold Lands Hexes\readme_cold_hexes.txt" />
     <None Include="Assets\Sprites\Hex Rivers Coasts Seas\readme.txt" />
+    <None Include="Assets\Sprites\readme_tile_hex_samples.txt" />
     <None Include="Assets\Shit to do.txt" />
     <None Include="Assets\Sprites\Hex Tropics Wetlands\readme hex tropics-wetlands.txt" />
-    <None Include="Assets\Sprites\Basic Tile Set\Tiles\readme v1.3.txt" />
-    <None Include="Assets\Sprites\Desert Terrain Hexes\readme_desert.txt" />
-    <None Include="Assets\Sprites\readme_tile_hex_samples.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -344,6 +344,24 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NGCore">
+      <HintPath>Assets\Plugins\NGTools\NGCore\NGCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -753,9 +771,6 @@
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
     </Reference>
@@ -782,6 +797,51 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

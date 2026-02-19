@@ -246,6 +246,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -328,11 +349,74 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619394800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 1
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 1
+  m_ShadowVolumeIntensity: 0.75
+  m_Vertices:
+  - position: {x: 0.9985302, y: 0.9985302, z: 0}
+    color: {r: 0.70710677, g: 0.70710677, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: 0.9985302, y: 0.9985302, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.9985302, y: 0.9985302, z: 0}
+    color: {r: -0.70710677, g: 0.70710677, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.9985302, y: 0.9985302, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.99853003, y: -0.9985304, z: 0}
+    color: {r: -0.70710665, g: -0.7071069, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: -0.99853003, y: -0.9985304, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: 0.99853003, y: -0.9985304, z: 0}
+    color: {r: 0.70710665, g: -0.7071069, b: 0, a: 0}
+    uv: {x: 0, y: 0}
+  - position: {x: 0.99853003, y: -0.9985304, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  - position: {x: 0, y: 0, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    uv: {x: 0, y: 0}
+  m_Triangles: 030001000800020000000100030002000100050003000800040002000300050004000300070005000800060004000500070006000500010007000800000006000700010000000700
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath: []
 --- !u!4 &619394802
 Transform:
   m_ObjectHideFlags: 0
@@ -543,7 +627,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 950372655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d055cf6ae1248184491b4ee6aef4f48a, type: 3}
+  m_Script: {fileID: 11500000, guid: 654f8a458fdce92498c97b6c094e3309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _precipitationScale: 1.55
@@ -605,11 +689,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 950372655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5fb13624cf1284082440725cb0eff7, type: 3}
+  m_Script: {fileID: 11500000, guid: f0379249300f10c408119d0244f354c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _oceans:
-    tileAsset: {fileID: 11400000, guid: 815da816fb5aef84f9d80518045e1ccb, type: 2}
+    tileAsset: {fileID: 11400000, guid: 2b3321dc857fc1842b6b9d29b3a00752, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 7b9feb9e6eb98da46bff54963ff2767f, type: 3}
@@ -642,7 +726,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b20f99e0bf9a299428e5d626cfdb27a8, type: 3}
       - {fileID: 21300000, guid: 864144f073f046e448a4b9a0acb2a81a, type: 3}
   _lakes:
-    tileAsset: {fileID: 11400000, guid: c45558090db4ec145984bd9e74c206ba, type: 2}
+    tileAsset: {fileID: 11400000, guid: 0c6358d93e6d1164ea69379a3bfd0735, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 887d164985172594b9a98ef89f687b7a, type: 3}
@@ -674,19 +758,19 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 405c3e1acebfdd84cb26c92832947384, type: 3}
       - {fileID: 21300000, guid: dfb00c7dae1fb554989f9321e2aab3d0, type: 3}
   _plains:
-    tileAsset: {fileID: 11400000, guid: 7aea96c547fd361438ea2babb0b4bafe, type: 2}
+    tileAsset: {fileID: 11400000, guid: c251729d0e008304a8afdfe0d2688e25, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 24133b0960b26d148954ef4fae76a337, type: 3}
-      - {fileID: 21300000, guid: 93b1d31241389ef479e621aa4f75166c, type: 3}
-      - {fileID: 21300000, guid: afba93929a328a840acedcf216eb26be, type: 3}
-      - {fileID: 21300000, guid: cc0b4b0ccd7664048bbcd35aacd1a52a, type: 3}
+      - {fileID: 21300000, guid: dce1f91e27220904d826496a02c83c0a, type: 3}
+      - {fileID: 21300000, guid: 7b9097bbb4125704483f28d8f6d1b986, type: 3}
+      - {fileID: 21300000, guid: cc3126523820ce343953ff8d7e2548a4, type: 3}
+      - {fileID: 21300000, guid: 7cab8d93318c28247846eb7322b1fc26, type: 3}
     warmTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 24133b0960b26d148954ef4fae76a337, type: 3}
-      - {fileID: 21300000, guid: 93b1d31241389ef479e621aa4f75166c, type: 3}
-      - {fileID: 21300000, guid: afba93929a328a840acedcf216eb26be, type: 3}
-      - {fileID: 21300000, guid: cc0b4b0ccd7664048bbcd35aacd1a52a, type: 3}
+      - {fileID: 21300000, guid: dce1f91e27220904d826496a02c83c0a, type: 3}
+      - {fileID: 21300000, guid: 7b9097bbb4125704483f28d8f6d1b986, type: 3}
+      - {fileID: 21300000, guid: cc3126523820ce343953ff8d7e2548a4, type: 3}
+      - {fileID: 21300000, guid: 7cab8d93318c28247846eb7322b1fc26, type: 3}
     coldTiles:
       tileSprites:
       - {fileID: 21300000, guid: 7e6a2aef2bb591d4ea991a5d3dffb33d, type: 3}
@@ -714,12 +798,12 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b20f99e0bf9a299428e5d626cfdb27a8, type: 3}
       - {fileID: 21300000, guid: 864144f073f046e448a4b9a0acb2a81a, type: 3}
   _deserts:
-    tileAsset: {fileID: 11400000, guid: e19db94bf09b01e4885d87ba939d43c8, type: 2}
+    tileAsset: {fileID: 11400000, guid: 367f7c7a405d0fa4f9c0683c47a4517c, type: 2}
     hotTiles:
       tileSprites:
-      - {fileID: 21300000, guid: 56cfa9fc399205e4e99f01edcb07e802, type: 3}
-      - {fileID: 21300000, guid: 3f1838282598131498bae3309469535f, type: 3}
-      - {fileID: 21300000, guid: 5220f5490c4f0484cb77eef24cd15c93, type: 3}
+      - {fileID: 21300000, guid: dce1f91e27220904d826496a02c83c0a, type: 3}
+      - {fileID: 21300000, guid: 7b9097bbb4125704483f28d8f6d1b986, type: 3}
+      - {fileID: 21300000, guid: cc3126523820ce343953ff8d7e2548a4, type: 3}
       - {fileID: 21300000, guid: b3ab05b62c5ad854a9e552157ca895dd, type: 3}
       - {fileID: 21300000, guid: c6d6d7df3ab3c074495c5dd7ad14819e, type: 3}
       - {fileID: 21300000, guid: 73c843f505728d544946aa499083f8a4, type: 3}
@@ -751,7 +835,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: e1826acec03ddb642a02679c0691af3e, type: 3}
       - {fileID: 21300000, guid: a1836efea6a170043ace985e20c0b397, type: 3}
   _dryLands:
-    tileAsset: {fileID: 11400000, guid: e98e8d35afba20649bcd695e1061956e, type: 2}
+    tileAsset: {fileID: 11400000, guid: 30317b5e1caea6f4aaff0ea33e14247c, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 8f3b56240a5d2154b85948cfcb3b50b5, type: 3}
@@ -779,7 +863,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 99bac28bc92782447b2b957a90d68fc6, type: 3}
       - {fileID: 21300000, guid: 97ef3277be258ee42bd1c22cba814dad, type: 3}
   _wetLands:
-    tileAsset: {fileID: 11400000, guid: f2e1d485ec2332b4bafdb09ffccf45b5, type: 2}
+    tileAsset: {fileID: 11400000, guid: e7251b53502b859478f29624201b7bb9, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 3dc9730900772a5498647dac39ddc0e1, type: 3}
@@ -799,7 +883,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 7ea3f283975a7014992e37d698cb658a, type: 3}
       - {fileID: 21300000, guid: b9d28f845e7e5f34984f6ba4148dfdab, type: 3}
   _forest:
-    tileAsset: {fileID: 11400000, guid: 00a04662bb791694899c86626643cb47, type: 2}
+    tileAsset: {fileID: 11400000, guid: 039fcb89ff01d1241a98bb02ae931f19, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: a6d84309ec2239942807bc4a22e03b75, type: 3}
@@ -841,7 +925,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: e8b0d6d6e6bfb1e45a8939bcd1156d2b, type: 3}
       - {fileID: 21300000, guid: 20dab6d6bff502e4787c2f0bf30e538c, type: 3}
   _hills:
-    tileAsset: {fileID: 11400000, guid: 15aaf9722f8210c4cae4fb5c4a77bce3, type: 2}
+    tileAsset: {fileID: 11400000, guid: 84f522e81ab4f9c4fa0d158d08874c32, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: aabda9ea8fcb965418a9fc0d0cba10a2, type: 3}
@@ -876,7 +960,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 2e0482aa5ddabda449f7ba667f9de255, type: 3}
       - {fileID: 21300000, guid: 5e9d7de7ac7a7a74394ade92d1b9e11b, type: 3}
   _highlands:
-    tileAsset: {fileID: 11400000, guid: ff7edbac2a3e11a45bbf58593bcd9de9, type: 2}
+    tileAsset: {fileID: 11400000, guid: 0cee2365ab4eff94dbb8d785063396b9, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 50a2c54d34957514492e640860aefdb9, type: 3}
@@ -896,7 +980,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 32940ba96071b0641850e85e9916e921, type: 3}
       - {fileID: 21300000, guid: 2acf34ecd7268f0479908f1824059d08, type: 3}
   _mountains:
-    tileAsset: {fileID: 11400000, guid: 20b43cdf12471ec41b548810250bebfe, type: 2}
+    tileAsset: {fileID: 11400000, guid: ee3d2af19eb9ffe46a2c7c87b760c756, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 7845234e8b641ba41ba9cb61c7e88706, type: 3}
@@ -922,7 +1006,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 32940ba96071b0641850e85e9916e921, type: 3}
       - {fileID: 21300000, guid: 2acf34ecd7268f0479908f1824059d08, type: 3}
   _desertHills:
-    tileAsset: {fileID: 11400000, guid: 15aaf9722f8210c4cae4fb5c4a77bce3, type: 2}
+    tileAsset: {fileID: 11400000, guid: 84f522e81ab4f9c4fa0d158d08874c32, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 9bdb085180716b94d976ce8c9c18fdc0, type: 3}
@@ -962,7 +1046,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 596db1c5a7559a94bbb6084898f3e970, type: 3}
       - {fileID: 21300000, guid: 2ecfaa8e0ccf6824c8b6350448efb91c, type: 3}
   _desertHighlands:
-    tileAsset: {fileID: 11400000, guid: e19db94bf09b01e4885d87ba939d43c8, type: 2}
+    tileAsset: {fileID: 11400000, guid: 0cee2365ab4eff94dbb8d785063396b9, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 421225f2eb9b18543aab6d5206f57688, type: 3}
@@ -1000,7 +1084,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4531f35c5398e7942986f00232ab995c, type: 3}
       - {fileID: 21300000, guid: ec649a7b5fbc464479d24e5add1332c2, type: 3}
   _desertMountains:
-    tileAsset: {fileID: 11400000, guid: e19db94bf09b01e4885d87ba939d43c8, type: 2}
+    tileAsset: {fileID: 11400000, guid: ee3d2af19eb9ffe46a2c7c87b760c756, type: 2}
     hotTiles:
       tileSprites:
       - {fileID: 21300000, guid: 2a75ec48e6f34014a8d3601a108a48f2, type: 3}
@@ -1173,12 +1257,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1508648861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d928eaf060673474899b92d43f89c97a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d187bae741c79544b8107fb5233d17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riverAsset: {fileID: 11400000, guid: 1a3a61ece41af8443b87f443b4b81baf, type: 2}
-  riverSpriteRules: {fileID: 11400000, guid: e04f87961b9dc7b4e9f013eaa2fe145a, type: 2}
-  riverMouthRules: {fileID: 11400000, guid: b0312ecdbec5ebe4f869c6a677257ebb, type: 2}
+  riverAsset: {fileID: 11400000, guid: f449b1525f938c849a8d891e9744cb22, type: 2}
+  riverSpriteRules: {fileID: 11400000, guid: 1393e857429c9a84487b9efa979f8a56, type: 2}
+  riverMouthRules: {fileID: 11400000, guid: 5b9b28457552e334dbac2eeb29f0561c, type: 2}
 --- !u!1 &1547094925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,8 +1427,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1547094925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7325225d9c687848a725099981f053c, type: 3}
+  m_Script: {fileID: 11500000, guid: c29457cf3a77eab40a0534dafb1bbdd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coastAsset: {fileID: 11400000, guid: 71298294c70fc614b974b05ca0ef7c0d, type: 2}
-  coastSpriteRules: {fileID: 11400000, guid: 4bf7a019115e41c42834c154af1ae20e, type: 2}
+  coastAsset: {fileID: 11400000, guid: 274597ccc5829794bbba2b4629545f2f, type: 2}
+  coastSpriteRules: {fileID: 11400000, guid: f1a8521cd9a53cf4ab167577913d4073, type: 2}
